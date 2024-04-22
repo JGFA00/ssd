@@ -10,3 +10,8 @@ Quando acabar a mineração este bloco é propagado pela rede com um propagate b
 Ao mesmo tempo podemos estar a receber também mensagens de outros nós
 
 Portanto ficará tudo dentro do Impl que vai definir o que fazer com cada mensagem de outros nós e vai definir também como enviar mensagens para outros nós
+
+Aqui está um bom exemplo de como isto funciona
+https://grpc.io/docs/languages/java/basics/
+
+Nos próximos passos vou começar a definir os métodos -> ping, get blockhain, etc 
