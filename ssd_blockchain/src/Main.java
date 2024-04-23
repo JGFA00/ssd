@@ -15,6 +15,7 @@ public class Main {
         System.out.println("Block Header: " + head_block1.toString());
 
 
+
     }
 
     private static BlockData getBlockData() {
