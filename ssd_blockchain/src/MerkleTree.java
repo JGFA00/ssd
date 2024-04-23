@@ -4,8 +4,8 @@
     import java.util.List;
 
     public class MerkleTree {
-        private List<Transaction> transactions;
-        private List<String> merkleTree;
+        private final List<Transaction> transactions;
+        private final List<String> merkleTree;
 
         public MerkleTree(List<Transaction> transactions) {
             this.transactions = transactions;
@@ -23,11 +23,11 @@
                 return;
             }
 
-            List<String> currentTreeLevel = new ArrayList<>(transactions);
+            List<Transaction> currentTreeLevel = new ArrayList<>(transactions);
 
             // Return hash of the element if there is only 1 transaction
             if (currentTreeLevel.size() == 1) {
-                merkleTree.add(applySHA256(currentTreeLevel.getFirst()));
+                merkleTree.add(applySHA256(currentTreeLevel.getFirst().toString()));
                 return;
             }
 
@@ -44,37 +44,37 @@
 
             // Hash all the leafs and add to first level
             List<String> leaf_hashes = new ArrayList<>();
-            for (int i = 0; i < currentTreeLevel.size(); i++) {
-                leaf_hashes.add(applySHA256(currentTreeLevel.get(i)));
+            for (Transaction transaction : currentTreeLevel) {
+                leaf_hashes.add(applySHA256(transaction.toString()));
             }
-            currentTreeLevel = leaf_hashes;
-            merkleTree.addAll(currentTreeLevel);
+            merkleTree.addAll(leaf_hashes);
 
-            System.out.println("Leafs (Hashed Transactions): " + currentTreeLevel);
+            System.out.println("Leafs (Hashed Transactions): " + leaf_hashes);
+            System.out.println("Tree(leafs only): " + merkleTree);
 
-            while (currentTreeLevel.size() > 1) {
+            while (leaf_hashes.size() > 1) {
                 List<String> nextTreeLevel = new ArrayList<>();
-                for (int i = 0; i < currentTreeLevel.size() - 1; i += 2) {
-                    String concatenatedHash = currentTreeLevel.get(i) + currentTreeLevel.get(i + 1);
+                for (int i = 0; i < leaf_hashes.size() - 1; i += 2) {
+                    String concatenatedHash = leaf_hashes.get(i) + leaf_hashes.get(i + 1);
                     String hash = applySHA256(concatenatedHash);
                     nextTreeLevel.add(hash);
                 }
-                if (currentTreeLevel.size() % 2 == 1) {
+                if (leaf_hashes.size() % 2 == 1) {
                     // If the number of transactions is odd, duplicate the last transaction
-                    String concatenatedHash = currentTreeLevel.get(currentTreeLevel.size() - 1);
+                    String concatenatedHash = leaf_hashes.getLast();
                     String hash = applySHA256(concatenatedHash + concatenatedHash);
                     nextTreeLevel.add(hash);
                 }
-                merkleTree.addAll(currentTreeLevel);
-                currentTreeLevel = nextTreeLevel;
+                merkleTree.addAll(leaf_hashes);
+                leaf_hashes = nextTreeLevel;
             }
-            merkleTree.addAll(currentTreeLevel);
+            merkleTree.addAll(leaf_hashes);
         }
 
-        private String applySHA256(String input) {
+        private String applySHA256(String data) {
             try {
                 MessageDigest digest = MessageDigest.getInstance("SHA-256");
-                byte[] hash = digest.digest(input.getBytes());
+                byte[] hash = digest.digest(data.getBytes());
                 StringBuilder hexString = new StringBuilder();
                 for (byte b : hash) {
                     String hex = Integer.toHexString(0xff & b);
