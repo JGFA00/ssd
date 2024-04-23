@@ -49,6 +49,37 @@ public final class GreeterGrpc {
     return getSayHelloMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.ssid.grpc.NodeID,
+      com.ssid.grpc.Node> getFindNodeMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "FindNode",
+      requestType = com.ssid.grpc.NodeID.class,
+      responseType = com.ssid.grpc.Node.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<com.ssid.grpc.NodeID,
+      com.ssid.grpc.Node> getFindNodeMethod() {
+    io.grpc.MethodDescriptor<com.ssid.grpc.NodeID, com.ssid.grpc.Node> getFindNodeMethod;
+    if ((getFindNodeMethod = GreeterGrpc.getFindNodeMethod) == null) {
+      synchronized (GreeterGrpc.class) {
+        if ((getFindNodeMethod = GreeterGrpc.getFindNodeMethod) == null) {
+          GreeterGrpc.getFindNodeMethod = getFindNodeMethod =
+              io.grpc.MethodDescriptor.<com.ssid.grpc.NodeID, com.ssid.grpc.Node>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "FindNode"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ssid.grpc.NodeID.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ssid.grpc.Node.getDefaultInstance()))
+              .setSchemaDescriptor(new GreeterMethodDescriptorSupplier("FindNode"))
+              .build();
+        }
+      }
+    }
+    return getFindNodeMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -109,6 +140,13 @@ public final class GreeterGrpc {
         io.grpc.stub.StreamObserver<com.ssid.grpc.HelloReply> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSayHelloMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void findNode(com.ssid.grpc.NodeID request,
+        io.grpc.stub.StreamObserver<com.ssid.grpc.Node> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindNodeMethod(), responseObserver);
+    }
   }
 
   /**
@@ -154,6 +192,14 @@ public final class GreeterGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getSayHelloMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void findNode(com.ssid.grpc.NodeID request,
+        io.grpc.stub.StreamObserver<com.ssid.grpc.Node> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getFindNodeMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -183,6 +229,14 @@ public final class GreeterGrpc {
     public com.ssid.grpc.HelloReply sayHello(com.ssid.grpc.HelloRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSayHelloMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<com.ssid.grpc.Node> findNode(
+        com.ssid.grpc.NodeID request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getFindNodeMethod(), getCallOptions(), request);
     }
   }
 
@@ -218,6 +272,7 @@ public final class GreeterGrpc {
   }
 
   private static final int METHODID_SAY_HELLO = 0;
+  private static final int METHODID_FIND_NODE = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -239,6 +294,10 @@ public final class GreeterGrpc {
         case METHODID_SAY_HELLO:
           serviceImpl.sayHello((com.ssid.grpc.HelloRequest) request,
               (io.grpc.stub.StreamObserver<com.ssid.grpc.HelloReply>) responseObserver);
+          break;
+        case METHODID_FIND_NODE:
+          serviceImpl.findNode((com.ssid.grpc.NodeID) request,
+              (io.grpc.stub.StreamObserver<com.ssid.grpc.Node>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -265,6 +324,13 @@ public final class GreeterGrpc {
               com.ssid.grpc.HelloRequest,
               com.ssid.grpc.HelloReply>(
                 service, METHODID_SAY_HELLO)))
+        .addMethod(
+          getFindNodeMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              com.ssid.grpc.NodeID,
+              com.ssid.grpc.Node>(
+                service, METHODID_FIND_NODE)))
         .build();
   }
 
@@ -314,6 +380,7 @@ public final class GreeterGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new GreeterFileDescriptorSupplier())
               .addMethod(getSayHelloMethod())
+              .addMethod(getFindNodeMethod())
               .build();
         }
       }

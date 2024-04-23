@@ -1,9 +1,13 @@
+c:\Users\jfran\Desktop\5.2\SSD\testgrpc\target\generated-sources\protobuf\java\com\ssid\grpc\NodeID.java
 c:\Users\jfran\Desktop\5.2\SSD\testgrpc\target\generated-sources\protobuf\grpc-java\com\ssid\grpc\GreeterGrpc.java
 c:\Users\jfran\Desktop\5.2\SSD\testgrpc\target\generated-sources\protobuf\java\com\ssid\grpc\HelloReplyOrBuilder.java
 c:\Users\jfran\Desktop\5.2\SSD\testgrpc\src\main\java\com\ssid\server\Main.java
-c:\Users\jfran\Desktop\5.2\SSD\testgrpc\src\main\java\com\ssid\client\GreeterClient.java
 c:\Users\jfran\Desktop\5.2\SSD\testgrpc\target\generated-sources\protobuf\java\com\ssid\grpc\HelloReply.java
 c:\Users\jfran\Desktop\5.2\SSD\testgrpc\target\generated-sources\protobuf\java\com\ssid\grpc\Client.java
 c:\Users\jfran\Desktop\5.2\SSD\testgrpc\target\generated-sources\protobuf\java\com\ssid\grpc\HelloRequest.java
-c:\Users\jfran\Desktop\5.2\SSD\testgrpc\target\generated-sources\protobuf\java\com\ssid\grpc\HelloRequestOrBuilder.java
+c:\Users\jfran\Desktop\5.2\SSD\testgrpc\target\generated-sources\protobuf\java\com\ssid\grpc\NodeOrBuilder.java
 c:\Users\jfran\Desktop\5.2\SSD\testgrpc\src\main\java\com\ssid\server\GreeterImpl.java
+c:\Users\jfran\Desktop\5.2\SSD\testgrpc\src\main\java\com\ssid\client\GreeterClient.java
+c:\Users\jfran\Desktop\5.2\SSD\testgrpc\target\generated-sources\protobuf\java\com\ssid\grpc\Node.java
+c:\Users\jfran\Desktop\5.2\SSD\testgrpc\target\generated-sources\protobuf\java\com\ssid\grpc\HelloRequestOrBuilder.java
+c:\Users\jfran\Desktop\5.2\SSD\testgrpc\target\generated-sources\protobuf\java\com\ssid\grpc\NodeIDOrBuilder.java
