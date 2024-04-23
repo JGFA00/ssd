@@ -18,10 +18,40 @@
         }
 
         private void buildTree() {
-            List<String> currentTreeLevel = new ArrayList<>();
-            for (Transaction transaction : transactions) {
-                currentTreeLevel.add(applySHA256(transaction.getData()));
+
+            if (transactions == null || transactions.isEmpty()) {
+                return;
             }
+
+            List<String> currentTreeLevel = new ArrayList<>(transactions);
+
+            // Return hash of the element if there is only 1 transaction
+            if (currentTreeLevel.size() == 1) {
+                merkleTree.add(applySHA256(currentTreeLevel.getFirst()));
+                return;
+            }
+
+            // Show all transactions
+            System.out.println("Transactions before: " + currentTreeLevel);
+
+            // Duplicate last value if there is an odd number of transactions
+            if (currentTreeLevel.size() % 2 != 0) {
+                currentTreeLevel.add(currentTreeLevel.getLast());
+            }
+
+            // Show all transactions to see if duplicated
+            System.out.println("Transactions after: " + currentTreeLevel);
+
+            // Hash all the leafs and add to first level
+            List<String> leaf_hashes = new ArrayList<>();
+            for (int i = 0; i < currentTreeLevel.size(); i++) {
+                leaf_hashes.add(applySHA256(currentTreeLevel.get(i)));
+            }
+            currentTreeLevel = leaf_hashes;
+            merkleTree.addAll(currentTreeLevel);
+
+            System.out.println("Leafs (Hashed Transactions): " + currentTreeLevel);
+
             while (currentTreeLevel.size() > 1) {
                 List<String> nextTreeLevel = new ArrayList<>();
                 for (int i = 0; i < currentTreeLevel.size() - 1; i += 2) {
