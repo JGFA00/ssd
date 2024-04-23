@@ -25,6 +25,16 @@ public final class Client {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_HelloReply_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_NodeID_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_NodeID_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Node_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Node_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -35,9 +45,12 @@ public final class Client {
   static {
     java.lang.String[] descriptorData = {
       "\n\014client.proto\"\034\n\014HelloRequest\022\014\n\004name\030\001" +
-      " \001(\t\"\035\n\nHelloReply\022\017\n\007message\030\001 \001(\t23\n\007G" +
-      "reeter\022(\n\010SayHello\022\r.HelloRequest\032\013.Hell" +
-      "oReply\"\000B\021\n\rcom.ssid.grpcP\001b\006proto3"
+      " \001(\t\"\035\n\nHelloReply\022\017\n\007message\030\001 \001(\t\"\024\n\006N" +
+      "odeID\022\n\n\002id\030\001 \001(\005\"4\n\004Node\022\n\n\002id\030\001 \001(\005\022\022\n" +
+      "\nip_address\030\002 \001(\t\022\014\n\004port\030\003 \001(\0052S\n\007Greet" +
+      "er\022(\n\010SayHello\022\r.HelloRequest\032\013.HelloRep" +
+      "ly\"\000\022\036\n\010FindNode\022\007.NodeID\032\005.Node\"\0000\001B\021\n\r" +
+      "com.ssid.grpcP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -55,6 +68,18 @@ public final class Client {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_HelloReply_descriptor,
         new java.lang.String[] { "Message", });
+    internal_static_NodeID_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_NodeID_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_NodeID_descriptor,
+        new java.lang.String[] { "Id", });
+    internal_static_Node_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_Node_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Node_descriptor,
+        new java.lang.String[] { "Id", "IpAddress", "Port", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
