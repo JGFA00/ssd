@@ -26,6 +26,6 @@ public class Main {
         transactions.add(transaction3);
         transactions.add(transaction4);
 
-        return new Block("0",transactions);
+        return new Block("0",transactions,5);
     }
 }
