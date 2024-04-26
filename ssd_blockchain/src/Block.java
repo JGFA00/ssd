@@ -1,36 +1,42 @@
+import java.util.List;
+
 public class Block {
-    private BlockHeader header;
-    private BlockData data;
-    //private int hash;
+    private String prev_hash;
+    private long timestamp;
+    //private int nonce;
+    private String merkleRoot;
+    //private String block_hash;
+    private List<Transaction> transactions;
 
-    public Block(BlockHeader header, BlockData data) {
-        this.header = header;
-        this.data = data;
-        //this.hash = hashCode(getHeader(), getData());
+    public Block(String prev_hash, List<Transaction> transactions) {
+        this.prev_hash = prev_hash;
+        this.transactions = transactions;
+        this.merkleRoot = calculateMerkleRoot(transactions);
+        this.timestamp = System.currentTimeMillis();
+        //this.block_hash = calculateHash();
     }
 
-    public BlockData getData() {
-        return data;
+    public String getPrev_hash() {
+        return prev_hash;
     }
 
-    public void setData(BlockData data) {
-        this.data = data;
-    }
-
-    public BlockHeader getHeader() {
-        return header;
-    }
-
-    public void setHeader(BlockHeader header) {
-        this.header = header;
+    public String getTransactions() {
+        return transactions.toString();
     }
 
     @Override
     public String toString() {
-        return "Block{" +
-                "header=" + header +
-                ", data=" + data +
-                '}';
+        return "Block[" +
+                "prev_hash=" + prev_hash +
+                ", timestamp=" + timestamp +
+                ", merkle_root=" + merkleRoot +
+                ']';
+    }
+
+    private String calculateMerkleRoot(List<Transaction> transactions ) {
+        MerkleTree merkleTree = new MerkleTree(transactions);
+        System.out.println(merkleTree);
+        return merkleTree.getMerkleRoot();
     }
 
 }
