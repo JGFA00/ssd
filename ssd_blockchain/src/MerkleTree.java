@@ -14,7 +14,7 @@
         }
 
         public String getMerkleRoot() {
-            return merkleTree.getFirst();
+            return merkleTree.getLast();
         }
 
         private void buildTree() {
@@ -32,7 +32,7 @@
             }
 
             // Show all transactions
-            System.out.println("Transactions before: " + currentTreeLevel);
+            // System.out.println("Transactions before: " + currentTreeLevel);
 
             // Duplicate last value if there is an odd number of transactions
             if (currentTreeLevel.size() % 2 != 0) {
@@ -49,8 +49,8 @@
             }
             merkleTree.addAll(leaf_hashes);
 
-            System.out.println("Leafs (Hashed Transactions): " + leaf_hashes);
-            System.out.println("Tree(leafs only): " + merkleTree);
+            //System.out.println("Leafs (Hashed Transactions): " + leaf_hashes);
+            //System.out.println("Tree(leafs only): " + merkleTree);
 
             while (leaf_hashes.size() > 1) {
                 List<String> nextTreeLevel = new ArrayList<>();
@@ -87,5 +87,29 @@
             } catch (NoSuchAlgorithmException e) {
                 throw new RuntimeException(e);
             }
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            int level = 0;
+            int levelSize = 1;
+            int currentIndex = merkleTree.size() - 1; // Start from the last element
+
+            while (currentIndex >= 0) {
+                stringBuilder.append("Level ").append(level).append(": ");
+
+                for (int i = 0; i < levelSize && currentIndex >= 0; i++) {
+                    stringBuilder.append(merkleTree.get(currentIndex)).append(" ");
+                    currentIndex--;
+                }
+
+                stringBuilder.append("\n");
+                level++;
+                levelSize *= 2;
+            }
+
+            return stringBuilder.toString();
         }
     }
