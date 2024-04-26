@@ -27,7 +27,7 @@
 
             // Return hash of the element if there is only 1 transaction
             if (currentTreeLevel.size() == 1) {
-                merkleTree.add(applySHA256(currentTreeLevel.getFirst().toString()));
+                merkleTree.add(Hashing.applySHA256(currentTreeLevel.getFirst().toString()));
                 return;
             }
 
@@ -45,7 +45,7 @@
             // Hash all the leafs and add to first level
             List<String> leaf_hashes = new ArrayList<>();
             for (Transaction transaction : currentTreeLevel) {
-                leaf_hashes.add(applySHA256(transaction.toString()));
+                leaf_hashes.add(Hashing.applySHA256(transaction.toString()));
             }
             merkleTree.addAll(leaf_hashes);
 
@@ -56,13 +56,13 @@
                 List<String> nextTreeLevel = new ArrayList<>();
                 for (int i = 0; i < leaf_hashes.size() - 1; i += 2) {
                     String concatenatedHash = leaf_hashes.get(i) + leaf_hashes.get(i + 1);
-                    String hash = applySHA256(concatenatedHash);
+                    String hash = Hashing.applySHA256(concatenatedHash);
                     nextTreeLevel.add(hash);
                 }
                 if (leaf_hashes.size() % 2 == 1) {
                     // If the number of transactions is odd, duplicate the last transaction
                     String concatenatedHash = leaf_hashes.getLast();
-                    String hash = applySHA256(concatenatedHash + concatenatedHash);
+                    String hash = Hashing.applySHA256(concatenatedHash + concatenatedHash);
                     nextTreeLevel.add(hash);
                 }
                 merkleTree.addAll(leaf_hashes);
@@ -71,23 +71,6 @@
             merkleTree.addAll(leaf_hashes);
         }
 
-        private String applySHA256(String data) {
-            try {
-                MessageDigest digest = MessageDigest.getInstance("SHA-256");
-                byte[] hash = digest.digest(data.getBytes());
-                StringBuilder hexString = new StringBuilder();
-                for (byte b : hash) {
-                    String hex = Integer.toHexString(0xff & b);
-                    if (hex.length() == 1) {
-                        hexString.append('0');
-                    }
-                    hexString.append(hex);
-                }
-                return hexString.toString();
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
-            }
-        }
 
         @Override
         public String toString() {
