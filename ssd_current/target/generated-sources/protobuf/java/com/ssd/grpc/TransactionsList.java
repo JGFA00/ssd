@@ -5,13 +5,6 @@
 package com.ssd.grpc;
 
 /**
- * <pre>
- *
- *list auctions
- *subscribe auction
- *create auction, start auction, bid, end auction
- * </pre>
- *
  * Protobuf type {@code TransactionsList}
  */
 public final class TransactionsList extends
@@ -248,13 +241,6 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * <pre>
-   *
-   *list auctions
-   *subscribe auction
-   *create auction, start auction, bid, end auction
-   * </pre>
-   *
    * Protobuf type {@code TransactionsList}
    */
   public static final class Builder extends

@@ -1,5 +1,6 @@
 package com.ssd.client;
 import com.ssd.grpc.AuctionGrpc;
+import com.ssd.grpc.Block;
 import com.ssd.grpc.AuctionGrpc.AuctionBlockingStub;
 import com.ssd.grpc.AuctionGrpc.AuctionStub;
 import com.ssd.grpc.NodeID;
@@ -39,6 +40,15 @@ public class AuctionClient {
         blockingStub.findNode(id).forEachRemaining(Node -> {
             System.out.println(Node.getId());
         });
+    }
+
+
+    public void propagateBlock(){
+        
+    }
+
+    public void getBlockchain() {
+
     }
     
     //O cliente não precisa do main (só a app, que só vai ter cliente, é que precisa) é mais para teste. o Nó vai estar a correr 
