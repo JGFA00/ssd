@@ -10,6 +10,9 @@ import com.ssd.grpc.Block;
 import com.ssd.grpc.Node;
 import com.ssd.grpc.NodeID;
 import com.ssd.grpc.PingResponse;
+import com.ssd.grpc.Transaction;
+import com.ssd.grpc.TransactionsList;
+import com.ssd.util.AuctionUtil;
 
 import io.grpc.Grpc;
 import io.grpc.InsecureServerCredentials;
@@ -82,7 +85,10 @@ public class AuctionServer {
 
         private List<Node> nodes;
         private List<Block> blockchain;
+        private List<Transaction> transactions;
+
         private AuctionService(){
+            //test nodes
             nodes = new ArrayList<>(); 
             Node n1 = Node.newBuilder().setId(1).setIpAddress("192.168.1").setPort(1).build();
             Node n2 = Node.newBuilder().setId(2).setIpAddress("192.168.2").setPort(2).build();
@@ -90,6 +96,20 @@ public class AuctionServer {
             nodes.add(n1);
             nodes.add(n2);
             nodes.add(n3);
+
+            //test transactions and transactions list
+            transactions = new ArrayList<>();
+            AuctionUtil t = new AuctionUtil();
+            transactions.add(t.createTransaction("bid", "mambo"));
+            transactions.add(t.createTransaction("bid", "mambito"));
+            TransactionsList tlist = t.createTransactionsList(transactions);
+            //System.out.println(tlist);
+
+            //test block and blockchain
+            blockchain = new ArrayList<>();
+            blockchain.add(t.createBlock("a", 0, 0, "a", "a", tlist));
+            blockchain.add(t.createBlock("b", 0, 0, "b", "b", tlist));
+
         }
 
         //eventualmente vai haver aqui um método submitTransaction (server), que quando acumular transações suficientes gera um bloco, 
@@ -129,7 +149,7 @@ public class AuctionServer {
         public void propagateBlock(Block block, StreamObserver<Ack> responseObserver) {
             Ack ack = Ack.newBuilder().setAcknowledge("received").build();
             responseObserver.onNext(ack);
-            System.out.println(block.getNonce());
+            System.out.println(block.getAllFields());
             responseObserver.onCompleted();
             
         }

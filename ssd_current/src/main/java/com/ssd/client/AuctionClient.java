@@ -1,10 +1,14 @@
 package com.ssd.client;
+
+import com.ssd.grpc.Ack;
 import com.ssd.grpc.AuctionGrpc;
 import com.ssd.grpc.Block;
 import com.ssd.grpc.AuctionGrpc.AuctionBlockingStub;
 import com.ssd.grpc.AuctionGrpc.AuctionStub;
+import com.ssd.util.AuctionUtil;
 import com.ssd.grpc.NodeID;
 import com.ssd.grpc.PingResponse;
+import com.ssd.grpc.TransactionsList;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -43,20 +47,30 @@ public class AuctionClient {
     }
 
 
-    public void propagateBlock(){
-        
+    public void propagateBlock(Block block){
+        Ack ack;
+        ack = blockingStub.propagateBlock(block);
+        System.out.println(ack.getAcknowledge());
     }
 
-    public void getBlockchain() {
-
+    public void getBlockchain(int nodeid) {
+        NodeID id = NodeID.newBuilder().setId(nodeid).build();
+        //aqui estamos a invocar o findNode do servidor, passando um id para o canal criado e a receber a resposta
+        blockingStub.getBlockchain(id).forEachRemaining(Block -> {
+            System.out.println(Block.getAllFields());
+        });
     }
     
     //O cliente não precisa do main (só a app, que só vai ter cliente, é que precisa) é mais para teste. o Nó vai estar a correr 
     //servidor e a chamar métodos aqui do cliente para interagir com outros nós
     public static void main(String[] args){
+        AuctionUtil util = new AuctionUtil();
+        TransactionsList tlist = util.createEmptyTransactionsList();
+        Block block = util.createBlock("dd", 0, 0, "dd", "dd", tlist);
         AuctionClient client = new AuctionClient("localhost", 5000);
         client.findNode(3);
+        client.propagateBlock(block);
         client.ping(3);
-        
+        client.getBlockchain(3);
     } 
 }
