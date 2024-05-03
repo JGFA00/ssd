@@ -64,9 +64,8 @@ public class AuctionClient {
     //O cliente não precisa do main (só a app, que só vai ter cliente, é que precisa) é mais para teste. o Nó vai estar a correr 
     //servidor e a chamar métodos aqui do cliente para interagir com outros nós
     public static void main(String[] args){
-        AuctionUtil util = new AuctionUtil();
-        TransactionsList tlist = util.createEmptyTransactionsList();
-        Block block = util.createBlock("dd", 0, 0, "dd", "dd", tlist);
+        TransactionsList tlist = AuctionUtil.createEmptyTransactionsList();
+        Block block = AuctionUtil.createBlock("dd", 0, 0, "dd", "dd", tlist);
         AuctionClient client = new AuctionClient("localhost", 5000);
         client.findNode(3);
         client.propagateBlock(block);

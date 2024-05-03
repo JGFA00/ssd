@@ -7,6 +7,8 @@ service Auction {
   rpc FindNode (NodeID) returns (stream Node) {}
   rpc PropagateBlock (Block) returns (Ack) {}
   rpc getBlockchain (NodeID) returns (stream Block) {}
+  rpc ListAuctions(Id) returns (stream Transaction) {}
+  rpc SubmitTransaction(Transaction) returns (Ack) {}
 }
 message PingResponse {
   string response =1;
@@ -47,3 +49,8 @@ message Block {
   string merkleRoot = 5;
   TransactionsList transactionsList = 6;
 }
+
+message Id {
+  int32 id =1;
+}
+

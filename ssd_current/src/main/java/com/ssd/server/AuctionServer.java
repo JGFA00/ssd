@@ -7,6 +7,7 @@ import com.ssd.client.AuctionClient;
 import com.ssd.grpc.Ack;
 import com.ssd.grpc.AuctionGrpc;
 import com.ssd.grpc.Block;
+import com.ssd.grpc.Id;
 import com.ssd.grpc.Node;
 import com.ssd.grpc.NodeID;
 import com.ssd.grpc.PingResponse;
@@ -63,16 +64,19 @@ public class AuctionServer {
         if (server != null) {
           server.awaitTermination();
         }
-      }
+    }
 
+    
+    //a app até pode correr aqui, para não termos que criar métodos adicionais para a app
     public static void main(String[] args) throws IOException {
         AuctionServer server = new AuctionServer(5000);
         //a primeira coisa aqui até vai ser um nodelookup como cliente para o bootstrap, depois é que se inicializa o servidor
         //eventualmente podemos por o find node assincrono para poder começar o servidor ao mesmo tempo
-        
+    
         //AuctionClient client = new AuctionClient("localhost", 6000);
         //client.findNode(0);
         server.start();
+        System.out.println("Servidor começado");
         try {
             server.blockUntilShutdown();
         } catch (InterruptedException e) {
@@ -83,9 +87,9 @@ public class AuctionServer {
 
     private static class AuctionService extends AuctionGrpc.AuctionImplBase {
 
-        private List<Node> nodes;
-        private List<Block> blockchain;
-        private List<Transaction> transactions;
+        private static List<Node> nodes;
+        private static List<Block> blockchain;
+        private static List<Transaction> transactions;
 
         private AuctionService(){
             //test nodes
@@ -99,22 +103,18 @@ public class AuctionServer {
 
             //test transactions and transactions list
             transactions = new ArrayList<>();
-            AuctionUtil t = new AuctionUtil();
-            transactions.add(t.createTransaction("bid", "mambo"));
-            transactions.add(t.createTransaction("bid", "mambito"));
-            TransactionsList tlist = t.createTransactionsList(transactions);
+            transactions.add(AuctionUtil.createTransaction("bid", "mambo"));
+            transactions.add(AuctionUtil.createTransaction("bid", "mambito"));
+            TransactionsList tlist = AuctionUtil.createTransactionsList(transactions);
             //System.out.println(tlist);
 
             //test block and blockchain
             blockchain = new ArrayList<>();
-            blockchain.add(t.createBlock("a", 0, 0, "a", "a", tlist));
-            blockchain.add(t.createBlock("b", 0, 0, "b", "b", tlist));
+            blockchain.add(AuctionUtil.createBlock("a", 0, 0, "a", "a", tlist));
+            blockchain.add(AuctionUtil.createBlock("b", 0, 0, "b", "b", tlist));
 
         }
 
-        //eventualmente vai haver aqui um método submitTransaction (server), que quando acumular transações suficientes gera um bloco, 
-        //e passa a uma chamada propagate block da perspetiva do cliente (cria um auctionclient e envia para todos os nós presentes 
-        //na routing table um propagate block)
         
         @Override
         public void ping (NodeID nodeid, StreamObserver<PingResponse> responseObserver){
@@ -171,6 +171,20 @@ public class AuctionServer {
             }
             //on completed dá a call por terminada e termina o canal
             responseObserver.onCompleted();
+        }
+
+        //eventualmente vai haver aqui um método submitTransaction (server), que quando acumular transações suficientes gera um bloco, 
+        //e passa a uma chamada propagate block da perspetiva do cliente (cria um auctionclient e envia para todos os nós presentes 
+        //na routing table um propagate block)
+        @Override
+        public void submitTransaction(Transaction t, StreamObserver<Ack> responObserver){
+
+        }
+
+        //ao receber um pedido de listAuctions, percorrer a blockchain e retornar as auctions ativas
+        @Override
+        public void listAuctions(Id id, StreamObserver<Transaction> respObserver){
+            
         }
 
     }

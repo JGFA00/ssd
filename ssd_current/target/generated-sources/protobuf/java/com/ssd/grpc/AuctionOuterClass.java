@@ -50,6 +50,11 @@ public final class AuctionOuterClass {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Block_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Id_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Id_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -69,11 +74,14 @@ public final class AuctionOuterClass {
       "Hash\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001(\003\022\r\n\005nonce\030\003" +
       " \001(\005\022\021\n\tblockHash\030\004 \001(\t\022\022\n\nmerkleRoot\030\005 " +
       "\001(\t\022+\n\020transactionsList\030\006 \001(\0132\021.Transact" +
-      "ionsList2\223\001\n\007Auction\022 \n\004Ping\022\007.NodeID\032\r." +
-      "PingResponse\"\000\022\036\n\010FindNode\022\007.NodeID\032\005.No" +
-      "de\"\0000\001\022 \n\016PropagateBlock\022\006.Block\032\004.Ack\"\000" +
-      "\022$\n\rgetBlockchain\022\007.NodeID\032\006.Block\"\0000\001B\020" +
-      "\n\014com.ssd.grpcP\001b\006proto3"
+      "ionsList\"\020\n\002Id\022\n\n\002id\030\001 \001(\0052\345\001\n\007Auction\022 " +
+      "\n\004Ping\022\007.NodeID\032\r.PingResponse\"\000\022\036\n\010Find" +
+      "Node\022\007.NodeID\032\005.Node\"\0000\001\022 \n\016PropagateBlo" +
+      "ck\022\006.Block\032\004.Ack\"\000\022$\n\rgetBlockchain\022\007.No" +
+      "deID\032\006.Block\"\0000\001\022%\n\014ListAuctions\022\003.Id\032\014." +
+      "Transaction\"\0000\001\022)\n\021SubmitTransaction\022\014.T" +
+      "ransaction\032\004.Ack\"\000B\020\n\014com.ssd.grpcP\001b\006pr" +
+      "oto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -121,6 +129,12 @@ public final class AuctionOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Block_descriptor,
         new java.lang.String[] { "PrevHash", "Timestamp", "Nonce", "BlockHash", "MerkleRoot", "TransactionsList", });
+    internal_static_Id_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_Id_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Id_descriptor,
+        new java.lang.String[] { "Id", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

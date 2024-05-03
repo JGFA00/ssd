@@ -5,6 +5,7 @@ c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\target\generated-sour
 c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\target\generated-sources\protobuf\java\com\ssd\grpc\TransactionsList.java
 c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\target\generated-sources\protobuf\java\com\ssd\grpc\PingResponse.java
 c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\target\generated-sources\protobuf\java\com\ssd\grpc\TransactionOrBuilder.java
+c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\src\main\java\com\ssd\app\App.java
 c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\target\generated-sources\protobuf\java\com\ssd\grpc\Block.java
 c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\target\generated-sources\protobuf\java\com\ssd\grpc\NodeID.java
 c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\target\generated-sources\protobuf\java\com\ssd\grpc\AuctionOuterClass.java
@@ -14,6 +15,8 @@ c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\target\generated-sour
 c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\target\generated-sources\protobuf\java\com\ssd\grpc\NodeIDOrBuilder.java
 c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\target\generated-sources\protobuf\java\com\ssd\grpc\Transaction.java
 c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\src\main\java\com\ssd\client\AuctionClient.java
+c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\target\generated-sources\protobuf\java\com\ssd\grpc\IdOrBuilder.java
 c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\target\generated-sources\protobuf\grpc-java\com\ssd\grpc\AuctionGrpc.java
 c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\src\main\java\com\ssd\util\AuctionUtil.java
 c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\target\generated-sources\protobuf\java\com\ssd\grpc\Ack.java
+c:\Users\jfran\Desktop\5.2\ssd_repo_shared\ssd\ssd_current\target\generated-sources\protobuf\java\com\ssd\grpc\Id.java
