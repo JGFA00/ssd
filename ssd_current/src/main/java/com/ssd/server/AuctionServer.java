@@ -1,6 +1,7 @@
 package com.ssd.server;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
 import com.ssd.client.AuctionClient;
@@ -86,14 +87,18 @@ public class AuctionServer {
     }
 
     private static class AuctionService extends AuctionGrpc.AuctionImplBase {
-
-        private static List<Node> nodes;
-        private static List<Block> blockchain;
-        private static List<Transaction> transactions;
+        private List<Node> nodes;
+        private List<Block> blockchain;
+        private LinkedBlockingDeque<Transaction> transactions;
 
         private AuctionService(){
+            nodes = new ArrayList<Node>(); 
+            transactions = new LinkedBlockingDeque<Transaction>();
+            blockchain = new ArrayList<Block>();
+
+    
             //test nodes
-            nodes = new ArrayList<>(); 
+            
             Node n1 = Node.newBuilder().setId(1).setIpAddress("192.168.1").setPort(1).build();
             Node n2 = Node.newBuilder().setId(2).setIpAddress("192.168.2").setPort(2).build();
             Node n3 = Node.newBuilder().setId(3).setIpAddress("192.168.3").setPort(3).build();
@@ -101,18 +106,18 @@ public class AuctionServer {
             nodes.add(n2);
             nodes.add(n3);
 
-            //test transactions and transactions list
-            transactions = new ArrayList<>();
+            /*
+            //old test transactions and transactions list
             transactions.add(AuctionUtil.createTransaction("bid", "mambo"));
             transactions.add(AuctionUtil.createTransaction("bid", "mambito"));
             TransactionsList tlist = AuctionUtil.createTransactionsList(transactions);
-            //System.out.println(tlist);
+            System.out.println(tlist);
 
             //test block and blockchain
-            blockchain = new ArrayList<>();
+             
             blockchain.add(AuctionUtil.createBlock("a", 0, 0, "a", "a", tlist));
             blockchain.add(AuctionUtil.createBlock("b", 0, 0, "b", "b", tlist));
-
+            */
         }
 
         
@@ -177,13 +182,21 @@ public class AuctionServer {
         //e passa a uma chamada propagate block da perspetiva do cliente (cria um auctionclient e envia para todos os nós presentes 
         //na routing table um propagate block)
         @Override
-        public void submitTransaction(Transaction t, StreamObserver<Ack> responObserver){
+        public void submitTransaction(Transaction t, StreamObserver<Ack> responseObserver){
+            //eventualmente um verify transaction que verifica a chave publica do user, que a auction está a decorrer etc etc
+            Ack ack = Ack.newBuilder().setAcknowledge("Transaction received").build();
+            responseObserver.onNext(ack);
+            responseObserver.onCompleted();
+            transactions.addLast(t);
+            if(transactions.size() ==3){
+                
+            }
 
         }
 
         //ao receber um pedido de listAuctions, percorrer a blockchain e retornar as auctions ativas
         @Override
-        public void listAuctions(Id id, StreamObserver<Transaction> respObserver){
+        public void listAuctions(Id id, StreamObserver<Transaction> responseObserver){
             
         }
 
