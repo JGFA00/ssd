@@ -5,8 +5,10 @@ option java_package = "com.ssd.grpc";
 service Auction {
   rpc Ping (NodeID) returns (PingResponse) {}
   rpc FindNode (NodeID) returns (stream Node) {}
-  //rpc PropagateBlock (NodeID) returns () {}
-  //rpc getBlockchain
+  rpc PropagateBlock (Block) returns (Ack) {}
+  rpc getBlockchain (NodeID) returns (stream Block) {}
+  rpc ListAuctions(Id) returns (stream Transaction) {}
+  rpc SubmitTransaction(Transaction) returns (Ack) {}
 }
 message PingResponse {
   string response =1;
@@ -26,6 +28,10 @@ list auctions
 subscribe auction
 create auction, start auction, bid, end auction
 */
+
+message Ack {
+  string acknowledge = 1;
+}
 message TransactionsList {
   repeated Transaction transactionList = 1;
 }
@@ -44,6 +50,7 @@ message Block {
   TransactionsList transactionsList = 6;
 }
 
-message Blockchain {
-  repeated Block blockchain =1;
+message Id {
+  int32 id =1;
 }
+

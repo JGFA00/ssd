@@ -80,6 +80,130 @@ public final class AuctionGrpc {
     return getFindNodeMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.ssd.grpc.Block,
+      com.ssd.grpc.Ack> getPropagateBlockMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "PropagateBlock",
+      requestType = com.ssd.grpc.Block.class,
+      responseType = com.ssd.grpc.Ack.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.ssd.grpc.Block,
+      com.ssd.grpc.Ack> getPropagateBlockMethod() {
+    io.grpc.MethodDescriptor<com.ssd.grpc.Block, com.ssd.grpc.Ack> getPropagateBlockMethod;
+    if ((getPropagateBlockMethod = AuctionGrpc.getPropagateBlockMethod) == null) {
+      synchronized (AuctionGrpc.class) {
+        if ((getPropagateBlockMethod = AuctionGrpc.getPropagateBlockMethod) == null) {
+          AuctionGrpc.getPropagateBlockMethod = getPropagateBlockMethod =
+              io.grpc.MethodDescriptor.<com.ssd.grpc.Block, com.ssd.grpc.Ack>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "PropagateBlock"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ssd.grpc.Block.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ssd.grpc.Ack.getDefaultInstance()))
+              .setSchemaDescriptor(new AuctionMethodDescriptorSupplier("PropagateBlock"))
+              .build();
+        }
+      }
+    }
+    return getPropagateBlockMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.ssd.grpc.NodeID,
+      com.ssd.grpc.Block> getGetBlockchainMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "getBlockchain",
+      requestType = com.ssd.grpc.NodeID.class,
+      responseType = com.ssd.grpc.Block.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<com.ssd.grpc.NodeID,
+      com.ssd.grpc.Block> getGetBlockchainMethod() {
+    io.grpc.MethodDescriptor<com.ssd.grpc.NodeID, com.ssd.grpc.Block> getGetBlockchainMethod;
+    if ((getGetBlockchainMethod = AuctionGrpc.getGetBlockchainMethod) == null) {
+      synchronized (AuctionGrpc.class) {
+        if ((getGetBlockchainMethod = AuctionGrpc.getGetBlockchainMethod) == null) {
+          AuctionGrpc.getGetBlockchainMethod = getGetBlockchainMethod =
+              io.grpc.MethodDescriptor.<com.ssd.grpc.NodeID, com.ssd.grpc.Block>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getBlockchain"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ssd.grpc.NodeID.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ssd.grpc.Block.getDefaultInstance()))
+              .setSchemaDescriptor(new AuctionMethodDescriptorSupplier("getBlockchain"))
+              .build();
+        }
+      }
+    }
+    return getGetBlockchainMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.ssd.grpc.Id,
+      com.ssd.grpc.Transaction> getListAuctionsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ListAuctions",
+      requestType = com.ssd.grpc.Id.class,
+      responseType = com.ssd.grpc.Transaction.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<com.ssd.grpc.Id,
+      com.ssd.grpc.Transaction> getListAuctionsMethod() {
+    io.grpc.MethodDescriptor<com.ssd.grpc.Id, com.ssd.grpc.Transaction> getListAuctionsMethod;
+    if ((getListAuctionsMethod = AuctionGrpc.getListAuctionsMethod) == null) {
+      synchronized (AuctionGrpc.class) {
+        if ((getListAuctionsMethod = AuctionGrpc.getListAuctionsMethod) == null) {
+          AuctionGrpc.getListAuctionsMethod = getListAuctionsMethod =
+              io.grpc.MethodDescriptor.<com.ssd.grpc.Id, com.ssd.grpc.Transaction>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ListAuctions"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ssd.grpc.Id.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ssd.grpc.Transaction.getDefaultInstance()))
+              .setSchemaDescriptor(new AuctionMethodDescriptorSupplier("ListAuctions"))
+              .build();
+        }
+      }
+    }
+    return getListAuctionsMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.ssd.grpc.Transaction,
+      com.ssd.grpc.Ack> getSubmitTransactionMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "SubmitTransaction",
+      requestType = com.ssd.grpc.Transaction.class,
+      responseType = com.ssd.grpc.Ack.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.ssd.grpc.Transaction,
+      com.ssd.grpc.Ack> getSubmitTransactionMethod() {
+    io.grpc.MethodDescriptor<com.ssd.grpc.Transaction, com.ssd.grpc.Ack> getSubmitTransactionMethod;
+    if ((getSubmitTransactionMethod = AuctionGrpc.getSubmitTransactionMethod) == null) {
+      synchronized (AuctionGrpc.class) {
+        if ((getSubmitTransactionMethod = AuctionGrpc.getSubmitTransactionMethod) == null) {
+          AuctionGrpc.getSubmitTransactionMethod = getSubmitTransactionMethod =
+              io.grpc.MethodDescriptor.<com.ssd.grpc.Transaction, com.ssd.grpc.Ack>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SubmitTransaction"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ssd.grpc.Transaction.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.ssd.grpc.Ack.getDefaultInstance()))
+              .setSchemaDescriptor(new AuctionMethodDescriptorSupplier("SubmitTransaction"))
+              .build();
+        }
+      }
+    }
+    return getSubmitTransactionMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -144,6 +268,34 @@ public final class AuctionGrpc {
         io.grpc.stub.StreamObserver<com.ssd.grpc.Node> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindNodeMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void propagateBlock(com.ssd.grpc.Block request,
+        io.grpc.stub.StreamObserver<com.ssd.grpc.Ack> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getPropagateBlockMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void getBlockchain(com.ssd.grpc.NodeID request,
+        io.grpc.stub.StreamObserver<com.ssd.grpc.Block> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetBlockchainMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void listAuctions(com.ssd.grpc.Id request,
+        io.grpc.stub.StreamObserver<com.ssd.grpc.Transaction> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListAuctionsMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void submitTransaction(com.ssd.grpc.Transaction request,
+        io.grpc.stub.StreamObserver<com.ssd.grpc.Ack> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSubmitTransactionMethod(), responseObserver);
+    }
   }
 
   /**
@@ -194,6 +346,38 @@ public final class AuctionGrpc {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getFindNodeMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void propagateBlock(com.ssd.grpc.Block request,
+        io.grpc.stub.StreamObserver<com.ssd.grpc.Ack> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getPropagateBlockMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getBlockchain(com.ssd.grpc.NodeID request,
+        io.grpc.stub.StreamObserver<com.ssd.grpc.Block> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getGetBlockchainMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void listAuctions(com.ssd.grpc.Id request,
+        io.grpc.stub.StreamObserver<com.ssd.grpc.Transaction> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getListAuctionsMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void submitTransaction(com.ssd.grpc.Transaction request,
+        io.grpc.stub.StreamObserver<com.ssd.grpc.Ack> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getSubmitTransactionMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -229,6 +413,36 @@ public final class AuctionGrpc {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getFindNodeMethod(), getCallOptions(), request);
     }
+
+    /**
+     */
+    public com.ssd.grpc.Ack propagateBlock(com.ssd.grpc.Block request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getPropagateBlockMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<com.ssd.grpc.Block> getBlockchain(
+        com.ssd.grpc.NodeID request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getGetBlockchainMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public java.util.Iterator<com.ssd.grpc.Transaction> listAuctions(
+        com.ssd.grpc.Id request) {
+      return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
+          getChannel(), getListAuctionsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.ssd.grpc.Ack submitTransaction(com.ssd.grpc.Transaction request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getSubmitTransactionMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -257,10 +471,30 @@ public final class AuctionGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getPingMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.ssd.grpc.Ack> propagateBlock(
+        com.ssd.grpc.Block request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getPropagateBlockMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.ssd.grpc.Ack> submitTransaction(
+        com.ssd.grpc.Transaction request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getSubmitTransactionMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_PING = 0;
   private static final int METHODID_FIND_NODE = 1;
+  private static final int METHODID_PROPAGATE_BLOCK = 2;
+  private static final int METHODID_GET_BLOCKCHAIN = 3;
+  private static final int METHODID_LIST_AUCTIONS = 4;
+  private static final int METHODID_SUBMIT_TRANSACTION = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -286,6 +520,22 @@ public final class AuctionGrpc {
         case METHODID_FIND_NODE:
           serviceImpl.findNode((com.ssd.grpc.NodeID) request,
               (io.grpc.stub.StreamObserver<com.ssd.grpc.Node>) responseObserver);
+          break;
+        case METHODID_PROPAGATE_BLOCK:
+          serviceImpl.propagateBlock((com.ssd.grpc.Block) request,
+              (io.grpc.stub.StreamObserver<com.ssd.grpc.Ack>) responseObserver);
+          break;
+        case METHODID_GET_BLOCKCHAIN:
+          serviceImpl.getBlockchain((com.ssd.grpc.NodeID) request,
+              (io.grpc.stub.StreamObserver<com.ssd.grpc.Block>) responseObserver);
+          break;
+        case METHODID_LIST_AUCTIONS:
+          serviceImpl.listAuctions((com.ssd.grpc.Id) request,
+              (io.grpc.stub.StreamObserver<com.ssd.grpc.Transaction>) responseObserver);
+          break;
+        case METHODID_SUBMIT_TRANSACTION:
+          serviceImpl.submitTransaction((com.ssd.grpc.Transaction) request,
+              (io.grpc.stub.StreamObserver<com.ssd.grpc.Ack>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -319,6 +569,34 @@ public final class AuctionGrpc {
               com.ssd.grpc.NodeID,
               com.ssd.grpc.Node>(
                 service, METHODID_FIND_NODE)))
+        .addMethod(
+          getPropagateBlockMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ssd.grpc.Block,
+              com.ssd.grpc.Ack>(
+                service, METHODID_PROPAGATE_BLOCK)))
+        .addMethod(
+          getGetBlockchainMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              com.ssd.grpc.NodeID,
+              com.ssd.grpc.Block>(
+                service, METHODID_GET_BLOCKCHAIN)))
+        .addMethod(
+          getListAuctionsMethod(),
+          io.grpc.stub.ServerCalls.asyncServerStreamingCall(
+            new MethodHandlers<
+              com.ssd.grpc.Id,
+              com.ssd.grpc.Transaction>(
+                service, METHODID_LIST_AUCTIONS)))
+        .addMethod(
+          getSubmitTransactionMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.ssd.grpc.Transaction,
+              com.ssd.grpc.Ack>(
+                service, METHODID_SUBMIT_TRANSACTION)))
         .build();
   }
 
@@ -369,6 +647,10 @@ public final class AuctionGrpc {
               .setSchemaDescriptor(new AuctionFileDescriptorSupplier())
               .addMethod(getPingMethod())
               .addMethod(getFindNodeMethod())
+              .addMethod(getPropagateBlockMethod())
+              .addMethod(getGetBlockchainMethod())
+              .addMethod(getListAuctionsMethod())
+              .addMethod(getSubmitTransactionMethod())
               .build();
         }
       }
