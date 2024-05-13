@@ -19,20 +19,19 @@ public class AuctionClient {
     final AuctionStub asyncStub;
     final ManagedChannel channel;
 
-    public AuctionClient(String host, int port) {
-        channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
+    public AuctionClient(NodeInfo nodeInfo) {
+        channel = ManagedChannelBuilder.forAddress(nodeInfo.getIpAddress(), ondeInfo.getPort).usePlaintext().build();
         blockingStub = AuctionGrpc.newBlockingStub(channel);
         asyncStub = AuctionGrpc.newStub(channel);
     } 
 
     //este node id é o id do próprio nó que está a enviar o ping
-    public void ping(int nodeid) {
+    public void ping() {
         NodeID id = NodeID.newBuilder().setId(nodeid).build();
         PingResponse response;
         response = blockingStub.ping(id);
         System.out.println(response.getResponse());
     }
-
 
     //aqui implementa-se o find node da perspetiva do cliente, o que queremos fazer com os nós que recebemos? adicionar à 
     //routing table etc etc
@@ -45,7 +44,6 @@ public class AuctionClient {
             System.out.println(Node.getId());
         });
     }
-
 
     public void propagateBlock(Block block){
         Ack ack;
@@ -64,12 +62,12 @@ public class AuctionClient {
     //O cliente não precisa do main (só a app, que só vai ter cliente, é que precisa) é mais para teste. o Nó vai estar a correr 
     //servidor e a chamar métodos aqui do cliente para interagir com outros nós
     public static void main(String[] args){
-        TransactionsList tlist = AuctionUtil.createEmptyTransactionsList();
-        Block block = AuctionUtil.createBlock("dd", 0, 0, "dd", "dd", tlist);
-        AuctionClient client = new AuctionClient("localhost", 5000);
-        client.findNode(3);
-        client.propagateBlock(block);
-        client.ping(3);
-        client.getBlockchain(3);
+        //TransactionsList tlist = AuctionUtil.createEmptyTransactionsList();
+        //Block block = AuctionUtil.createBlock("dd", 0, 0, "dd", "dd", tlist);
+        //AuctionClient client = new AuctionClient("localhost", 5000);
+        //client.findNode(3);
+        //client.propagateBlock(block);
+        //client.ping(3);
+        //client.getBlockchain(3);
     } 
 }

@@ -28,13 +28,16 @@ public class AuctionServer {
 
     private final int port;
     private final Server server;
+    private List<Block> blockchain;
+    private LinkedBlockingDeque<Transaction> transactions;
+    private RoutingTable routingTable;
 
-    public AuctionServer(int port) {
+    public AuctionServer(NodeInfo nodeInfo,List<Block> blockchain,LinkedBlockingDeque<Transaction> transactions, RoutingTable routingTable) {
         this(Grpc.newServerBuilderForPort(port, InsecureServerCredentials.create()),
         port);  
     }
 
-    public AuctionServer(ServerBuilder<?> serverBuilder, int port) {
+    public AuctionServer(ServerBuilder<?> serverBuilder,NodeInfo nodeInfo,List<Block> blockchain,LinkedBlockingDeque<Transaction> transactions, RoutingTable routingTable ) {
         this.port = port;
         server = serverBuilder.addService(new AuctionService()).build();
     }
@@ -70,60 +73,10 @@ public class AuctionServer {
     }
 
     
-    //a app até pode correr aqui, para não termos que criar métodos adicionais para a app
-    public static void main(String[] args) throws IOException {
-        AuctionServer server = new AuctionServer(5000);
-        //a primeira coisa aqui até vai ser um nodelookup como cliente para o bootstrap, depois é que se inicializa o servidor
-        //eventualmente podemos por o find node assincrono para poder começar o servidor ao mesmo tempo
-    
-        //AuctionClient client = new AuctionClient("localhost", 6000);
-        //client.findNode(0);
-        server.start();
-        System.out.println("Servidor começado");
-        try {
-            server.blockUntilShutdown();
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
+  
 
     private static class AuctionService extends AuctionGrpc.AuctionImplBase {
-        private List<Node> nodes;
-        private List<Block> blockchain;
-        private LinkedBlockingDeque<Transaction> transactions;
-        private RoutingTable routingTable;
-
-        private AuctionService(){
-            nodes = new ArrayList<Node>(); 
-            transactions = new LinkedBlockingDeque<Transaction>();
-            blockchain = new ArrayList<Block>();
-
-    
-            //test nodes
-            
-            Node n1 = Node.newBuilder().setId(1).setIpAddress("192.168.1").setPort(1).build();
-            Node n2 = Node.newBuilder().setId(2).setIpAddress("192.168.2").setPort(2).build();
-            Node n3 = Node.newBuilder().setId(3).setIpAddress("192.168.3").setPort(3).build();
-            nodes.add(n1);
-            nodes.add(n2);
-            nodes.add(n3);
-
-            /*
-            //old test transactions and transactions list
-            transactions.add(AuctionUtil.createTransaction("bid", "mambo"));
-            transactions.add(AuctionUtil.createTransaction("bid", "mambito"));
-            TransactionsList tlist = AuctionUtil.createTransactionsList(transactions);
-            System.out.println(tlist);
-
-            //test block and blockchain
-             
-            blockchain.add(AuctionUtil.createBlock("a", 0, 0, "a", "a", tlist));
-            blockchain.add(AuctionUtil.createBlock("b", 0, 0, "b", "b", tlist));
-            */ 
-        } 
- 
-         
+  
         @Override 
         public void ping (NodeID nodeid, StreamObserver<PingResponse> responseObserver){ 
             //o que fazer com um ping? para já retorna só resposta ao cliente que enviou o ping 
@@ -136,20 +89,16 @@ public class AuctionServer {
         //este NodeID é o id do nó que estamos à procura 
         @Override 
         public void findNode (NodeID nodeid, StreamObserver<Node> responseObserver){
-            List<NodeInfo> closestNodes = routingTable.findClosestNodes(nodeid, 20);
-            // Implementar aqui a funcionalidade do find node da perspetiva do servidor - que nós da routing table retorna?
-            for (Node node : closestNodes){
-                //este response observer.onnext(node) retorna o node para o canal com o cliente que invocou o findnode 
-                responseObserver.onNext(node);
-                
+            //Return the 3 closest nodes
+            List<NodeInfo> closestNodes = routingTable.findClosestNodes(nodeid, 3);
+            //este response observer.onnext(node) retorna o node para o canal com o cliente que invocou o findnode 
+            responseObserver.onNext(closestNodes);           
                 try {
                     Thread.sleep(10000);
                 } catch (InterruptedException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                
-            }
             //on completed dá a call por terminada e termina o canal
             responseObserver.onCompleted();
         }

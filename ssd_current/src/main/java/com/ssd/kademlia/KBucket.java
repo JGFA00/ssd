@@ -1,15 +1,13 @@
 package com.ssd.kademlia;
 
+import java.math.BigInteger;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.Iterator;
-import java.math.BigInteger;
-import java.util.List;
-import java.util.ArrayList;
 
 public class KBucket {
-    private final Set<NodeInfo> nodes;
-    private final int capacity;
+    public final Set<NodeInfo> nodes;
+    public final int capacity;
 
     public KBucket(int capacity) {
         this.nodes = new LinkedHashSet<>(capacity);
@@ -17,28 +15,65 @@ public class KBucket {
     }
 
     public synchronized void addNode(NodeInfo node) {
-        if (!nodes.contains(node)) {
-            if (nodes.size() >= capacity) {
-                Iterator<KademliaNodeInfo> it = nodes.iterator();
-                KademliaNodeInfo oldestNode = it.next();
-                if (!isResponsive(oldestNode)) {
-                    it.remove();
-                }
-            }
-            nodes.add(node);
-        } else {
-            // Move the node to the end to mark it as most recently seen
+        if (nodes.contains(node)) {
+            // Node is already in the KBucket, move it to the end to mark as recently seen
             nodes.remove(node);
             nodes.add(node);
+        } else if (nodes.size() < capacity) {
+            nodes.add(node);
+        } else {
+            // KBucket is full, check the oldest node's responsiveness if unresponsive remove it and add the new one
+            Iterator<NodeInfo> it = nodes.iterator();
+            NodeInfo oldestNode = it.next();
+            if (!ping(oldestNode)) {
+                it.remove();
+                nodes.add(node);
+            }
         }
     }
 
-    public boolean isResponsive(NodeInfo node) {
-        // Implement actual check (e.g., ping)
-        return true; // Placeholder
+    public synchronized void removeNode(NodeInfo node) {
+        nodes.remove(node);
+    }
+
+    public NodeInfo findNode(BigInteger nodeId) {
+        for (NodeInfo node : nodes) {
+            if (node.getId().equals(nodeId)) {
+                return node;
+            }
+        }
+        return null;
     }
 
     public Set<NodeInfo> getNodes() {
         return new LinkedHashSet<>(nodes);
     }
+
+    public boolean isNodePresent(NodeInfo node) {
+        return nodes.contains(node);
+    }
+
+    public synchronized void refresh() {
+        //Ping all Nodes and update
+        Iterator<NodeInfo> it = nodes.iterator();
+        while (it.hasNext()) {
+            NodeInfo node = it.next();
+            if (!ping(node)) {
+                it.remove();
+            }
+        }
+    }
+
+    public boolean isEmpty() {
+        return nodes.isEmpty();
+    }
+
+    public int size() {
+        return nodes.size();
+    }
+
+    public void clear() {
+        nodes.clear();
+    }
+
 }
