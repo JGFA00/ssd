@@ -28,6 +28,11 @@ public class Block {
         return transactions;
     }
 
+    public void setTransactions(List<Transaction> alt_transactions) {
+        this.transactions = alt_transactions;
+        this.merkleRoot = calculateMerkleRoot(alt_transactions);
+    }
+
     public int getNumberOfTransactions(){
         return transactions.size();
     }
