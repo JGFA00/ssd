@@ -11,13 +11,15 @@ public class Main {
 
         System.out.println("blockchain inicial: " + chain);
 
-        Block genesisBlock = chain.getBlockchain().get(0); // Get the genesis block
+        Block genesisBlock = chain.getBlockchain().getFirst(); // Get the genesis block
         String genesis_hash = genesisBlock.getBlockHash();
 
+        // 1st Block with transactions
         Block block1 = getBlockData(genesis_hash);
-
-        System.out.println("Block1: " + block1);
-        System.out.println("Block1 Transactions: " + block1.getTransactions().toString());
+        System.out.println("Block1 before mining: " + block1);
+        block1.mineBlock();
+        System.out.println("Block1 after mining: " + block1);
+        System.out.println("Block1 Transactions: " + block1.getTransactions());
         System.out.println(block1.verifyBlock());
 
         chain.addBlock(block1);
@@ -25,6 +27,15 @@ public class Main {
         System.out.println("blockchain final: " + chain);
 
         System.out.println("blockchain valid: " + chain.isValid());
+
+        //Transaction transaction1_alt = new Transaction(Transaction.TransactionType.BID, "Joao deu bid $50");
+        //Transaction transaction2_alt = new Transaction(Transaction.TransactionType.BID, "Julio deu bid $60");
+        //List<Transaction> transactions_alt = new ArrayList<>();
+        //transactions_alt.add(transaction1_alt);
+        //transactions_alt.add(transaction2_alt);
+        //chain.getBlockchain().get(1).setTransactions(transactions_alt);
+
+        //System.out.println("blockchain valid: " + chain.isValid());
 
     }
 
