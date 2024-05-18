@@ -19,7 +19,9 @@ public class Blockchain {
         Transaction genesisTransaction = new Transaction(Transaction.TransactionType.START_AUCTION,"genesiscenas");
         List<Transaction> genesis_transactions = new ArrayList<>();
         genesis_transactions.add(genesisTransaction);
-        return new Block("0", genesis_transactions);
+        Block genesisBlock = new Block("0", genesis_transactions);
+        genesisBlock.mineBlock();
+        return genesisBlock;
     }
 
     public void addBlock(Block block) {
