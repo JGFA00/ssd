@@ -4,17 +4,18 @@ import java.util.*;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
+import com.ssd.app.Transactions;
+import com.ssd.blockchain.Blockchain;
 import com.ssd.client.AuctionClient;
 import com.ssd.grpc.Ack;
 import com.ssd.grpc.AuctionGrpc;
 import com.ssd.grpc.Block;
 import com.ssd.grpc.Id;
-import com.ssd.grpc.Node;
 import com.ssd.grpc.NodeID;
 import com.ssd.grpc.PingResponse;
 import com.ssd.grpc.Transaction;
 import com.ssd.grpc.TransactionsList;
-import com.ssd.kademlia.NodeInfo;
+import com.ssd.grpc.NodeInfo;
 import com.ssd.kademlia.RoutingTable;
 import com.ssd.util.AuctionUtil;
 
@@ -25,20 +26,23 @@ import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 
 public class AuctionServer {
-
+    private final NodeInfo nodeinfo;
     private final int port;
     private final Server server;
-    private List<Block> blockchain;
-    private LinkedBlockingDeque<Transaction> transactions;
+    private Blockchain blockchain;
+    private Transactions tlist;
     private RoutingTable routingTable;
 
-    public AuctionServer(NodeInfo nodeInfo,List<Block> blockchain,LinkedBlockingDeque<Transaction> transactions, RoutingTable routingTable) {
-        this(Grpc.newServerBuilderForPort(port, InsecureServerCredentials.create()),
-        port);  
+    public AuctionServer(NodeInfo nodeinfo,Blockchain blockchain, Transactions tlist, RoutingTable routingTable) {
+        this(Grpc.newServerBuilderForPort(nodeinfo.getPort(), InsecureServerCredentials.create()),nodeinfo, blockchain, tlist, routingTable);
     }
 
-    public AuctionServer(ServerBuilder<?> serverBuilder,NodeInfo nodeInfo,List<Block> blockchain,LinkedBlockingDeque<Transaction> transactions, RoutingTable routingTable ) {
-        this.port = port;
+    public AuctionServer(ServerBuilder<?> serverBuilder,NodeInfo nodeinfo,Blockchain blockchain, Transactions tlist, RoutingTable routingTable) {
+        this.nodeinfo = nodeinfo;
+        this.port = nodeinfo.getPort();
+        this.blockchain = blockchain;
+        this.tlist = tlist;
+        this.routingTable = routingTable;
         server = serverBuilder.addService(new AuctionService()).build();
     }
 
@@ -76,7 +80,7 @@ public class AuctionServer {
   
 
     private static class AuctionService extends AuctionGrpc.AuctionImplBase {
-  
+        
         @Override 
         public void ping (NodeID nodeid, StreamObserver<PingResponse> responseObserver){ 
             //o que fazer com um ping? para já retorna só resposta ao cliente que enviou o ping 
@@ -154,7 +158,6 @@ public class AuctionServer {
         }
 
     }
-
 
 
 }

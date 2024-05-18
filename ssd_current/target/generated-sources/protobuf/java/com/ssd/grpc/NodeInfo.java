@@ -5,85 +5,114 @@
 package com.ssd.grpc;
 
 /**
- * Protobuf type {@code Node}
+ * Protobuf type {@code NodeInfo}
  */
-public final class Node extends
+public final class NodeInfo extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:Node)
-    NodeOrBuilder {
+    // @@protoc_insertion_point(message_implements:NodeInfo)
+    NodeInfoOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use Node.newBuilder() to construct.
-  private Node(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use NodeInfo.newBuilder() to construct.
+  private NodeInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private Node() {
-    ipAddress_ = "";
+  private NodeInfo() {
+    id_ = "";
+    ip_ = "";
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new Node();
+    return new NodeInfo();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.ssd.grpc.AuctionOuterClass.internal_static_Node_descriptor;
+    return com.ssd.grpc.AuctionOuterClass.internal_static_NodeInfo_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.ssd.grpc.AuctionOuterClass.internal_static_Node_fieldAccessorTable
+    return com.ssd.grpc.AuctionOuterClass.internal_static_NodeInfo_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.ssd.grpc.Node.class, com.ssd.grpc.Node.Builder.class);
+            com.ssd.grpc.NodeInfo.class, com.ssd.grpc.NodeInfo.Builder.class);
   }
 
   public static final int ID_FIELD_NUMBER = 1;
-  private int id_ = 0;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object id_ = "";
   /**
-   * <code>int32 id = 1;</code>
+   * <code>string id = 1;</code>
    * @return The id.
    */
   @java.lang.Override
-  public int getId() {
-    return id_;
-  }
-
-  public static final int IP_ADDRESS_FIELD_NUMBER = 2;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object ipAddress_ = "";
-  /**
-   * <code>string ip_address = 2;</code>
-   * @return The ipAddress.
-   */
-  @java.lang.Override
-  public java.lang.String getIpAddress() {
-    java.lang.Object ref = ipAddress_;
+  public java.lang.String getId() {
+    java.lang.Object ref = id_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      ipAddress_ = s;
+      id_ = s;
       return s;
     }
   }
   /**
-   * <code>string ip_address = 2;</code>
-   * @return The bytes for ipAddress.
+   * <code>string id = 1;</code>
+   * @return The bytes for id.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getIpAddressBytes() {
-    java.lang.Object ref = ipAddress_;
+      getIdBytes() {
+    java.lang.Object ref = id_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      ipAddress_ = b;
+      id_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int IP_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object ip_ = "";
+  /**
+   * <code>string ip = 2;</code>
+   * @return The ip.
+   */
+  @java.lang.Override
+  public java.lang.String getIp() {
+    java.lang.Object ref = ip_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      ip_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string ip = 2;</code>
+   * @return The bytes for ip.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getIpBytes() {
+    java.lang.Object ref = ip_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      ip_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -115,11 +144,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (id_ != 0) {
-      output.writeInt32(1, id_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ipAddress_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, ipAddress_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ip_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, ip_);
     }
     if (port_ != 0) {
       output.writeInt32(3, port_);
@@ -133,12 +162,11 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (id_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(1, id_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(id_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ipAddress_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, ipAddress_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ip_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, ip_);
     }
     if (port_ != 0) {
       size += com.google.protobuf.CodedOutputStream
@@ -154,15 +182,15 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.ssd.grpc.Node)) {
+    if (!(obj instanceof com.ssd.grpc.NodeInfo)) {
       return super.equals(obj);
     }
-    com.ssd.grpc.Node other = (com.ssd.grpc.Node) obj;
+    com.ssd.grpc.NodeInfo other = (com.ssd.grpc.NodeInfo) obj;
 
-    if (getId()
-        != other.getId()) return false;
-    if (!getIpAddress()
-        .equals(other.getIpAddress())) return false;
+    if (!getId()
+        .equals(other.getId())) return false;
+    if (!getIp()
+        .equals(other.getIp())) return false;
     if (getPort()
         != other.getPort()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
@@ -177,9 +205,9 @@ private static final long serialVersionUID = 0L;
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + ID_FIELD_NUMBER;
-    hash = (53 * hash) + getId();
-    hash = (37 * hash) + IP_ADDRESS_FIELD_NUMBER;
-    hash = (53 * hash) + getIpAddress().hashCode();
+    hash = (53 * hash) + getId().hashCode();
+    hash = (37 * hash) + IP_FIELD_NUMBER;
+    hash = (53 * hash) + getIp().hashCode();
     hash = (37 * hash) + PORT_FIELD_NUMBER;
     hash = (53 * hash) + getPort();
     hash = (29 * hash) + getUnknownFields().hashCode();
@@ -187,44 +215,44 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static com.ssd.grpc.Node parseFrom(
+  public static com.ssd.grpc.NodeInfo parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.ssd.grpc.Node parseFrom(
+  public static com.ssd.grpc.NodeInfo parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.ssd.grpc.Node parseFrom(
+  public static com.ssd.grpc.NodeInfo parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.ssd.grpc.Node parseFrom(
+  public static com.ssd.grpc.NodeInfo parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.ssd.grpc.Node parseFrom(byte[] data)
+  public static com.ssd.grpc.NodeInfo parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.ssd.grpc.Node parseFrom(
+  public static com.ssd.grpc.NodeInfo parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.ssd.grpc.Node parseFrom(java.io.InputStream input)
+  public static com.ssd.grpc.NodeInfo parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.ssd.grpc.Node parseFrom(
+  public static com.ssd.grpc.NodeInfo parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -232,26 +260,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.ssd.grpc.Node parseDelimitedFrom(java.io.InputStream input)
+  public static com.ssd.grpc.NodeInfo parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.ssd.grpc.Node parseDelimitedFrom(
+  public static com.ssd.grpc.NodeInfo parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.ssd.grpc.Node parseFrom(
+  public static com.ssd.grpc.NodeInfo parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.ssd.grpc.Node parseFrom(
+  public static com.ssd.grpc.NodeInfo parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -264,7 +292,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.ssd.grpc.Node prototype) {
+  public static Builder newBuilder(com.ssd.grpc.NodeInfo prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -280,26 +308,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code Node}
+   * Protobuf type {@code NodeInfo}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:Node)
-      com.ssd.grpc.NodeOrBuilder {
+      // @@protoc_insertion_point(builder_implements:NodeInfo)
+      com.ssd.grpc.NodeInfoOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.ssd.grpc.AuctionOuterClass.internal_static_Node_descriptor;
+      return com.ssd.grpc.AuctionOuterClass.internal_static_NodeInfo_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.ssd.grpc.AuctionOuterClass.internal_static_Node_fieldAccessorTable
+      return com.ssd.grpc.AuctionOuterClass.internal_static_NodeInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.ssd.grpc.Node.class, com.ssd.grpc.Node.Builder.class);
+              com.ssd.grpc.NodeInfo.class, com.ssd.grpc.NodeInfo.Builder.class);
     }
 
-    // Construct using com.ssd.grpc.Node.newBuilder()
+    // Construct using com.ssd.grpc.NodeInfo.newBuilder()
     private Builder() {
 
     }
@@ -313,8 +341,8 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      id_ = 0;
-      ipAddress_ = "";
+      id_ = "";
+      ip_ = "";
       port_ = 0;
       return this;
     }
@@ -322,17 +350,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.ssd.grpc.AuctionOuterClass.internal_static_Node_descriptor;
+      return com.ssd.grpc.AuctionOuterClass.internal_static_NodeInfo_descriptor;
     }
 
     @java.lang.Override
-    public com.ssd.grpc.Node getDefaultInstanceForType() {
-      return com.ssd.grpc.Node.getDefaultInstance();
+    public com.ssd.grpc.NodeInfo getDefaultInstanceForType() {
+      return com.ssd.grpc.NodeInfo.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.ssd.grpc.Node build() {
-      com.ssd.grpc.Node result = buildPartial();
+    public com.ssd.grpc.NodeInfo build() {
+      com.ssd.grpc.NodeInfo result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -340,20 +368,20 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.ssd.grpc.Node buildPartial() {
-      com.ssd.grpc.Node result = new com.ssd.grpc.Node(this);
+    public com.ssd.grpc.NodeInfo buildPartial() {
+      com.ssd.grpc.NodeInfo result = new com.ssd.grpc.NodeInfo(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(com.ssd.grpc.Node result) {
+    private void buildPartial0(com.ssd.grpc.NodeInfo result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.id_ = id_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.ipAddress_ = ipAddress_;
+        result.ip_ = ip_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.port_ = port_;
@@ -394,21 +422,23 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.ssd.grpc.Node) {
-        return mergeFrom((com.ssd.grpc.Node)other);
+      if (other instanceof com.ssd.grpc.NodeInfo) {
+        return mergeFrom((com.ssd.grpc.NodeInfo)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.ssd.grpc.Node other) {
-      if (other == com.ssd.grpc.Node.getDefaultInstance()) return this;
-      if (other.getId() != 0) {
-        setId(other.getId());
+    public Builder mergeFrom(com.ssd.grpc.NodeInfo other) {
+      if (other == com.ssd.grpc.NodeInfo.getDefaultInstance()) return this;
+      if (!other.getId().isEmpty()) {
+        id_ = other.id_;
+        bitField0_ |= 0x00000001;
+        onChanged();
       }
-      if (!other.getIpAddress().isEmpty()) {
-        ipAddress_ = other.ipAddress_;
+      if (!other.getIp().isEmpty()) {
+        ip_ = other.ip_;
         bitField0_ |= 0x00000002;
         onChanged();
       }
@@ -441,13 +471,13 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            case 8: {
-              id_ = input.readInt32();
+            case 10: {
+              id_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
-            } // case 8
+            } // case 10
             case 18: {
-              ipAddress_ = input.readStringRequireUtf8();
+              ip_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000002;
               break;
             } // case 18
@@ -473,105 +503,145 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private int id_ ;
+    private java.lang.Object id_ = "";
     /**
-     * <code>int32 id = 1;</code>
+     * <code>string id = 1;</code>
      * @return The id.
      */
-    @java.lang.Override
-    public int getId() {
-      return id_;
-    }
-    /**
-     * <code>int32 id = 1;</code>
-     * @param value The id to set.
-     * @return This builder for chaining.
-     */
-    public Builder setId(int value) {
-
-      id_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>int32 id = 1;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearId() {
-      bitField0_ = (bitField0_ & ~0x00000001);
-      id_ = 0;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object ipAddress_ = "";
-    /**
-     * <code>string ip_address = 2;</code>
-     * @return The ipAddress.
-     */
-    public java.lang.String getIpAddress() {
-      java.lang.Object ref = ipAddress_;
+    public java.lang.String getId() {
+      java.lang.Object ref = id_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        ipAddress_ = s;
+        id_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string ip_address = 2;</code>
-     * @return The bytes for ipAddress.
+     * <code>string id = 1;</code>
+     * @return The bytes for id.
      */
     public com.google.protobuf.ByteString
-        getIpAddressBytes() {
-      java.lang.Object ref = ipAddress_;
+        getIdBytes() {
+      java.lang.Object ref = id_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        ipAddress_ = b;
+        id_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string ip_address = 2;</code>
-     * @param value The ipAddress to set.
+     * <code>string id = 1;</code>
+     * @param value The id to set.
      * @return This builder for chaining.
      */
-    public Builder setIpAddress(
+    public Builder setId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      ipAddress_ = value;
+      id_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string id = 1;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearId() {
+      id_ = getDefaultInstance().getId();
+      bitField0_ = (bitField0_ & ~0x00000001);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string id = 1;</code>
+     * @param value The bytes for id to set.
+     * @return This builder for chaining.
+     */
+    public Builder setIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      id_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object ip_ = "";
+    /**
+     * <code>string ip = 2;</code>
+     * @return The ip.
+     */
+    public java.lang.String getIp() {
+      java.lang.Object ref = ip_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        ip_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string ip = 2;</code>
+     * @return The bytes for ip.
+     */
+    public com.google.protobuf.ByteString
+        getIpBytes() {
+      java.lang.Object ref = ip_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ip_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string ip = 2;</code>
+     * @param value The ip to set.
+     * @return This builder for chaining.
+     */
+    public Builder setIp(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ip_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
-     * <code>string ip_address = 2;</code>
+     * <code>string ip = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder clearIpAddress() {
-      ipAddress_ = getDefaultInstance().getIpAddress();
+    public Builder clearIp() {
+      ip_ = getDefaultInstance().getIp();
       bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
     /**
-     * <code>string ip_address = 2;</code>
-     * @param value The bytes for ipAddress to set.
+     * <code>string ip = 2;</code>
+     * @param value The bytes for ip to set.
      * @return This builder for chaining.
      */
-    public Builder setIpAddressBytes(
+    public Builder setIpBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      ipAddress_ = value;
+      ip_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
@@ -621,23 +691,23 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:Node)
+    // @@protoc_insertion_point(builder_scope:NodeInfo)
   }
 
-  // @@protoc_insertion_point(class_scope:Node)
-  private static final com.ssd.grpc.Node DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:NodeInfo)
+  private static final com.ssd.grpc.NodeInfo DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.ssd.grpc.Node();
+    DEFAULT_INSTANCE = new com.ssd.grpc.NodeInfo();
   }
 
-  public static com.ssd.grpc.Node getDefaultInstance() {
+  public static com.ssd.grpc.NodeInfo getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<Node>
-      PARSER = new com.google.protobuf.AbstractParser<Node>() {
+  private static final com.google.protobuf.Parser<NodeInfo>
+      PARSER = new com.google.protobuf.AbstractParser<NodeInfo>() {
     @java.lang.Override
-    public Node parsePartialFrom(
+    public NodeInfo parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -656,17 +726,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<Node> parser() {
+  public static com.google.protobuf.Parser<NodeInfo> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<Node> getParserForType() {
+  public com.google.protobuf.Parser<NodeInfo> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.ssd.grpc.Node getDefaultInstanceForType() {
+  public com.ssd.grpc.NodeInfo getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

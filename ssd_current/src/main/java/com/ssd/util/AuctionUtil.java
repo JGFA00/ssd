@@ -1,20 +1,20 @@
 package com.ssd.util;
 import java.util.List;
 import com.ssd.grpc.Block;
-import com.ssd.grpc.Node;
 import com.ssd.grpc.NodeID;
+import com.ssd.grpc.NodeInfo;
 import com.ssd.grpc.Transaction;
 import com.ssd.grpc.TransactionsList;
 
 public class AuctionUtil {
 
-    public static NodeID createNodeId(int nodeid){
+    public static NodeID createNodeId(String nodeid){
         NodeID nid = NodeID.newBuilder().setId(nodeid).build();
         return nid;
     }
 
-    public static Node createNode(int id, String ip, int port){
-        Node node = Node.newBuilder().setId(id).setIpAddress(ip).setPort(port).build();
+    public static NodeInfo createNodeInfo(String id, String ip, int port){
+        NodeInfo node = NodeInfo.newBuilder().setId(id).setIp(ip).setPort(port).build();
         return node;
     }
 
