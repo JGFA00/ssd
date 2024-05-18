@@ -50,28 +50,28 @@ public final class AuctionGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<com.ssd.grpc.NodeID,
-      com.ssd.grpc.Node> getFindNodeMethod;
+      com.ssd.grpc.NodeInfo> getFindNodeMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "FindNode",
       requestType = com.ssd.grpc.NodeID.class,
-      responseType = com.ssd.grpc.Node.class,
+      responseType = com.ssd.grpc.NodeInfo.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
   public static io.grpc.MethodDescriptor<com.ssd.grpc.NodeID,
-      com.ssd.grpc.Node> getFindNodeMethod() {
-    io.grpc.MethodDescriptor<com.ssd.grpc.NodeID, com.ssd.grpc.Node> getFindNodeMethod;
+      com.ssd.grpc.NodeInfo> getFindNodeMethod() {
+    io.grpc.MethodDescriptor<com.ssd.grpc.NodeID, com.ssd.grpc.NodeInfo> getFindNodeMethod;
     if ((getFindNodeMethod = AuctionGrpc.getFindNodeMethod) == null) {
       synchronized (AuctionGrpc.class) {
         if ((getFindNodeMethod = AuctionGrpc.getFindNodeMethod) == null) {
           AuctionGrpc.getFindNodeMethod = getFindNodeMethod =
-              io.grpc.MethodDescriptor.<com.ssd.grpc.NodeID, com.ssd.grpc.Node>newBuilder()
+              io.grpc.MethodDescriptor.<com.ssd.grpc.NodeID, com.ssd.grpc.NodeInfo>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "FindNode"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.ssd.grpc.NodeID.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.ssd.grpc.Node.getDefaultInstance()))
+                  com.ssd.grpc.NodeInfo.getDefaultInstance()))
               .setSchemaDescriptor(new AuctionMethodDescriptorSupplier("FindNode"))
               .build();
         }
@@ -265,7 +265,7 @@ public final class AuctionGrpc {
     /**
      */
     default void findNode(com.ssd.grpc.NodeID request,
-        io.grpc.stub.StreamObserver<com.ssd.grpc.Node> responseObserver) {
+        io.grpc.stub.StreamObserver<com.ssd.grpc.NodeInfo> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindNodeMethod(), responseObserver);
     }
 
@@ -342,7 +342,7 @@ public final class AuctionGrpc {
     /**
      */
     public void findNode(com.ssd.grpc.NodeID request,
-        io.grpc.stub.StreamObserver<com.ssd.grpc.Node> responseObserver) {
+        io.grpc.stub.StreamObserver<com.ssd.grpc.NodeInfo> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getFindNodeMethod(), getCallOptions()), request, responseObserver);
     }
@@ -408,7 +408,7 @@ public final class AuctionGrpc {
 
     /**
      */
-    public java.util.Iterator<com.ssd.grpc.Node> findNode(
+    public java.util.Iterator<com.ssd.grpc.NodeInfo> findNode(
         com.ssd.grpc.NodeID request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getFindNodeMethod(), getCallOptions(), request);
@@ -519,7 +519,7 @@ public final class AuctionGrpc {
           break;
         case METHODID_FIND_NODE:
           serviceImpl.findNode((com.ssd.grpc.NodeID) request,
-              (io.grpc.stub.StreamObserver<com.ssd.grpc.Node>) responseObserver);
+              (io.grpc.stub.StreamObserver<com.ssd.grpc.NodeInfo>) responseObserver);
           break;
         case METHODID_PROPAGATE_BLOCK:
           serviceImpl.propagateBlock((com.ssd.grpc.Block) request,
@@ -567,7 +567,7 @@ public final class AuctionGrpc {
           io.grpc.stub.ServerCalls.asyncServerStreamingCall(
             new MethodHandlers<
               com.ssd.grpc.NodeID,
-              com.ssd.grpc.Node>(
+              com.ssd.grpc.NodeInfo>(
                 service, METHODID_FIND_NODE)))
         .addMethod(
           getPropagateBlockMethod(),

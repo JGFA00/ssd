@@ -26,10 +26,10 @@ public final class AuctionOuterClass {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_NodeID_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Node_descriptor;
+    internal_static_NodeInfo_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Node_fieldAccessorTable;
+      internal_static_NodeInfo_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Ack_descriptor;
   static final 
@@ -65,18 +65,18 @@ public final class AuctionOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\rauction.proto\" \n\014PingResponse\022\020\n\010respo" +
-      "nse\030\001 \001(\t\"\024\n\006NodeID\022\n\n\002id\030\001 \001(\005\"4\n\004Node\022" +
-      "\n\n\002id\030\001 \001(\005\022\022\n\nip_address\030\002 \001(\t\022\014\n\004port\030" +
-      "\003 \001(\005\"\032\n\003Ack\022\023\n\013acknowledge\030\001 \001(\t\"9\n\020Tra" +
-      "nsactionsList\022%\n\017transactionList\030\001 \003(\0132\014" +
-      ".Transaction\"0\n\013Transaction\022\023\n\013transacti" +
-      "on\030\001 \001(\t\022\014\n\004nome\030\002 \001(\t\"\217\001\n\005Block\022\020\n\010prev" +
-      "Hash\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001(\003\022\r\n\005nonce\030\003" +
-      " \001(\005\022\021\n\tblockHash\030\004 \001(\t\022\022\n\nmerkleRoot\030\005 " +
-      "\001(\t\022+\n\020transactionsList\030\006 \001(\0132\021.Transact" +
-      "ionsList\"\020\n\002Id\022\n\n\002id\030\001 \001(\0052\345\001\n\007Auction\022 " +
-      "\n\004Ping\022\007.NodeID\032\r.PingResponse\"\000\022\036\n\010Find" +
-      "Node\022\007.NodeID\032\005.Node\"\0000\001\022 \n\016PropagateBlo" +
+      "nse\030\001 \001(\t\"\024\n\006NodeID\022\n\n\002id\030\001 \001(\t\"0\n\010NodeI" +
+      "nfo\022\n\n\002id\030\001 \001(\t\022\n\n\002ip\030\002 \001(\t\022\014\n\004port\030\003 \001(" +
+      "\005\"\032\n\003Ack\022\023\n\013acknowledge\030\001 \001(\t\"9\n\020Transac" +
+      "tionsList\022%\n\017transactionList\030\001 \003(\0132\014.Tra" +
+      "nsaction\"0\n\013Transaction\022\023\n\013transaction\030\001" +
+      " \001(\t\022\014\n\004nome\030\002 \001(\t\"\217\001\n\005Block\022\020\n\010prevHash" +
+      "\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001(\003\022\r\n\005nonce\030\003 \001(\005" +
+      "\022\021\n\tblockHash\030\004 \001(\t\022\022\n\nmerkleRoot\030\005 \001(\t\022" +
+      "+\n\020transactionsList\030\006 \001(\0132\021.Transactions" +
+      "List\"\020\n\002Id\022\n\n\002id\030\001 \001(\0052\351\001\n\007Auction\022 \n\004Pi" +
+      "ng\022\007.NodeID\032\r.PingResponse\"\000\022\"\n\010FindNode" +
+      "\022\007.NodeID\032\t.NodeInfo\"\0000\001\022 \n\016PropagateBlo" +
       "ck\022\006.Block\032\004.Ack\"\000\022$\n\rgetBlockchain\022\007.No" +
       "deID\032\006.Block\"\0000\001\022%\n\014ListAuctions\022\003.Id\032\014." +
       "Transaction\"\0000\001\022)\n\021SubmitTransaction\022\014.T" +
@@ -99,12 +99,12 @@ public final class AuctionOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_NodeID_descriptor,
         new java.lang.String[] { "Id", });
-    internal_static_Node_descriptor =
+    internal_static_NodeInfo_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_Node_fieldAccessorTable = new
+    internal_static_NodeInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Node_descriptor,
-        new java.lang.String[] { "Id", "IpAddress", "Port", });
+        internal_static_NodeInfo_descriptor,
+        new java.lang.String[] { "Id", "Ip", "Port", });
     internal_static_Ack_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_Ack_fieldAccessorTable = new

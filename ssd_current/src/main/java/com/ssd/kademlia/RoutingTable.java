@@ -1,11 +1,8 @@
 package com.ssd.kademlia;
-
 import java.math.BigInteger;
 import java.util.List;
-
 import com.ssd.kademlia.KBucket;
-import com.ssd.kademlia.NodeInfo;
-
+import com.ssd.grpc.NodeInfo;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -64,9 +61,11 @@ public class RoutingTable {
         return closestNodes.subList(0, Math.min(count, closestNodes.size()));
     }
 
+    /*
     public List<kBuckets> getAllRoutes(){
         
-        this.kBuckets.get()
+        this.kBuckets.get();
         
     } 
+     */
 }
