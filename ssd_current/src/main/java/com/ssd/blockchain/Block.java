@@ -14,8 +14,7 @@ public class Block {
         this.prevHash = prev_hash;
         this.transactions = transactions;
         this.merkleRoot = calculateMerkleRoot(transactions);
-        this.timestamp = System.currentTimeMillis();
-        this.blockHash = mineBlock();
+        this.blockHash = "";
     }
 
     public String getPrevHash() {
@@ -30,6 +29,11 @@ public class Block {
         return transactions;
     }
 
+    public void setTransactions(List<Transaction> alt_transactions) {
+        this.transactions = alt_transactions;
+        this.merkleRoot = calculateMerkleRoot(alt_transactions);
+    }
+
     public int getNumberOfTransactions(){
         return transactions.size();
     }
@@ -39,14 +43,16 @@ public class Block {
         return merkleTree.getMerkleRoot();
     }
 
-    private String mineBlock() {
+    public void mineBlock() {
+        this.timestamp = System.currentTimeMillis();
+        String currHash;
         // Iterate until a valid hash is found
-        while (!isValidHash(calculateHash())) {
+        do {
             nonce++;
-        }
+            currHash = calculateHash();
+        } while(!isValidHash(currHash));
         // Valid hash found, block mined
-        blockHash = calculateHash();
-        return blockHash;
+        this.blockHash = currHash;
     }
 
     private String calculateHash() {
