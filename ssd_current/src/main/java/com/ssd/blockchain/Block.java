@@ -16,6 +16,7 @@ public class Block {
         this.merkleRoot = calculateMerkleRoot(transactions);
         this.blockHash = "";
         this.pedrito2;
+        maluquise;
     }
 
     public String getPrevHash() {
