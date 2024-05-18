@@ -105,17 +105,21 @@ public class AuctionServer {
  
         //este NodeID é o id do nó que o cliente quer encontrar
         @Override 
-        public void findNode (NodeID nodeid, StreamObserver<Node> responseObserver){
+        public void findNode(NodeID nodeid, StreamObserver<NodeInfo> responseObserver){
+            /*
             //Return the 3 closest nodes
-            List<NodeInfo> closestNodes = routingTable.findClosestNodes(nodeid, 3);
-            //este response observer.onnext(node) retorna o node para o canal com o cliente que invocou o findnode 
-            responseObserver.onNext(closestNodes);           
+            List<NodeInfo> closestNodes = routingTable.findClosestNodes(nodeid.getId(), 3);
+            //este response observer.onnext(node) retorna o node para o canal com o cliente que invocou o findnode
+            for(NodeInfo node : closestNodes){ 
+                responseObserver.onNext(node);           
                 try {
                     Thread.sleep(10000);
                 } catch (InterruptedException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
+            }
+            */
             //on completed dá a call por terminada e termina o canal
             responseObserver.onCompleted();
         }
@@ -133,6 +137,7 @@ public class AuctionServer {
         //da perspetiva do servidor recebe um pedido get blockchain do no nodeid e envia uma stream de blocos (blockchain)
         @Override
         public void getBlockchain(NodeID nodeid, StreamObserver<Block> responseObserver) {
+            /*
             for (Block block : blockchain){
                 responseObserver.onNext(block);
                 
@@ -144,6 +149,7 @@ public class AuctionServer {
                 }
                 
             }
+             */
             //on completed dá a call por terminada e termina o canal
             responseObserver.onCompleted();
         }

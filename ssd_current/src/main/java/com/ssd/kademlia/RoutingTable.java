@@ -1,3 +1,4 @@
+
 package com.ssd.kademlia;
 import java.math.BigInteger;
 import java.util.List;
@@ -22,7 +23,6 @@ public class RoutingTable {
     public RoutingTable(String nodeIdHex) {
         this(new BigInteger(nodeIdHex, 16));  
     }
-
     public void addNode(NodeInfo node) {
         int bucketIndex = getBucketIndex(node.getId());
         kBuckets.get(bucketIndex).addNode(node);
@@ -41,7 +41,7 @@ public class RoutingTable {
     private BigInteger xorDistance(BigInteger id1, BigInteger id2) {
         return id1.xor(id2);
     }
-
+    
     public List<NodeInfo> findClosestNodes(BigInteger targetId, int count) {
         List<NodeInfo> closestNodes = new ArrayList<>();
         int startBucketIndex = getBucketIndex(targetId);
@@ -60,7 +60,7 @@ public class RoutingTable {
         // Return only the required number of closest nodes
         return closestNodes.subList(0, Math.min(count, closestNodes.size()));
     }
-
+    
     /*
     public List<kBuckets> getAllRoutes(){
         
