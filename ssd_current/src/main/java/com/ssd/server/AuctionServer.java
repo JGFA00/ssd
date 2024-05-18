@@ -84,7 +84,7 @@ public class AuctionServer {
     private static class AuctionService extends AuctionGrpc.AuctionImplBase {
         private final NodeInfo nodeinfo;
         private Blockchain blockchain;
-        private LinkedList<Transaction> tlist;
+        private LinkedList<TransactionKad> tlist;
         private RoutingTable routingTable;
 
         public AuctionService(NodeInfo nodeinfo, Blockchain blockchain, LinkedList<TransactionKad> tlist, RoutingTable routingTable){
@@ -103,7 +103,7 @@ public class AuctionServer {
             responseObserver.onCompleted(); 
         } 
  
-        //este NodeID é o id do nó que estamos à procura 
+        //este NodeID é o id do nó que o cliente quer encontrar
         @Override 
         public void findNode (NodeID nodeid, StreamObserver<Node> responseObserver){
             //Return the 3 closest nodes

@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import com.ssd.blockchain.Blockchain;
 import com.ssd.client.AuctionClient;
 import com.ssd.grpc.NodeInfo;
-import com.ssd.grpc.Transaction;
+import com.ssd.grpc.TransactionKad;
 import com.ssd.grpc.NodeID;
 import com.ssd.kademlia.RoutingTable;
 import com.ssd.server.AuctionServer;
@@ -17,7 +17,7 @@ public class Main {
         NodeID nodeid = AuctionUtil.createNodeId("1");
         Blockchain blockchain = new Blockchain();
         RoutingTable routingTable = new RoutingTable(nodeid.getId());
-        LinkedList<Transaction> tlist = new LinkedList<>();
+        LinkedList<TransactionKad> tlist = new LinkedList<>();
         AuctionServer server = new AuctionServer(nodeinfo, blockchain, tlist, routingTable);
         server.start();
         NodeInfo bootstrap = AuctionUtil.createNodeInfo("2", "173", 9000);
