@@ -24,6 +24,8 @@ public class Main {
 
         System.out.println("blockchain final: " + chain);
 
+        System.out.println("blockchain valid: " + chain.isValid());
+
     }
 
     private static Block getBlockData(String previous_hash) {
