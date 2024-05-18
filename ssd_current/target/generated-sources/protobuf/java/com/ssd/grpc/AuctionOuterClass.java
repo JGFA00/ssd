@@ -41,10 +41,10 @@ public final class AuctionOuterClass {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_TransactionsList_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Transaction_descriptor;
+    internal_static_TransactionKad_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Transaction_fieldAccessorTable;
+      internal_static_TransactionKad_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Block_descriptor;
   static final 
@@ -67,21 +67,21 @@ public final class AuctionOuterClass {
       "\n\rauction.proto\" \n\014PingResponse\022\020\n\010respo" +
       "nse\030\001 \001(\t\"\024\n\006NodeID\022\n\n\002id\030\001 \001(\t\"0\n\010NodeI" +
       "nfo\022\n\n\002id\030\001 \001(\t\022\n\n\002ip\030\002 \001(\t\022\014\n\004port\030\003 \001(" +
-      "\005\"\032\n\003Ack\022\023\n\013acknowledge\030\001 \001(\t\"9\n\020Transac" +
-      "tionsList\022%\n\017transactionList\030\001 \003(\0132\014.Tra" +
-      "nsaction\"0\n\013Transaction\022\023\n\013transaction\030\001" +
-      " \001(\t\022\014\n\004nome\030\002 \001(\t\"\217\001\n\005Block\022\020\n\010prevHash" +
-      "\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001(\003\022\r\n\005nonce\030\003 \001(\005" +
-      "\022\021\n\tblockHash\030\004 \001(\t\022\022\n\nmerkleRoot\030\005 \001(\t\022" +
-      "+\n\020transactionsList\030\006 \001(\0132\021.Transactions" +
-      "List\"\020\n\002Id\022\n\n\002id\030\001 \001(\0052\351\001\n\007Auction\022 \n\004Pi" +
-      "ng\022\007.NodeID\032\r.PingResponse\"\000\022\"\n\010FindNode" +
-      "\022\007.NodeID\032\t.NodeInfo\"\0000\001\022 \n\016PropagateBlo" +
-      "ck\022\006.Block\032\004.Ack\"\000\022$\n\rgetBlockchain\022\007.No" +
-      "deID\032\006.Block\"\0000\001\022%\n\014ListAuctions\022\003.Id\032\014." +
-      "Transaction\"\0000\001\022)\n\021SubmitTransaction\022\014.T" +
-      "ransaction\032\004.Ack\"\000B\020\n\014com.ssd.grpcP\001b\006pr" +
-      "oto3"
+      "\005\"\032\n\003Ack\022\023\n\013acknowledge\030\001 \001(\t\"<\n\020Transac" +
+      "tionsList\022(\n\017transactionList\030\001 \003(\0132\017.Tra" +
+      "nsactionKad\"3\n\016TransactionKad\022\023\n\013transac" +
+      "tion\030\001 \001(\t\022\014\n\004nome\030\002 \001(\t\"\217\001\n\005Block\022\020\n\010pr" +
+      "evHash\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001(\003\022\r\n\005nonce" +
+      "\030\003 \001(\005\022\021\n\tblockHash\030\004 \001(\t\022\022\n\nmerkleRoot\030" +
+      "\005 \001(\t\022+\n\020transactionsList\030\006 \001(\0132\021.Transa" +
+      "ctionsList\"\020\n\002Id\022\n\n\002id\030\001 \001(\0052\357\001\n\007Auction" +
+      "\022 \n\004Ping\022\007.NodeID\032\r.PingResponse\"\000\022\"\n\010Fi" +
+      "ndNode\022\007.NodeID\032\t.NodeInfo\"\0000\001\022 \n\016Propag" +
+      "ateBlock\022\006.Block\032\004.Ack\"\000\022$\n\rgetBlockchai" +
+      "n\022\007.NodeID\032\006.Block\"\0000\001\022(\n\014ListAuctions\022\003" +
+      ".Id\032\017.TransactionKad\"\0000\001\022,\n\021SubmitTransa" +
+      "ction\022\017.TransactionKad\032\004.Ack\"\000B\020\n\014com.ss" +
+      "d.grpcP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -117,11 +117,11 @@ public final class AuctionOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_TransactionsList_descriptor,
         new java.lang.String[] { "TransactionList", });
-    internal_static_Transaction_descriptor =
+    internal_static_TransactionKad_descriptor =
       getDescriptor().getMessageTypes().get(5);
-    internal_static_Transaction_fieldAccessorTable = new
+    internal_static_TransactionKad_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Transaction_descriptor,
+        internal_static_TransactionKad_descriptor,
         new java.lang.String[] { "Transaction", "Nome", });
     internal_static_Block_descriptor =
       getDescriptor().getMessageTypes().get(6);

@@ -1,3 +1,4 @@
+/*
 package com.ssd.blockchain;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,3 +44,4 @@ public class Main {
         return new Block(previous_hash,transactions);
     }
 }
+ */

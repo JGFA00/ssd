@@ -6,7 +6,7 @@
 
     public class MerkleTree {
         private final List<Transaction> transactions;
-        private final List<String> merkleTree;
+        private final ArrayList<String> merkleTree;
 
         public MerkleTree(List<Transaction> transactions) {
             this.transactions = transactions;

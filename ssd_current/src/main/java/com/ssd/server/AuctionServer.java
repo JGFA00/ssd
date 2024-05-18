@@ -3,8 +3,6 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
-
-import com.ssd.app.Transactions;
 import com.ssd.blockchain.Blockchain;
 import com.ssd.client.AuctionClient;
 import com.ssd.grpc.Ack;
@@ -13,7 +11,7 @@ import com.ssd.grpc.Block;
 import com.ssd.grpc.Id;
 import com.ssd.grpc.NodeID;
 import com.ssd.grpc.PingResponse;
-import com.ssd.grpc.Transaction;
+import com.ssd.grpc.TransactionKad;
 import com.ssd.grpc.TransactionsList;
 import com.ssd.grpc.NodeInfo;
 import com.ssd.kademlia.RoutingTable;
@@ -26,24 +24,30 @@ import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 
 public class AuctionServer {
-    private final NodeInfo nodeinfo;
+    
     private final int port;
     private final Server server;
+    /*
+    private final NodeInfo nodeinfo;
     private Blockchain blockchain;
-    private Transactions tlist;
+    private LinkedList<Transaction> tlist;
     private RoutingTable routingTable;
+     */
 
-    public AuctionServer(NodeInfo nodeinfo,Blockchain blockchain, Transactions tlist, RoutingTable routingTable) {
+    public AuctionServer(NodeInfo nodeinfo, Blockchain blockchain, LinkedList<TransactionKad> tlist, RoutingTable routingTable) {
         this(Grpc.newServerBuilderForPort(nodeinfo.getPort(), InsecureServerCredentials.create()),nodeinfo, blockchain, tlist, routingTable);
     }
 
-    public AuctionServer(ServerBuilder<?> serverBuilder,NodeInfo nodeinfo,Blockchain blockchain, Transactions tlist, RoutingTable routingTable) {
-        this.nodeinfo = nodeinfo;
+    public AuctionServer(ServerBuilder<?> serverBuilder,NodeInfo nodeinfo, Blockchain blockchain, LinkedList<TransactionKad> tlist, RoutingTable routingTable) {
         this.port = nodeinfo.getPort();
+        server = serverBuilder.addService(new AuctionService(nodeinfo, blockchain, tlist, routingTable)).build();
+        /*
+        this.nodeinfo = nodeinfo;
         this.blockchain = blockchain;
         this.tlist = tlist;
         this.routingTable = routingTable;
-        server = serverBuilder.addService(new AuctionService()).build();
+         */
+        
     }
 
 
@@ -75,11 +79,20 @@ public class AuctionServer {
           server.awaitTermination();
         }
     }
-
-    
   
 
     private static class AuctionService extends AuctionGrpc.AuctionImplBase {
+        private final NodeInfo nodeinfo;
+        private Blockchain blockchain;
+        private LinkedList<Transaction> tlist;
+        private RoutingTable routingTable;
+
+        public AuctionService(NodeInfo nodeinfo, Blockchain blockchain, LinkedList<TransactionKad> tlist, RoutingTable routingTable){
+            this.nodeinfo = nodeinfo;
+            this.blockchain = blockchain;
+            this.tlist = tlist;
+            this.routingTable = routingTable;
+        }
         
         @Override 
         public void ping (NodeID nodeid, StreamObserver<PingResponse> responseObserver){ 
@@ -139,21 +152,19 @@ public class AuctionServer {
         //e passa a uma chamada propagate block da perspetiva do cliente (cria um auctionclient e envia para todos os nós presentes 
         //na routing table um propagate block)
         @Override
-        public void submitTransaction(Transaction t, StreamObserver<Ack> responseObserver){
+        public void submitTransaction(TransactionKad t, StreamObserver<Ack> responseObserver){
             //eventualmente um verify transaction que verifica a chave publica do user, que a auction está a decorrer etc etc
             Ack ack = Ack.newBuilder().setAcknowledge("Transaction received").build();
             responseObserver.onNext(ack);
             responseObserver.onCompleted();
-            transactions.addLast(t);
-            if(transactions.size() ==3){
-                
-            }
+            tlist.add(t);
+            
 
         }
 
         //ao receber um pedido de listAuctions, percorrer a blockchain e retornar as auctions ativas
         @Override
-        public void listAuctions(Id id, StreamObserver<Transaction> responseObserver){
+        public void listAuctions(Id id, StreamObserver<TransactionKad> responseObserver){
             
         }
 

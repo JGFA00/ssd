@@ -6,9 +6,7 @@ import com.ssd.grpc.AuctionGrpc.AuctionBlockingStub;
 import com.ssd.grpc.AuctionGrpc.AuctionStub;
 import com.ssd.util.AuctionUtil;
 import com.ssd.grpc.Id;
-
-import com.ssd.grpc.Transaction;
-
+import com.ssd.grpc.TransactionKad;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -41,7 +39,7 @@ public class App {
 
     private void sendTransaction (int choice) {
         System.out.println("\nSending transaction\n");
-        Transaction t = AuctionUtil.createTransaction("bid", "A");
+        TransactionKad t = AuctionUtil.createTransaction("bid", "A");
         Ack ack;
         ack = blockingStub.submitTransaction(t);
         System.out.println(ack.getAcknowledge());
@@ -77,3 +75,17 @@ public class App {
         }
     }
 }
+
+
+/*
+class Transaction
+
+    int type -> start, end, bid
+    String public key
+    String item
+    int target_auction
+ */
+
+
+
+
