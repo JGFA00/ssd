@@ -3,18 +3,17 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
-
+import com.ssd.blockchain.Blockchain;
 import com.ssd.client.AuctionClient;
 import com.ssd.grpc.Ack;
 import com.ssd.grpc.AuctionGrpc;
 import com.ssd.grpc.Block;
 import com.ssd.grpc.Id;
-import com.ssd.grpc.Node;
 import com.ssd.grpc.NodeID;
 import com.ssd.grpc.PingResponse;
-import com.ssd.grpc.Transaction;
+import com.ssd.grpc.TransactionKad;
 import com.ssd.grpc.TransactionsList;
-import com.ssd.kademlia.NodeInfo;
+import com.ssd.grpc.NodeInfo;
 import com.ssd.kademlia.RoutingTable;
 import com.ssd.util.AuctionUtil;
 
@@ -25,18 +24,30 @@ import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 
 public class AuctionServer {
-
+    
     private final int port;
     private final Server server;
+    /*
+    private final NodeInfo nodeinfo;
+    private Blockchain blockchain;
+    private LinkedList<Transaction> tlist;
+    private RoutingTable routingTable;
+     */
 
-    public AuctionServer(int port) {
-        this(Grpc.newServerBuilderForPort(port, InsecureServerCredentials.create()),
-        port);  
+    public AuctionServer(NodeInfo nodeinfo, Blockchain blockchain, LinkedList<TransactionKad> tlist, RoutingTable routingTable) {
+        this(Grpc.newServerBuilderForPort(nodeinfo.getPort(), InsecureServerCredentials.create()),nodeinfo, blockchain, tlist, routingTable);
     }
 
-    public AuctionServer(ServerBuilder<?> serverBuilder, int port) {
-        this.port = port;
-        server = serverBuilder.addService(new AuctionService()).build();
+    public AuctionServer(ServerBuilder<?> serverBuilder,NodeInfo nodeinfo, Blockchain blockchain, LinkedList<TransactionKad> tlist, RoutingTable routingTable) {
+        this.port = nodeinfo.getPort();
+        server = serverBuilder.addService(new AuctionService(nodeinfo, blockchain, tlist, routingTable)).build();
+        /*
+        this.nodeinfo = nodeinfo;
+        this.blockchain = blockchain;
+        this.tlist = tlist;
+        this.routingTable = routingTable;
+         */
+        
     }
 
 
@@ -68,62 +79,21 @@ public class AuctionServer {
           server.awaitTermination();
         }
     }
-
-    
-    //a app até pode correr aqui, para não termos que criar métodos adicionais para a app
-    public static void main(String[] args) throws IOException {
-        AuctionServer server = new AuctionServer(5000);
-        //a primeira coisa aqui até vai ser um nodelookup como cliente para o bootstrap, depois é que se inicializa o servidor
-        //eventualmente podemos por o find node assincrono para poder começar o servidor ao mesmo tempo
-    
-        //AuctionClient client = new AuctionClient("localhost", 6000);
-        //client.findNode(0);
-        server.start();
-        System.out.println("Servidor começado");
-        try {
-            server.blockUntilShutdown();
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
+  
 
     private static class AuctionService extends AuctionGrpc.AuctionImplBase {
-        private List<Node> nodes;
-        private List<Block> blockchain;
-        private LinkedBlockingDeque<Transaction> transactions;
+        private final NodeInfo nodeinfo;
+        private Blockchain blockchain;
+        private LinkedList<TransactionKad> tlist;
         private RoutingTable routingTable;
 
-        private AuctionService(){
-            nodes = new ArrayList<Node>(); 
-            transactions = new LinkedBlockingDeque<Transaction>();
-            blockchain = new ArrayList<Block>();
-
-    
-            //test nodes
-            
-            Node n1 = Node.newBuilder().setId(1).setIpAddress("192.168.1").setPort(1).build();
-            Node n2 = Node.newBuilder().setId(2).setIpAddress("192.168.2").setPort(2).build();
-            Node n3 = Node.newBuilder().setId(3).setIpAddress("192.168.3").setPort(3).build();
-            nodes.add(n1);
-            nodes.add(n2);
-            nodes.add(n3);
-
-            /*
-            //old test transactions and transactions list
-            transactions.add(AuctionUtil.createTransaction("bid", "mambo"));
-            transactions.add(AuctionUtil.createTransaction("bid", "mambito"));
-            TransactionsList tlist = AuctionUtil.createTransactionsList(transactions);
-            System.out.println(tlist);
-
-            //test block and blockchain
-             
-            blockchain.add(AuctionUtil.createBlock("a", 0, 0, "a", "a", tlist));
-            blockchain.add(AuctionUtil.createBlock("b", 0, 0, "b", "b", tlist));
-            */ 
-        } 
- 
-         
+        public AuctionService(NodeInfo nodeinfo, Blockchain blockchain, LinkedList<TransactionKad> tlist, RoutingTable routingTable){
+            this.nodeinfo = nodeinfo;
+            this.blockchain = blockchain;
+            this.tlist = tlist;
+            this.routingTable = routingTable;
+        }
+        
         @Override 
         public void ping (NodeID nodeid, StreamObserver<PingResponse> responseObserver){ 
             //o que fazer com um ping? para já retorna só resposta ao cliente que enviou o ping 
@@ -133,23 +103,23 @@ public class AuctionServer {
             responseObserver.onCompleted(); 
         } 
  
-        //este NodeID é o id do nó que estamos à procura 
+        //este NodeID é o id do nó que o cliente quer encontrar
         @Override 
-        public void findNode (NodeID nodeid, StreamObserver<Node> responseObserver){
-            List<NodeInfo> closestNodes = routingTable.findClosestNodes(nodeid, 20);
-            // Implementar aqui a funcionalidade do find node da perspetiva do servidor - que nós da routing table retorna?
-            for (Node node : closestNodes){
-                //este response observer.onnext(node) retorna o node para o canal com o cliente que invocou o findnode 
-                responseObserver.onNext(node);
-                
+        public void findNode(NodeID nodeid, StreamObserver<NodeInfo> responseObserver){
+            /*
+            //Return the 3 closest nodes
+            List<NodeInfo> closestNodes = routingTable.findClosestNodes(nodeid.getId(), 3);
+            //este response observer.onnext(node) retorna o node para o canal com o cliente que invocou o findnode
+            for(NodeInfo node : closestNodes){ 
+                responseObserver.onNext(node);           
                 try {
                     Thread.sleep(10000);
                 } catch (InterruptedException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
-                
             }
+            */
             //on completed dá a call por terminada e termina o canal
             responseObserver.onCompleted();
         }
@@ -167,6 +137,7 @@ public class AuctionServer {
         //da perspetiva do servidor recebe um pedido get blockchain do no nodeid e envia uma stream de blocos (blockchain)
         @Override
         public void getBlockchain(NodeID nodeid, StreamObserver<Block> responseObserver) {
+            /*
             for (Block block : blockchain){
                 responseObserver.onNext(block);
                 
@@ -178,6 +149,7 @@ public class AuctionServer {
                 }
                 
             }
+             */
             //on completed dá a call por terminada e termina o canal
             responseObserver.onCompleted();
         }
@@ -186,26 +158,23 @@ public class AuctionServer {
         //e passa a uma chamada propagate block da perspetiva do cliente (cria um auctionclient e envia para todos os nós presentes 
         //na routing table um propagate block)
         @Override
-        public void submitTransaction(Transaction t, StreamObserver<Ack> responseObserver){
+        public void submitTransaction(TransactionKad t, StreamObserver<Ack> responseObserver){
             //eventualmente um verify transaction que verifica a chave publica do user, que a auction está a decorrer etc etc
             Ack ack = Ack.newBuilder().setAcknowledge("Transaction received").build();
             responseObserver.onNext(ack);
             responseObserver.onCompleted();
-            transactions.addLast(t);
-            if(transactions.size() ==3){
-                
-            }
+            tlist.add(t);
+            
 
         }
 
         //ao receber um pedido de listAuctions, percorrer a blockchain e retornar as auctions ativas
         @Override
-        public void listAuctions(Id id, StreamObserver<Transaction> responseObserver){
+        public void listAuctions(Id id, StreamObserver<TransactionKad> responseObserver){
             
         }
 
     }
-
 
 
 }

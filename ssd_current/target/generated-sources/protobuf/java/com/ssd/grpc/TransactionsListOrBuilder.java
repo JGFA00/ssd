@@ -9,26 +9,26 @@ public interface TransactionsListOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>repeated .Transaction transactionList = 1;</code>
+   * <code>repeated .TransactionKad transactionList = 1;</code>
    */
-  java.util.List<com.ssd.grpc.Transaction> 
+  java.util.List<com.ssd.grpc.TransactionKad> 
       getTransactionListList();
   /**
-   * <code>repeated .Transaction transactionList = 1;</code>
+   * <code>repeated .TransactionKad transactionList = 1;</code>
    */
-  com.ssd.grpc.Transaction getTransactionList(int index);
+  com.ssd.grpc.TransactionKad getTransactionList(int index);
   /**
-   * <code>repeated .Transaction transactionList = 1;</code>
+   * <code>repeated .TransactionKad transactionList = 1;</code>
    */
   int getTransactionListCount();
   /**
-   * <code>repeated .Transaction transactionList = 1;</code>
+   * <code>repeated .TransactionKad transactionList = 1;</code>
    */
-  java.util.List<? extends com.ssd.grpc.TransactionOrBuilder> 
+  java.util.List<? extends com.ssd.grpc.TransactionKadOrBuilder> 
       getTransactionListOrBuilderList();
   /**
-   * <code>repeated .Transaction transactionList = 1;</code>
+   * <code>repeated .TransactionKad transactionList = 1;</code>
    */
-  com.ssd.grpc.TransactionOrBuilder getTransactionListOrBuilder(
+  com.ssd.grpc.TransactionKadOrBuilder getTransactionListOrBuilder(
       int index);
 }

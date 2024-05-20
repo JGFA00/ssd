@@ -1,28 +1,28 @@
-package com.ssd.kademlia;
 
+package com.ssd.kademlia;
 import java.math.BigInteger;
 import java.util.List;
-
 import com.ssd.kademlia.KBucket;
-import com.ssd.kademlia.NodeInfo;
-
+import com.ssd.grpc.NodeInfo;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class RoutingTable {
     private final BigInteger nodeId;
     private final List<KBucket> kBuckets;
-    private static final int BUCKET_COUNT = 160;  // Assuming 160-bit IDs for simplicity
+    private static final int BUCKET_COUNT = 160;  
 
-
-    public RoutingTable(String nodeIdHex) {
-        this.nodeId = new BigInteger(nodeIdHex, 16);
+    public RoutingTable(BigInteger nodeId) {
+        this.nodeId = nodeId;
         this.kBuckets = new ArrayList<>(BUCKET_COUNT);
         for (int i = 0; i < BUCKET_COUNT; i++) {
-            this.kBuckets.add(new KBucket(20));  // KBuckets with a capacity of 20 nodes each
+            this.kBuckets.add(new KBucket(20)); 
         }
     }
 
+    public RoutingTable(String nodeIdHex) {
+        this(new BigInteger(nodeIdHex, 16));  
+    }
     public void addNode(NodeInfo node) {
         int bucketIndex = getBucketIndex(node.getId());
         kBuckets.get(bucketIndex).addNode(node);
@@ -60,4 +60,12 @@ public class RoutingTable {
         // Return only the required number of closest nodes
         return closestNodes.subList(0, Math.min(count, closestNodes.size()));
     }
+    
+    /*
+    public List<kBuckets> getAllRoutes(){
+        
+        this.kBuckets.get();
+        
+    } 
+     */
 }
