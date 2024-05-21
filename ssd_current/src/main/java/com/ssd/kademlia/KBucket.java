@@ -3,6 +3,9 @@ package com.ssd.kademlia;
 import java.math.BigInteger;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import com.ssd.grpc.NodeInfo;
+
 import java.util.Iterator;
 
 public class KBucket {
@@ -15,6 +18,7 @@ public class KBucket {
     }
 
     public synchronized void addNode(NodeInfo node) {
+        /*
         if (nodes.contains(node)) {
             // Node is already in the KBucket, move it to the end to mark as recently seen
             nodes.remove(node);
@@ -30,6 +34,7 @@ public class KBucket {
                 nodes.add(node);
             }
         }
+         */
     }
 
     public synchronized void removeNode(NodeInfo node) {
@@ -54,6 +59,7 @@ public class KBucket {
     }
 
     public synchronized void refresh() {
+        /*
         //Ping all Nodes and update
         Iterator<NodeInfo> it = nodes.iterator();
         while (it.hasNext()) {
@@ -62,6 +68,7 @@ public class KBucket {
                 it.remove();
             }
         }
+         */
     }
 
     public boolean isEmpty() {

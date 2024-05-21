@@ -24,12 +24,12 @@ public class RoutingTable {
         this(new BigInteger(nodeIdHex, 16));  
     }
     public void addNode(NodeInfo node) {
-        int bucketIndex = getBucketIndex(node.getId());
+        int bucketIndex = getBucketIndex(new BigInteger(node.getId(), 16));
         kBuckets.get(bucketIndex).addNode(node);
     }
 
     public void removeNode(NodeInfo node) {
-        int bucketIndex = getBucketIndex(node.getId());
+        int bucketIndex = getBucketIndex(new BigInteger(node.getId(), 16));
         kBuckets.get(bucketIndex).removeNode(node);
     }
 
@@ -41,8 +41,9 @@ public class RoutingTable {
     private BigInteger xorDistance(BigInteger id1, BigInteger id2) {
         return id1.xor(id2);
     }
-    
+    /*
     public List<NodeInfo> findClosestNodes(BigInteger targetId, int count) {
+        
         List<NodeInfo> closestNodes = new ArrayList<>();
         int startBucketIndex = getBucketIndex(targetId);
 
@@ -55,11 +56,12 @@ public class RoutingTable {
         }
 
         // Sort the collected nodes by their XOR distance from the targetId
-        Collections.sort(closestNodes, (node1, node2) -> xorDistance(node1.getId(), targetId).compareTo(xorDistance(node2.getId(), targetId)));
+        Collections.sort(closestNodes, (node1, node2) -> xorDistance(new BigInteger(node1.getId(), 16), targetId).compareTo(xorDistance(new BigInteger(node2.getId(), 16), targetId)));
 
         // Return only the required number of closest nodes
         return closestNodes.subList(0, Math.min(count, closestNodes.size()));
     }
+     */
     
     /*
     public List<kBuckets> getAllRoutes(){
