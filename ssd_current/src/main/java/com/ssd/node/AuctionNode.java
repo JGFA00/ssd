@@ -1,3 +1,4 @@
+/*
 package com.ssd.node;
 
 import javax.crypto.spec.RC2ParameterSpec;
@@ -16,3 +17,4 @@ public class AuctionNode {
     
 
 }
+ */

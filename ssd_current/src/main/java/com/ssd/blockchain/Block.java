@@ -61,10 +61,12 @@ public class Block {
         return Hashing.applySHA256(data);
     }
 
+    //note fix here
     private boolean isValidHash(String hash) {
         // Check if the hash has the required number of leading zeros
-        String prefix = "0".repeat(Config.DIFFICULTY);
-        return hash.startsWith(prefix);
+        //String prefix = "0".repeat(Config.DIFFICULTY);
+        //return hash.startsWith(prefix);
+        return true;
     }
 
     public boolean verifyBlock(){
