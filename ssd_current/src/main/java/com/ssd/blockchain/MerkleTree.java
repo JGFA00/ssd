@@ -1,6 +1,4 @@
     package com.ssd.blockchain;
-    import java.security.MessageDigest;
-    import java.security.NoSuchAlgorithmException;
     import java.util.ArrayList;
     import java.util.List;
 
@@ -15,7 +13,7 @@
         }
 
         public String getMerkleRoot() {
-            return merkleTree.getLast();
+            return merkleTree.get(merkleTree.size() -1);
         }
 
         private void buildTree() {
@@ -28,7 +26,7 @@
 
             // Return hash of the element if there is only 1 transaction
             if (currentTreeLevel.size() == 1) {
-                merkleTree.add(Hashing.applySHA256(currentTreeLevel.getFirst().toString()));
+                merkleTree.add(Hashing.applySHA256(currentTreeLevel.get(0).toString()));
                 return;
             }
 
@@ -37,7 +35,7 @@
 
             // Duplicate last value if there is an odd number of transactions
             if (currentTreeLevel.size() % 2 != 0) {
-                currentTreeLevel.add(currentTreeLevel.getLast());
+                currentTreeLevel.add(currentTreeLevel.get(currentTreeLevel.size() - 1));
             }
 
             // Show all transactions to see if duplicated
@@ -62,7 +60,7 @@
                 }
                 if (leaf_hashes.size() % 2 == 1) {
                     // If the number of transactions is odd, duplicate the last transaction
-                    String concatenatedHash = leaf_hashes.getLast();
+                    String concatenatedHash = leaf_hashes.get(leaf_hashes.size() - 1);
                     String hash = Hashing.applySHA256(concatenatedHash + concatenatedHash);
                     nextTreeLevel.add(hash);
                 }
