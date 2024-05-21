@@ -13,7 +13,7 @@ import com.ssd.util.AuctionUtil;
 public class Main {
     public static void main(String[] args) throws IOException {
         //aqui pode estar um generatenodeid() que retorna um id de 160 bytes
-        NodeInfo nodeinfo = AuctionUtil.createNodeInfo("1", "172", 8000);
+        NodeInfo nodeinfo = AuctionUtil.createNodeInfo("1", "172", 500);
         NodeID nodeid = AuctionUtil.createNodeId("1");
         Blockchain blockchain = new Blockchain();
         RoutingTable routingTable = new RoutingTable(nodeid.getId());
@@ -21,8 +21,8 @@ public class Main {
         AuctionServer server = new AuctionServer(nodeinfo, blockchain, tlist, routingTable);
         server.start();
         NodeInfo bootstrap = AuctionUtil.createNodeInfo("2", "173", 9000);
-        AuctionClient bootstrapClient = new AuctionClient(bootstrap);
-        bootstrapClient.findNode(nodeid.getId());
+        //AuctionClient bootstrapClient = new AuctionClient(bootstrap);
+        //bootstrapClient.findNode(nodeid.getId());
 
     }
 }

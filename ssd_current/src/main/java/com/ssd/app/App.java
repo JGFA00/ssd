@@ -77,15 +77,4 @@ public class App {
 }
 
 
-/*
-class Transaction
-
-    int type -> start, end, bid
-    String public key
-    String item
-    int target_auction
- */
-
-
-
 
