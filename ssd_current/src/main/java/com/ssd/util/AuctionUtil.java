@@ -3,7 +3,7 @@ import java.util.List;
 import com.ssd.grpc.Block;
 import com.ssd.grpc.NodeID;
 import com.ssd.grpc.NodeInfo;
-import com.ssd.grpc.TransactionKad;
+import com.ssd.grpc.TransactionApp;
 import com.ssd.grpc.TransactionsList;
 
 public class AuctionUtil {
@@ -18,12 +18,12 @@ public class AuctionUtil {
         return node;
     }
 
-    public static TransactionKad createTransaction(String transaction, String nome){
-        TransactionKad t = TransactionKad.newBuilder().setTransaction(transaction).setNome(nome).build();
+    public static TransactionApp createTransaction(String transaction, String nome){
+        TransactionApp t = TransactionApp.newBuilder().setTransaction(transaction).setNome(nome).build();
         return t;
     }
 
-    public static TransactionsList createTransactionsList(List<TransactionKad> tl){
+    public static TransactionsList createTransactionsList(List<TransactionApp> tl){
         TransactionsList tlist = TransactionsList.newBuilder().addAllTransactionList(tl).build();
         return tlist;
     }

@@ -4,8 +4,8 @@
 // Protobuf Java Version: 3.25.1
 package com.ssd.grpc;
 
-public interface TransactionKadOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:TransactionKad)
+public interface TransactionAppOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:TransactionApp)
     com.google.protobuf.MessageOrBuilder {
 
   /**

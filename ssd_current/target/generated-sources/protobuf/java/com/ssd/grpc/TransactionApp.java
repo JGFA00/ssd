@@ -5,18 +5,18 @@
 package com.ssd.grpc;
 
 /**
- * Protobuf type {@code TransactionKad}
+ * Protobuf type {@code TransactionApp}
  */
-public final class TransactionKad extends
+public final class TransactionApp extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:TransactionKad)
-    TransactionKadOrBuilder {
+    // @@protoc_insertion_point(message_implements:TransactionApp)
+    TransactionAppOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use TransactionKad.newBuilder() to construct.
-  private TransactionKad(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use TransactionApp.newBuilder() to construct.
+  private TransactionApp(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private TransactionKad() {
+  private TransactionApp() {
     transaction_ = "";
     nome_ = "";
   }
@@ -25,20 +25,20 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new TransactionKad();
+    return new TransactionApp();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.ssd.grpc.AuctionOuterClass.internal_static_TransactionKad_descriptor;
+    return com.ssd.grpc.AuctionOuterClass.internal_static_TransactionApp_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.ssd.grpc.AuctionOuterClass.internal_static_TransactionKad_fieldAccessorTable
+    return com.ssd.grpc.AuctionOuterClass.internal_static_TransactionApp_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.ssd.grpc.TransactionKad.class, com.ssd.grpc.TransactionKad.Builder.class);
+            com.ssd.grpc.TransactionApp.class, com.ssd.grpc.TransactionApp.Builder.class);
   }
 
   public static final int TRANSACTION_FIELD_NUMBER = 1;
@@ -164,10 +164,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.ssd.grpc.TransactionKad)) {
+    if (!(obj instanceof com.ssd.grpc.TransactionApp)) {
       return super.equals(obj);
     }
-    com.ssd.grpc.TransactionKad other = (com.ssd.grpc.TransactionKad) obj;
+    com.ssd.grpc.TransactionApp other = (com.ssd.grpc.TransactionApp) obj;
 
     if (!getTransaction()
         .equals(other.getTransaction())) return false;
@@ -193,44 +193,44 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static com.ssd.grpc.TransactionKad parseFrom(
+  public static com.ssd.grpc.TransactionApp parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.ssd.grpc.TransactionKad parseFrom(
+  public static com.ssd.grpc.TransactionApp parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.ssd.grpc.TransactionKad parseFrom(
+  public static com.ssd.grpc.TransactionApp parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.ssd.grpc.TransactionKad parseFrom(
+  public static com.ssd.grpc.TransactionApp parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.ssd.grpc.TransactionKad parseFrom(byte[] data)
+  public static com.ssd.grpc.TransactionApp parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.ssd.grpc.TransactionKad parseFrom(
+  public static com.ssd.grpc.TransactionApp parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.ssd.grpc.TransactionKad parseFrom(java.io.InputStream input)
+  public static com.ssd.grpc.TransactionApp parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.ssd.grpc.TransactionKad parseFrom(
+  public static com.ssd.grpc.TransactionApp parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -238,26 +238,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.ssd.grpc.TransactionKad parseDelimitedFrom(java.io.InputStream input)
+  public static com.ssd.grpc.TransactionApp parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.ssd.grpc.TransactionKad parseDelimitedFrom(
+  public static com.ssd.grpc.TransactionApp parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.ssd.grpc.TransactionKad parseFrom(
+  public static com.ssd.grpc.TransactionApp parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.ssd.grpc.TransactionKad parseFrom(
+  public static com.ssd.grpc.TransactionApp parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -270,7 +270,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.ssd.grpc.TransactionKad prototype) {
+  public static Builder newBuilder(com.ssd.grpc.TransactionApp prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -286,26 +286,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code TransactionKad}
+   * Protobuf type {@code TransactionApp}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:TransactionKad)
-      com.ssd.grpc.TransactionKadOrBuilder {
+      // @@protoc_insertion_point(builder_implements:TransactionApp)
+      com.ssd.grpc.TransactionAppOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.ssd.grpc.AuctionOuterClass.internal_static_TransactionKad_descriptor;
+      return com.ssd.grpc.AuctionOuterClass.internal_static_TransactionApp_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.ssd.grpc.AuctionOuterClass.internal_static_TransactionKad_fieldAccessorTable
+      return com.ssd.grpc.AuctionOuterClass.internal_static_TransactionApp_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.ssd.grpc.TransactionKad.class, com.ssd.grpc.TransactionKad.Builder.class);
+              com.ssd.grpc.TransactionApp.class, com.ssd.grpc.TransactionApp.Builder.class);
     }
 
-    // Construct using com.ssd.grpc.TransactionKad.newBuilder()
+    // Construct using com.ssd.grpc.TransactionApp.newBuilder()
     private Builder() {
 
     }
@@ -327,17 +327,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.ssd.grpc.AuctionOuterClass.internal_static_TransactionKad_descriptor;
+      return com.ssd.grpc.AuctionOuterClass.internal_static_TransactionApp_descriptor;
     }
 
     @java.lang.Override
-    public com.ssd.grpc.TransactionKad getDefaultInstanceForType() {
-      return com.ssd.grpc.TransactionKad.getDefaultInstance();
+    public com.ssd.grpc.TransactionApp getDefaultInstanceForType() {
+      return com.ssd.grpc.TransactionApp.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.ssd.grpc.TransactionKad build() {
-      com.ssd.grpc.TransactionKad result = buildPartial();
+    public com.ssd.grpc.TransactionApp build() {
+      com.ssd.grpc.TransactionApp result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -345,14 +345,14 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.ssd.grpc.TransactionKad buildPartial() {
-      com.ssd.grpc.TransactionKad result = new com.ssd.grpc.TransactionKad(this);
+    public com.ssd.grpc.TransactionApp buildPartial() {
+      com.ssd.grpc.TransactionApp result = new com.ssd.grpc.TransactionApp(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(com.ssd.grpc.TransactionKad result) {
+    private void buildPartial0(com.ssd.grpc.TransactionApp result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.transaction_ = transaction_;
@@ -396,16 +396,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.ssd.grpc.TransactionKad) {
-        return mergeFrom((com.ssd.grpc.TransactionKad)other);
+      if (other instanceof com.ssd.grpc.TransactionApp) {
+        return mergeFrom((com.ssd.grpc.TransactionApp)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.ssd.grpc.TransactionKad other) {
-      if (other == com.ssd.grpc.TransactionKad.getDefaultInstance()) return this;
+    public Builder mergeFrom(com.ssd.grpc.TransactionApp other) {
+      if (other == com.ssd.grpc.TransactionApp.getDefaultInstance()) return this;
       if (!other.getTransaction().isEmpty()) {
         transaction_ = other.transaction_;
         bitField0_ |= 0x00000001;
@@ -625,23 +625,23 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:TransactionKad)
+    // @@protoc_insertion_point(builder_scope:TransactionApp)
   }
 
-  // @@protoc_insertion_point(class_scope:TransactionKad)
-  private static final com.ssd.grpc.TransactionKad DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:TransactionApp)
+  private static final com.ssd.grpc.TransactionApp DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.ssd.grpc.TransactionKad();
+    DEFAULT_INSTANCE = new com.ssd.grpc.TransactionApp();
   }
 
-  public static com.ssd.grpc.TransactionKad getDefaultInstance() {
+  public static com.ssd.grpc.TransactionApp getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<TransactionKad>
-      PARSER = new com.google.protobuf.AbstractParser<TransactionKad>() {
+  private static final com.google.protobuf.Parser<TransactionApp>
+      PARSER = new com.google.protobuf.AbstractParser<TransactionApp>() {
     @java.lang.Override
-    public TransactionKad parsePartialFrom(
+    public TransactionApp parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -660,17 +660,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<TransactionKad> parser() {
+  public static com.google.protobuf.Parser<TransactionApp> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<TransactionKad> getParserForType() {
+  public com.google.protobuf.Parser<TransactionApp> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.ssd.grpc.TransactionKad getDefaultInstanceForType() {
+  public com.ssd.grpc.TransactionApp getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

@@ -9,10 +9,10 @@ import com.ssd.grpc.Block;
 import com.ssd.grpc.Id;
 import com.ssd.grpc.NodeID;
 import com.ssd.grpc.PingResponse;
-import com.ssd.grpc.TransactionKad;
+import com.ssd.grpc.TransactionApp;
 import com.ssd.grpc.NodeInfo;
 import com.ssd.kademlia.RoutingTable;
-
+import com.ssd.util.AuctionUtil;
 
 import io.grpc.Grpc;
 import io.grpc.InsecureServerCredentials;
@@ -31,11 +31,11 @@ public class AuctionServer {
     private RoutingTable routingTable;
      */
 
-    public AuctionServer(NodeInfo nodeinfo, Blockchain blockchain, LinkedList<TransactionKad> tlist, RoutingTable routingTable) {
+    public AuctionServer(NodeInfo nodeinfo, Blockchain blockchain, LinkedList<TransactionApp> tlist, RoutingTable routingTable) {
         this(Grpc.newServerBuilderForPort(nodeinfo.getPort(), InsecureServerCredentials.create()),nodeinfo, blockchain, tlist, routingTable);
     }
 
-    public AuctionServer(ServerBuilder<?> serverBuilder,NodeInfo nodeinfo, Blockchain blockchain, LinkedList<TransactionKad> tlist, RoutingTable routingTable) {
+    public AuctionServer(ServerBuilder<?> serverBuilder,NodeInfo nodeinfo, Blockchain blockchain, LinkedList<TransactionApp> tlist, RoutingTable routingTable) {
         this.port = nodeinfo.getPort();
         server = serverBuilder.addService(new AuctionService(nodeinfo, blockchain, tlist, routingTable)).build();
         /*
@@ -47,7 +47,7 @@ public class AuctionServer {
         
     }
 
-
+    
     public void start() throws IOException {
         System.out.println("got here");
         server.start();
@@ -71,20 +71,21 @@ public class AuctionServer {
         }
     }
 
-    private void blockUntilShutdown() throws InterruptedException {
+    public void blockUntilShutdown() throws InterruptedException {
         if (server != null) {
           server.awaitTermination();
         }
     }
-  
+
+
 
     private static class AuctionService extends AuctionGrpc.AuctionImplBase {
         private final NodeInfo nodeinfo;
         private Blockchain blockchain;
-        private LinkedList<TransactionKad> tlist;
+        private LinkedList<TransactionApp> tlist;
         private RoutingTable routingTable;
 
-        public AuctionService(NodeInfo nodeinfo, Blockchain blockchain, LinkedList<TransactionKad> tlist, RoutingTable routingTable){
+        public AuctionService(NodeInfo nodeinfo, Blockchain blockchain, LinkedList<TransactionApp> tlist, RoutingTable routingTable){
             this.nodeinfo = nodeinfo;
             this.blockchain = blockchain;
             this.tlist = tlist;
@@ -121,7 +122,8 @@ public class AuctionServer {
             responseObserver.onCompleted();
         }
 
-        @Override
+        //este método está a escuta de outros nós enviarem um bloco
+        @Override   
         public void propagateBlock(Block block, StreamObserver<Ack> responseObserver) {
             Ack ack = Ack.newBuilder().setAcknowledge("received").build();
             responseObserver.onNext(ack);
@@ -155,19 +157,21 @@ public class AuctionServer {
         //e passa a uma chamada propagate block da perspetiva do cliente (cria um auctionclient e envia para todos os nós presentes 
         //na routing table um propagate block)
         @Override
-        public void submitTransaction(TransactionKad t, StreamObserver<Ack> responseObserver){
+        public void submitTransaction(TransactionApp t, StreamObserver<Ack> responseObserver){
             //eventualmente um verify transaction que verifica a chave publica do user, que a auction está a decorrer etc etc
             Ack ack = Ack.newBuilder().setAcknowledge("Transaction received").build();
             responseObserver.onNext(ack);
             responseObserver.onCompleted();
             tlist.add(t);
+            System.out.println(tlist.toString());
+
             
 
         }
 
         //ao receber um pedido de listAuctions, percorrer a blockchain e retornar as auctions ativas
         @Override
-        public void listAuctions(Id id, StreamObserver<TransactionKad> responseObserver){
+        public void listAuctions(Id id, StreamObserver<TransactionApp> responseObserver){
             
         }
 

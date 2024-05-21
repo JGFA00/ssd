@@ -143,28 +143,28 @@ public final class AuctionGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<com.ssd.grpc.Id,
-      com.ssd.grpc.TransactionKad> getListAuctionsMethod;
+      com.ssd.grpc.TransactionApp> getListAuctionsMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "ListAuctions",
       requestType = com.ssd.grpc.Id.class,
-      responseType = com.ssd.grpc.TransactionKad.class,
+      responseType = com.ssd.grpc.TransactionApp.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
   public static io.grpc.MethodDescriptor<com.ssd.grpc.Id,
-      com.ssd.grpc.TransactionKad> getListAuctionsMethod() {
-    io.grpc.MethodDescriptor<com.ssd.grpc.Id, com.ssd.grpc.TransactionKad> getListAuctionsMethod;
+      com.ssd.grpc.TransactionApp> getListAuctionsMethod() {
+    io.grpc.MethodDescriptor<com.ssd.grpc.Id, com.ssd.grpc.TransactionApp> getListAuctionsMethod;
     if ((getListAuctionsMethod = AuctionGrpc.getListAuctionsMethod) == null) {
       synchronized (AuctionGrpc.class) {
         if ((getListAuctionsMethod = AuctionGrpc.getListAuctionsMethod) == null) {
           AuctionGrpc.getListAuctionsMethod = getListAuctionsMethod =
-              io.grpc.MethodDescriptor.<com.ssd.grpc.Id, com.ssd.grpc.TransactionKad>newBuilder()
+              io.grpc.MethodDescriptor.<com.ssd.grpc.Id, com.ssd.grpc.TransactionApp>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ListAuctions"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.ssd.grpc.Id.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.ssd.grpc.TransactionKad.getDefaultInstance()))
+                  com.ssd.grpc.TransactionApp.getDefaultInstance()))
               .setSchemaDescriptor(new AuctionMethodDescriptorSupplier("ListAuctions"))
               .build();
         }
@@ -173,27 +173,27 @@ public final class AuctionGrpc {
     return getListAuctionsMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.ssd.grpc.TransactionKad,
+  private static volatile io.grpc.MethodDescriptor<com.ssd.grpc.TransactionApp,
       com.ssd.grpc.Ack> getSubmitTransactionMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "SubmitTransaction",
-      requestType = com.ssd.grpc.TransactionKad.class,
+      requestType = com.ssd.grpc.TransactionApp.class,
       responseType = com.ssd.grpc.Ack.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.ssd.grpc.TransactionKad,
+  public static io.grpc.MethodDescriptor<com.ssd.grpc.TransactionApp,
       com.ssd.grpc.Ack> getSubmitTransactionMethod() {
-    io.grpc.MethodDescriptor<com.ssd.grpc.TransactionKad, com.ssd.grpc.Ack> getSubmitTransactionMethod;
+    io.grpc.MethodDescriptor<com.ssd.grpc.TransactionApp, com.ssd.grpc.Ack> getSubmitTransactionMethod;
     if ((getSubmitTransactionMethod = AuctionGrpc.getSubmitTransactionMethod) == null) {
       synchronized (AuctionGrpc.class) {
         if ((getSubmitTransactionMethod = AuctionGrpc.getSubmitTransactionMethod) == null) {
           AuctionGrpc.getSubmitTransactionMethod = getSubmitTransactionMethod =
-              io.grpc.MethodDescriptor.<com.ssd.grpc.TransactionKad, com.ssd.grpc.Ack>newBuilder()
+              io.grpc.MethodDescriptor.<com.ssd.grpc.TransactionApp, com.ssd.grpc.Ack>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SubmitTransaction"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.ssd.grpc.TransactionKad.getDefaultInstance()))
+                  com.ssd.grpc.TransactionApp.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.ssd.grpc.Ack.getDefaultInstance()))
               .setSchemaDescriptor(new AuctionMethodDescriptorSupplier("SubmitTransaction"))
@@ -286,13 +286,13 @@ public final class AuctionGrpc {
     /**
      */
     default void listAuctions(com.ssd.grpc.Id request,
-        io.grpc.stub.StreamObserver<com.ssd.grpc.TransactionKad> responseObserver) {
+        io.grpc.stub.StreamObserver<com.ssd.grpc.TransactionApp> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListAuctionsMethod(), responseObserver);
     }
 
     /**
      */
-    default void submitTransaction(com.ssd.grpc.TransactionKad request,
+    default void submitTransaction(com.ssd.grpc.TransactionApp request,
         io.grpc.stub.StreamObserver<com.ssd.grpc.Ack> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSubmitTransactionMethod(), responseObserver);
     }
@@ -366,14 +366,14 @@ public final class AuctionGrpc {
     /**
      */
     public void listAuctions(com.ssd.grpc.Id request,
-        io.grpc.stub.StreamObserver<com.ssd.grpc.TransactionKad> responseObserver) {
+        io.grpc.stub.StreamObserver<com.ssd.grpc.TransactionApp> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getListAuctionsMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void submitTransaction(com.ssd.grpc.TransactionKad request,
+    public void submitTransaction(com.ssd.grpc.TransactionApp request,
         io.grpc.stub.StreamObserver<com.ssd.grpc.Ack> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getSubmitTransactionMethod(), getCallOptions()), request, responseObserver);
@@ -431,7 +431,7 @@ public final class AuctionGrpc {
 
     /**
      */
-    public java.util.Iterator<com.ssd.grpc.TransactionKad> listAuctions(
+    public java.util.Iterator<com.ssd.grpc.TransactionApp> listAuctions(
         com.ssd.grpc.Id request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getListAuctionsMethod(), getCallOptions(), request);
@@ -439,7 +439,7 @@ public final class AuctionGrpc {
 
     /**
      */
-    public com.ssd.grpc.Ack submitTransaction(com.ssd.grpc.TransactionKad request) {
+    public com.ssd.grpc.Ack submitTransaction(com.ssd.grpc.TransactionApp request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getSubmitTransactionMethod(), getCallOptions(), request);
     }
@@ -483,7 +483,7 @@ public final class AuctionGrpc {
     /**
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ssd.grpc.Ack> submitTransaction(
-        com.ssd.grpc.TransactionKad request) {
+        com.ssd.grpc.TransactionApp request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getSubmitTransactionMethod(), getCallOptions()), request);
     }
@@ -531,10 +531,10 @@ public final class AuctionGrpc {
           break;
         case METHODID_LIST_AUCTIONS:
           serviceImpl.listAuctions((com.ssd.grpc.Id) request,
-              (io.grpc.stub.StreamObserver<com.ssd.grpc.TransactionKad>) responseObserver);
+              (io.grpc.stub.StreamObserver<com.ssd.grpc.TransactionApp>) responseObserver);
           break;
         case METHODID_SUBMIT_TRANSACTION:
-          serviceImpl.submitTransaction((com.ssd.grpc.TransactionKad) request,
+          serviceImpl.submitTransaction((com.ssd.grpc.TransactionApp) request,
               (io.grpc.stub.StreamObserver<com.ssd.grpc.Ack>) responseObserver);
           break;
         default:
@@ -588,13 +588,13 @@ public final class AuctionGrpc {
           io.grpc.stub.ServerCalls.asyncServerStreamingCall(
             new MethodHandlers<
               com.ssd.grpc.Id,
-              com.ssd.grpc.TransactionKad>(
+              com.ssd.grpc.TransactionApp>(
                 service, METHODID_LIST_AUCTIONS)))
         .addMethod(
           getSubmitTransactionMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              com.ssd.grpc.TransactionKad,
+              com.ssd.grpc.TransactionApp,
               com.ssd.grpc.Ack>(
                 service, METHODID_SUBMIT_TRANSACTION)))
         .build();

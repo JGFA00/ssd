@@ -7,8 +7,8 @@ service Auction {
   rpc FindNode (NodeID) returns (stream NodeInfo) {}
   rpc PropagateBlock (Block) returns (Ack) {}
   rpc getBlockchain (NodeID) returns (stream Block) {}
-  rpc ListAuctions(Id) returns (stream TransactionKad) {}
-  rpc SubmitTransaction(TransactionKad) returns (Ack) {}
+  rpc ListAuctions(Id) returns (stream TransactionApp) {}
+  rpc SubmitTransaction(TransactionApp) returns (Ack) {}
 }
 message PingResponse {
   string response =1;
@@ -33,10 +33,10 @@ message Ack {
   string acknowledge = 1;
 }
 message TransactionsList {
-  repeated TransactionKad transactionList = 1;
+  repeated TransactionApp transactionList = 1;
 }
 
-message TransactionKad {
+message TransactionApp {
   string transaction =1;       
   string nome =2 ;
 }

@@ -42,41 +42,41 @@ private static final long serialVersionUID = 0L;
 
   public static final int TRANSACTIONLIST_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
-  private java.util.List<com.ssd.grpc.TransactionKad> transactionList_;
+  private java.util.List<com.ssd.grpc.TransactionApp> transactionList_;
   /**
-   * <code>repeated .TransactionKad transactionList = 1;</code>
+   * <code>repeated .TransactionApp transactionList = 1;</code>
    */
   @java.lang.Override
-  public java.util.List<com.ssd.grpc.TransactionKad> getTransactionListList() {
+  public java.util.List<com.ssd.grpc.TransactionApp> getTransactionListList() {
     return transactionList_;
   }
   /**
-   * <code>repeated .TransactionKad transactionList = 1;</code>
+   * <code>repeated .TransactionApp transactionList = 1;</code>
    */
   @java.lang.Override
-  public java.util.List<? extends com.ssd.grpc.TransactionKadOrBuilder> 
+  public java.util.List<? extends com.ssd.grpc.TransactionAppOrBuilder> 
       getTransactionListOrBuilderList() {
     return transactionList_;
   }
   /**
-   * <code>repeated .TransactionKad transactionList = 1;</code>
+   * <code>repeated .TransactionApp transactionList = 1;</code>
    */
   @java.lang.Override
   public int getTransactionListCount() {
     return transactionList_.size();
   }
   /**
-   * <code>repeated .TransactionKad transactionList = 1;</code>
+   * <code>repeated .TransactionApp transactionList = 1;</code>
    */
   @java.lang.Override
-  public com.ssd.grpc.TransactionKad getTransactionList(int index) {
+  public com.ssd.grpc.TransactionApp getTransactionList(int index) {
     return transactionList_.get(index);
   }
   /**
-   * <code>repeated .TransactionKad transactionList = 1;</code>
+   * <code>repeated .TransactionApp transactionList = 1;</code>
    */
   @java.lang.Override
-  public com.ssd.grpc.TransactionKadOrBuilder getTransactionListOrBuilder(
+  public com.ssd.grpc.TransactionAppOrBuilder getTransactionListOrBuilder(
       int index) {
     return transactionList_.get(index);
   }
@@ -426,9 +426,9 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              com.ssd.grpc.TransactionKad m =
+              com.ssd.grpc.TransactionApp m =
                   input.readMessage(
-                      com.ssd.grpc.TransactionKad.parser(),
+                      com.ssd.grpc.TransactionApp.parser(),
                       extensionRegistry);
               if (transactionListBuilder_ == null) {
                 ensureTransactionListIsMutable();
@@ -455,22 +455,22 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.util.List<com.ssd.grpc.TransactionKad> transactionList_ =
+    private java.util.List<com.ssd.grpc.TransactionApp> transactionList_ =
       java.util.Collections.emptyList();
     private void ensureTransactionListIsMutable() {
       if (!((bitField0_ & 0x00000001) != 0)) {
-        transactionList_ = new java.util.ArrayList<com.ssd.grpc.TransactionKad>(transactionList_);
+        transactionList_ = new java.util.ArrayList<com.ssd.grpc.TransactionApp>(transactionList_);
         bitField0_ |= 0x00000001;
        }
     }
 
     private com.google.protobuf.RepeatedFieldBuilderV3<
-        com.ssd.grpc.TransactionKad, com.ssd.grpc.TransactionKad.Builder, com.ssd.grpc.TransactionKadOrBuilder> transactionListBuilder_;
+        com.ssd.grpc.TransactionApp, com.ssd.grpc.TransactionApp.Builder, com.ssd.grpc.TransactionAppOrBuilder> transactionListBuilder_;
 
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
-    public java.util.List<com.ssd.grpc.TransactionKad> getTransactionListList() {
+    public java.util.List<com.ssd.grpc.TransactionApp> getTransactionListList() {
       if (transactionListBuilder_ == null) {
         return java.util.Collections.unmodifiableList(transactionList_);
       } else {
@@ -478,7 +478,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
     public int getTransactionListCount() {
       if (transactionListBuilder_ == null) {
@@ -488,9 +488,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
-    public com.ssd.grpc.TransactionKad getTransactionList(int index) {
+    public com.ssd.grpc.TransactionApp getTransactionList(int index) {
       if (transactionListBuilder_ == null) {
         return transactionList_.get(index);
       } else {
@@ -498,10 +498,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
     public Builder setTransactionList(
-        int index, com.ssd.grpc.TransactionKad value) {
+        int index, com.ssd.grpc.TransactionApp value) {
       if (transactionListBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -515,10 +515,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
     public Builder setTransactionList(
-        int index, com.ssd.grpc.TransactionKad.Builder builderForValue) {
+        int index, com.ssd.grpc.TransactionApp.Builder builderForValue) {
       if (transactionListBuilder_ == null) {
         ensureTransactionListIsMutable();
         transactionList_.set(index, builderForValue.build());
@@ -529,9 +529,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
-    public Builder addTransactionList(com.ssd.grpc.TransactionKad value) {
+    public Builder addTransactionList(com.ssd.grpc.TransactionApp value) {
       if (transactionListBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -545,10 +545,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
     public Builder addTransactionList(
-        int index, com.ssd.grpc.TransactionKad value) {
+        int index, com.ssd.grpc.TransactionApp value) {
       if (transactionListBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -562,10 +562,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
     public Builder addTransactionList(
-        com.ssd.grpc.TransactionKad.Builder builderForValue) {
+        com.ssd.grpc.TransactionApp.Builder builderForValue) {
       if (transactionListBuilder_ == null) {
         ensureTransactionListIsMutable();
         transactionList_.add(builderForValue.build());
@@ -576,10 +576,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
     public Builder addTransactionList(
-        int index, com.ssd.grpc.TransactionKad.Builder builderForValue) {
+        int index, com.ssd.grpc.TransactionApp.Builder builderForValue) {
       if (transactionListBuilder_ == null) {
         ensureTransactionListIsMutable();
         transactionList_.add(index, builderForValue.build());
@@ -590,10 +590,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
     public Builder addAllTransactionList(
-        java.lang.Iterable<? extends com.ssd.grpc.TransactionKad> values) {
+        java.lang.Iterable<? extends com.ssd.grpc.TransactionApp> values) {
       if (transactionListBuilder_ == null) {
         ensureTransactionListIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -605,7 +605,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
     public Builder clearTransactionList() {
       if (transactionListBuilder_ == null) {
@@ -618,7 +618,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
     public Builder removeTransactionList(int index) {
       if (transactionListBuilder_ == null) {
@@ -631,16 +631,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
-    public com.ssd.grpc.TransactionKad.Builder getTransactionListBuilder(
+    public com.ssd.grpc.TransactionApp.Builder getTransactionListBuilder(
         int index) {
       return getTransactionListFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
-    public com.ssd.grpc.TransactionKadOrBuilder getTransactionListOrBuilder(
+    public com.ssd.grpc.TransactionAppOrBuilder getTransactionListOrBuilder(
         int index) {
       if (transactionListBuilder_ == null) {
         return transactionList_.get(index);  } else {
@@ -648,9 +648,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
-    public java.util.List<? extends com.ssd.grpc.TransactionKadOrBuilder> 
+    public java.util.List<? extends com.ssd.grpc.TransactionAppOrBuilder> 
          getTransactionListOrBuilderList() {
       if (transactionListBuilder_ != null) {
         return transactionListBuilder_.getMessageOrBuilderList();
@@ -659,33 +659,33 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
-    public com.ssd.grpc.TransactionKad.Builder addTransactionListBuilder() {
+    public com.ssd.grpc.TransactionApp.Builder addTransactionListBuilder() {
       return getTransactionListFieldBuilder().addBuilder(
-          com.ssd.grpc.TransactionKad.getDefaultInstance());
+          com.ssd.grpc.TransactionApp.getDefaultInstance());
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
-    public com.ssd.grpc.TransactionKad.Builder addTransactionListBuilder(
+    public com.ssd.grpc.TransactionApp.Builder addTransactionListBuilder(
         int index) {
       return getTransactionListFieldBuilder().addBuilder(
-          index, com.ssd.grpc.TransactionKad.getDefaultInstance());
+          index, com.ssd.grpc.TransactionApp.getDefaultInstance());
     }
     /**
-     * <code>repeated .TransactionKad transactionList = 1;</code>
+     * <code>repeated .TransactionApp transactionList = 1;</code>
      */
-    public java.util.List<com.ssd.grpc.TransactionKad.Builder> 
+    public java.util.List<com.ssd.grpc.TransactionApp.Builder> 
          getTransactionListBuilderList() {
       return getTransactionListFieldBuilder().getBuilderList();
     }
     private com.google.protobuf.RepeatedFieldBuilderV3<
-        com.ssd.grpc.TransactionKad, com.ssd.grpc.TransactionKad.Builder, com.ssd.grpc.TransactionKadOrBuilder> 
+        com.ssd.grpc.TransactionApp, com.ssd.grpc.TransactionApp.Builder, com.ssd.grpc.TransactionAppOrBuilder> 
         getTransactionListFieldBuilder() {
       if (transactionListBuilder_ == null) {
         transactionListBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-            com.ssd.grpc.TransactionKad, com.ssd.grpc.TransactionKad.Builder, com.ssd.grpc.TransactionKadOrBuilder>(
+            com.ssd.grpc.TransactionApp, com.ssd.grpc.TransactionApp.Builder, com.ssd.grpc.TransactionAppOrBuilder>(
                 transactionList_,
                 ((bitField0_ & 0x00000001) != 0),
                 getParentForChildren(),
