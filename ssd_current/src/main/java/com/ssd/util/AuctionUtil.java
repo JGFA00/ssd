@@ -1,10 +1,13 @@
 package com.ssd.util;
 import java.util.List;
-import com.ssd.grpc.Block;
+import com.ssd.grpc.BlockGRPC;
 import com.ssd.grpc.NodeID;
 import com.ssd.grpc.NodeInfo;
 import com.ssd.grpc.TransactionApp;
 import com.ssd.grpc.TransactionsList;
+import com.ssd.blockchain.Block;
+import com.ssd.blockchain.Transaction;
+
 
 public class AuctionUtil {
 
@@ -33,8 +36,8 @@ public class AuctionUtil {
         return tlist;
     }
 
-    public static Block createBlock(String prevHash, int timestamp, int nonce, String blockHash, String merkleRoot, TransactionsList transactions){
-        Block block = Block.newBuilder().setPrevHash(prevHash)
+    public static BlockGRPC createBlockGRPC(String prevHash, int timestamp, int nonce, String blockHash, String merkleRoot, TransactionsList transactions){
+        BlockGRPC block = BlockGRPC.newBuilder().setPrevHash(prevHash)
         .setTimestamp(timestamp)
         .setNonce(nonce)
         .setBlockHash(blockHash)
@@ -44,5 +47,31 @@ public class AuctionUtil {
 
         return block;
     }
+
+    public static Block convertBlockGrpctoBlock(BlockGRPC block){
+        Block b = new Block(block.getPrevHash(), block.getTimestamp(), block.getNonce(), block.getBlockHash(), block.getMerkleRoot(), convertBlockGrpctoBlock(block));
+        return b;
+    }
+
+    public static BlockGRPC convertBlocktoBlockGRPC(Block block){
+        BlockGRPC b = BlockGRPC.newBuilder().build();
+        return b;
+    }
+
+    //o que é esta list?
+    public static List<Transaction> convertTransactionGrpctoTransaction(TransactionsList tlist){
+        List<Transaction> list = new List<>(); 
+        for(TransactionApp t: tlist.getTransactionListList()){
+            list.add(convertTransactionApptoTransaction(t));
+        }
+
+        return list;
+    }
+
+    public static Transaction convertTransactionApptoTransaction(TransactionApp transaction){
+        Transaction t = new Transaction(null, null);
+        return t;
+    }
+        
 
 }

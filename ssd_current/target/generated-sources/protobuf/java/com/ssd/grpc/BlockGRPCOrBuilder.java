@@ -4,8 +4,8 @@
 // Protobuf Java Version: 3.25.1
 package com.ssd.grpc;
 
-public interface BlockOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:Block)
+public interface BlockGRPCOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:BlockGRPC)
     com.google.protobuf.MessageOrBuilder {
 
   /**

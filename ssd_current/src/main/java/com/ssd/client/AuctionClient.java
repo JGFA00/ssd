@@ -1,7 +1,7 @@
 package com.ssd.client;
 import com.ssd.grpc.Ack;
 import com.ssd.grpc.AuctionGrpc;
-import com.ssd.grpc.Block;
+import com.ssd.grpc.BlockGRPC;
 import com.ssd.grpc.AuctionGrpc.AuctionBlockingStub;
 import com.ssd.grpc.AuctionGrpc.AuctionStub;
 import com.ssd.util.AuctionUtil;
@@ -46,7 +46,7 @@ public class AuctionClient {
         });
     }
 
-    public void propagateBlock(Block block){
+    public void propagateBlock(BlockGRPC block){
         Ack ack;
         ack = blockingStub.propagateBlock(block);
         System.out.println(ack.getAcknowledge());

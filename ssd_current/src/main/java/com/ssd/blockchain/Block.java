@@ -1,6 +1,8 @@
 package com.ssd.blockchain;
 import java.util.List;
 
+import com.ssd.grpc.TransactionsList;
+
 public class Block {
     private String blockHash;
     private String prevHash;
@@ -15,6 +17,11 @@ public class Block {
         this.transactions = transactions;
         this.merkleRoot = calculateMerkleRoot(transactions);
         this.blockHash = "";
+    }
+
+    //constructor for block received after being converted, needs fixing
+    public Block(String prev_hash, long timestamp, int nonce, String blockHash, String merkleRoot, List<Transaction> transactions){
+
     }
 
     public String getPrevHash() {

@@ -41,7 +41,7 @@ public class RoutingTable {
     private BigInteger xorDistance(BigInteger id1, BigInteger id2) {
         return id1.xor(id2);
     }
-    /*
+    
     public List<NodeInfo> findClosestNodes(BigInteger targetId, int count) {
         
         List<NodeInfo> closestNodes = new ArrayList<>();
@@ -61,7 +61,7 @@ public class RoutingTable {
         // Return only the required number of closest nodes
         return closestNodes.subList(0, Math.min(count, closestNodes.size()));
     }
-     */
+     
     
     /*
     public List<kBuckets> getAllRoutes(){

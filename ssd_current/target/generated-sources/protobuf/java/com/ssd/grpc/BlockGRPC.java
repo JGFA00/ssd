@@ -5,18 +5,18 @@
 package com.ssd.grpc;
 
 /**
- * Protobuf type {@code Block}
+ * Protobuf type {@code BlockGRPC}
  */
-public final class Block extends
+public final class BlockGRPC extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:Block)
-    BlockOrBuilder {
+    // @@protoc_insertion_point(message_implements:BlockGRPC)
+    BlockGRPCOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use Block.newBuilder() to construct.
-  private Block(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use BlockGRPC.newBuilder() to construct.
+  private BlockGRPC(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private Block() {
+  private BlockGRPC() {
     prevHash_ = "";
     blockHash_ = "";
     merkleRoot_ = "";
@@ -26,20 +26,20 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new Block();
+    return new BlockGRPC();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.ssd.grpc.AuctionOuterClass.internal_static_Block_descriptor;
+    return com.ssd.grpc.AuctionOuterClass.internal_static_BlockGRPC_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.ssd.grpc.AuctionOuterClass.internal_static_Block_fieldAccessorTable
+    return com.ssd.grpc.AuctionOuterClass.internal_static_BlockGRPC_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.ssd.grpc.Block.class, com.ssd.grpc.Block.Builder.class);
+            com.ssd.grpc.BlockGRPC.class, com.ssd.grpc.BlockGRPC.Builder.class);
   }
 
   private int bitField0_;
@@ -280,10 +280,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.ssd.grpc.Block)) {
+    if (!(obj instanceof com.ssd.grpc.BlockGRPC)) {
       return super.equals(obj);
     }
-    com.ssd.grpc.Block other = (com.ssd.grpc.Block) obj;
+    com.ssd.grpc.BlockGRPC other = (com.ssd.grpc.BlockGRPC) obj;
 
     if (!getPrevHash()
         .equals(other.getPrevHash())) return false;
@@ -331,44 +331,44 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static com.ssd.grpc.Block parseFrom(
+  public static com.ssd.grpc.BlockGRPC parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.ssd.grpc.Block parseFrom(
+  public static com.ssd.grpc.BlockGRPC parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.ssd.grpc.Block parseFrom(
+  public static com.ssd.grpc.BlockGRPC parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.ssd.grpc.Block parseFrom(
+  public static com.ssd.grpc.BlockGRPC parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.ssd.grpc.Block parseFrom(byte[] data)
+  public static com.ssd.grpc.BlockGRPC parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.ssd.grpc.Block parseFrom(
+  public static com.ssd.grpc.BlockGRPC parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.ssd.grpc.Block parseFrom(java.io.InputStream input)
+  public static com.ssd.grpc.BlockGRPC parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.ssd.grpc.Block parseFrom(
+  public static com.ssd.grpc.BlockGRPC parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -376,26 +376,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.ssd.grpc.Block parseDelimitedFrom(java.io.InputStream input)
+  public static com.ssd.grpc.BlockGRPC parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.ssd.grpc.Block parseDelimitedFrom(
+  public static com.ssd.grpc.BlockGRPC parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.ssd.grpc.Block parseFrom(
+  public static com.ssd.grpc.BlockGRPC parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.ssd.grpc.Block parseFrom(
+  public static com.ssd.grpc.BlockGRPC parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -408,7 +408,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.ssd.grpc.Block prototype) {
+  public static Builder newBuilder(com.ssd.grpc.BlockGRPC prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -424,26 +424,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code Block}
+   * Protobuf type {@code BlockGRPC}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:Block)
-      com.ssd.grpc.BlockOrBuilder {
+      // @@protoc_insertion_point(builder_implements:BlockGRPC)
+      com.ssd.grpc.BlockGRPCOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.ssd.grpc.AuctionOuterClass.internal_static_Block_descriptor;
+      return com.ssd.grpc.AuctionOuterClass.internal_static_BlockGRPC_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.ssd.grpc.AuctionOuterClass.internal_static_Block_fieldAccessorTable
+      return com.ssd.grpc.AuctionOuterClass.internal_static_BlockGRPC_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.ssd.grpc.Block.class, com.ssd.grpc.Block.Builder.class);
+              com.ssd.grpc.BlockGRPC.class, com.ssd.grpc.BlockGRPC.Builder.class);
     }
 
-    // Construct using com.ssd.grpc.Block.newBuilder()
+    // Construct using com.ssd.grpc.BlockGRPC.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -479,17 +479,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.ssd.grpc.AuctionOuterClass.internal_static_Block_descriptor;
+      return com.ssd.grpc.AuctionOuterClass.internal_static_BlockGRPC_descriptor;
     }
 
     @java.lang.Override
-    public com.ssd.grpc.Block getDefaultInstanceForType() {
-      return com.ssd.grpc.Block.getDefaultInstance();
+    public com.ssd.grpc.BlockGRPC getDefaultInstanceForType() {
+      return com.ssd.grpc.BlockGRPC.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.ssd.grpc.Block build() {
-      com.ssd.grpc.Block result = buildPartial();
+    public com.ssd.grpc.BlockGRPC build() {
+      com.ssd.grpc.BlockGRPC result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -497,14 +497,14 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.ssd.grpc.Block buildPartial() {
-      com.ssd.grpc.Block result = new com.ssd.grpc.Block(this);
+    public com.ssd.grpc.BlockGRPC buildPartial() {
+      com.ssd.grpc.BlockGRPC result = new com.ssd.grpc.BlockGRPC(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(com.ssd.grpc.Block result) {
+    private void buildPartial0(com.ssd.grpc.BlockGRPC result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.prevHash_ = prevHash_;
@@ -565,16 +565,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.ssd.grpc.Block) {
-        return mergeFrom((com.ssd.grpc.Block)other);
+      if (other instanceof com.ssd.grpc.BlockGRPC) {
+        return mergeFrom((com.ssd.grpc.BlockGRPC)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.ssd.grpc.Block other) {
-      if (other == com.ssd.grpc.Block.getDefaultInstance()) return this;
+    public Builder mergeFrom(com.ssd.grpc.BlockGRPC other) {
+      if (other == com.ssd.grpc.BlockGRPC.getDefaultInstance()) return this;
       if (!other.getPrevHash().isEmpty()) {
         prevHash_ = other.prevHash_;
         bitField0_ |= 0x00000001;
@@ -1087,23 +1087,23 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:Block)
+    // @@protoc_insertion_point(builder_scope:BlockGRPC)
   }
 
-  // @@protoc_insertion_point(class_scope:Block)
-  private static final com.ssd.grpc.Block DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:BlockGRPC)
+  private static final com.ssd.grpc.BlockGRPC DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.ssd.grpc.Block();
+    DEFAULT_INSTANCE = new com.ssd.grpc.BlockGRPC();
   }
 
-  public static com.ssd.grpc.Block getDefaultInstance() {
+  public static com.ssd.grpc.BlockGRPC getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<Block>
-      PARSER = new com.google.protobuf.AbstractParser<Block>() {
+  private static final com.google.protobuf.Parser<BlockGRPC>
+      PARSER = new com.google.protobuf.AbstractParser<BlockGRPC>() {
     @java.lang.Override
-    public Block parsePartialFrom(
+    public BlockGRPC parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1122,17 +1122,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<Block> parser() {
+  public static com.google.protobuf.Parser<BlockGRPC> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<Block> getParserForType() {
+  public com.google.protobuf.Parser<BlockGRPC> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.ssd.grpc.Block getDefaultInstanceForType() {
+  public com.ssd.grpc.BlockGRPC getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

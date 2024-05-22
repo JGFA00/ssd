@@ -46,10 +46,10 @@ public final class AuctionOuterClass {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_TransactionApp_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Block_descriptor;
+    internal_static_BlockGRPC_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Block_fieldAccessorTable;
+      internal_static_BlockGRPC_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Id_descriptor;
   static final 
@@ -70,18 +70,18 @@ public final class AuctionOuterClass {
       "\005\"\032\n\003Ack\022\023\n\013acknowledge\030\001 \001(\t\"<\n\020Transac" +
       "tionsList\022(\n\017transactionList\030\001 \003(\0132\017.Tra" +
       "nsactionApp\"3\n\016TransactionApp\022\023\n\013transac" +
-      "tion\030\001 \001(\t\022\014\n\004nome\030\002 \001(\t\"\217\001\n\005Block\022\020\n\010pr" +
-      "evHash\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001(\003\022\r\n\005nonce" +
-      "\030\003 \001(\005\022\021\n\tblockHash\030\004 \001(\t\022\022\n\nmerkleRoot\030" +
-      "\005 \001(\t\022+\n\020transactionsList\030\006 \001(\0132\021.Transa" +
-      "ctionsList\"\020\n\002Id\022\n\n\002id\030\001 \001(\0052\357\001\n\007Auction" +
-      "\022 \n\004Ping\022\007.NodeID\032\r.PingResponse\"\000\022\"\n\010Fi" +
-      "ndNode\022\007.NodeID\032\t.NodeInfo\"\0000\001\022 \n\016Propag" +
-      "ateBlock\022\006.Block\032\004.Ack\"\000\022$\n\rgetBlockchai" +
-      "n\022\007.NodeID\032\006.Block\"\0000\001\022(\n\014ListAuctions\022\003" +
-      ".Id\032\017.TransactionApp\"\0000\001\022,\n\021SubmitTransa" +
-      "ction\022\017.TransactionApp\032\004.Ack\"\000B\020\n\014com.ss" +
-      "d.grpcP\001b\006proto3"
+      "tion\030\001 \001(\t\022\014\n\004nome\030\002 \001(\t\"\223\001\n\tBlockGRPC\022\020" +
+      "\n\010prevHash\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001(\003\022\r\n\005n" +
+      "once\030\003 \001(\005\022\021\n\tblockHash\030\004 \001(\t\022\022\n\nmerkleR" +
+      "oot\030\005 \001(\t\022+\n\020transactionsList\030\006 \001(\0132\021.Tr" +
+      "ansactionsList\"\020\n\002Id\022\n\n\002id\030\001 \001(\0052\367\001\n\007Auc" +
+      "tion\022 \n\004Ping\022\007.NodeID\032\r.PingResponse\"\000\022\"" +
+      "\n\010FindNode\022\007.NodeID\032\t.NodeInfo\"\0000\001\022$\n\016Pr" +
+      "opagateBlock\022\n.BlockGRPC\032\004.Ack\"\000\022(\n\rgetB" +
+      "lockchain\022\007.NodeID\032\n.BlockGRPC\"\0000\001\022(\n\014Li" +
+      "stAuctions\022\003.Id\032\017.TransactionApp\"\0000\001\022,\n\021" +
+      "SubmitTransaction\022\017.TransactionApp\032\004.Ack" +
+      "\"\000B\020\n\014com.ssd.grpcP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -123,11 +123,11 @@ public final class AuctionOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_TransactionApp_descriptor,
         new java.lang.String[] { "Transaction", "Nome", });
-    internal_static_Block_descriptor =
+    internal_static_BlockGRPC_descriptor =
       getDescriptor().getMessageTypes().get(6);
-    internal_static_Block_fieldAccessorTable = new
+    internal_static_BlockGRPC_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Block_descriptor,
+        internal_static_BlockGRPC_descriptor,
         new java.lang.String[] { "PrevHash", "Timestamp", "Nonce", "BlockHash", "MerkleRoot", "TransactionsList", });
     internal_static_Id_descriptor =
       getDescriptor().getMessageTypes().get(7);
