@@ -11,7 +11,7 @@ public class Block {
     private String merkleRoot;
     private List<Transaction> transactions;
     private String publicKey;
-
+    
     public Block(String prev_hash, List<Transaction> transactions) {
         this.prevHash = prev_hash;
         this.transactions = transactions;

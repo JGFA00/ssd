@@ -29,6 +29,8 @@ public class KBucket {
             // KBucket is full, check the oldest node's responsiveness if unresponsive remove it and add the new one
             Iterator<NodeInfo> it = nodes.iterator();
             NodeInfo oldestNode = it.next();
+            AuctionClient client = new AuctionClient(convertNodeInfotoNodeInfoGRPC(oldestNode));
+            client.Ping()
             if (!ping(oldestNode)) {
                 it.remove();
                 nodes.add(node);
