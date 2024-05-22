@@ -1,5 +1,8 @@
 package com.ssd.blockchain;
 
+import java.nio.charset.StandardCharsets;
+import java.security.InvalidKeyException;
+import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
@@ -8,6 +11,10 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.security.Security;
+import java.security.Signature;
+import java.security.SignatureException;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.encoders.Base64;
@@ -62,4 +69,22 @@ public class KeyPairs {
             }
         }
     }
+
+    public byte[][] sign(String message) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException, InvalidKeySpecException {
+
+        byte[] msgHashBytes = Hashing.applySHA256(this.publicKey.concat(String.valueOf(message))).getBytes();
+        Signature rsa  = Signature.getInstance("RSA");
+
+        // Decode the private key from Base64
+        byte[] keyBytes = Base64.decode(privateKey.getBytes(StandardCharsets.UTF_8));
+        PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(keyBytes);
+        KeyFactory kf = KeyFactory.getInstance("RSA");
+        PrivateKey privateKey = kf.generatePrivate(spec);
+
+
+        rsa.initSign(privateKey);
+        rsa.update(msgHashBytes);
+        byte[] rsaBytes = rsa.sign();
+        return new byte[][]{msgHashBytes, rsaBytes};
+    } 
 }
