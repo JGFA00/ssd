@@ -6,7 +6,7 @@ public class Hashing {
 
     public static String applySHA256(String data) {
         try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            MessageDigest digest = MessageDigest.getInstance(Config.HASH_ALG);
             byte[] hash = digest.digest(data.getBytes());
             StringBuilder hexString = new StringBuilder();
             for (byte b : hash) {
