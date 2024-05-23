@@ -2,6 +2,8 @@
 package com.ssd.kademlia;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.concurrent.ThreadPoolExecutor;
+
 import com.ssd.kademlia.KBucket;
 import com.ssd.grpc.NodeID;
 import com.ssd.grpc.NodeInfo;
@@ -58,7 +60,12 @@ public class RoutingTable {
         // Return the closest 'count' nodes, or the total number of nodes if fewer than 'count'
         return allNodes.subList(0, Math.min(count, allNodes.size()));
     }
-     
+    
+    public void nodeLookup(NodeInfo nodeInfo){
+        AuctionClient client = new AuctionClient(nodeInfo);
+        Queue q = client.findNode();
+        
+    }
 
     public List<NodeInfo> getAllRoutes() {
         List<NodeInfo> Nodes = new ArrayList<>();

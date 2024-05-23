@@ -26,12 +26,14 @@ public class AuctionClient {
         this.nodeinfo = nodeInfo;
     } 
 
+    //public AuctionClient(NodeInfo nodeInfo, RoutingTable routingTable)
     //este node id é o id do próprio nó que está a enviar o ping
-    public void ping() {
+    public Boolean ping() {
         NodeID id = NodeID.newBuilder().setId(nodeinfo.getId()).build();
         PingResponse response;
         response = blockingStub.ping(id);
         System.out.println(response.getResponse());
+        return true;
     }
 
     //aqui implementa-se o find node da perspetiva do cliente, o que queremos fazer com os nós que recebemos? adicionar à 

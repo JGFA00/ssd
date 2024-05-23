@@ -96,9 +96,11 @@ public class AuctionServer {
             this.routingTable = routingTable;
         }
         
+        //nodeid é do cliente, é possivel ter que fazer alguma coisa com o ping recebido (verificar o kbucket nós inativos)
+        //verifica se tem o node na routing table, se não faz um find node
         @Override 
         public void ping (NodeID nodeid, StreamObserver<PingResponse> responseObserver){ 
-            //o que fazer com um ping? para já retorna só resposta ao cliente que enviou o ping 
+            //o que fazer com um ping? para já retorna só resposta ao cliente que enviou o ping
             PingResponse response = PingResponse.newBuilder().setResponse("active").build(); 
             responseObserver.onNext(response); 
             System.out.println("ping responded"); 
@@ -127,6 +129,7 @@ public class AuctionServer {
             responseObserver.onNext(ack);
             responseObserver.onCompleted();
             Block b = AuctionUtil.convertBlockGrpctoBlock(block);
+            // validar o bloco aqui antes de adicionar a blockchain
             blockchain.addBlock(b);
             
         }
@@ -135,8 +138,10 @@ public class AuctionServer {
         //da perspetiva do servidor recebe um pedido get blockchain do no nodeid e envia uma stream de blocos (blockchain)
         @Override
         public void getBlockchain(NodeID nodeid, StreamObserver<BlockGRPC> responseObserver) {
+            //converter todos os blocos e enviar
             /*
             for (Block block : blockchain){
+                BlockGRPC b = convertblocktoblockGRPC()
                 responseObserver.onNext(block);
                 
                 try {

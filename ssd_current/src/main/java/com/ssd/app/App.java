@@ -39,7 +39,7 @@ public class App {
 
     private void sendTransaction (int choice) {
         System.out.println("\nSending transaction\n");
-        TransactionApp t = AuctionUtil.createTransaction("bid", "C");
+        TransactionApp t = AuctionUtil.createTransaction("bid", "A");
         Ack ack;
         ack = blockingStub.submitTransaction(t);
         System.out.println(ack.getAcknowledge());

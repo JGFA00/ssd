@@ -23,7 +23,8 @@ public class Main {
         server.blockUntilShutdown();
         //NodeInfo bootstrap = AuctionUtil.createNodeInfo("2", "173", 9000);
         //AuctionClient bootstrapClient = new AuctionClient(bootstrap);
-        //bootstrapClient.findNode(nodeid.getId());
+        routingTable.nodeLookup(bootstrap);
+        //bootstrapClient.nodeLookup(nodeid.getId());
         
 
 

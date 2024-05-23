@@ -1,27 +1,31 @@
 package com.ssd.blockchain;
 import java.util.List;
 
-import com.ssd.grpc.TransactionsList;
-
 public class Block {
-    private String blockHash;
-    private String prevHash;
-    private long timestamp;
-    private int nonce=0;
-    private String merkleRoot;
-    private List<Transaction> transactions;
-    private String publicKey;
-
-    public Block(String prev_hash, List<Transaction> transactions) {
+    public String blockHash;
+    public String prevHash;
+    public long timestamp;
+    public int nonce=0;
+    public String merkleRoot;
+    public List<Transaction> transactions;
+    public String publicKey;
+    
+    public Block(String prev_hash, List<Transaction> transactions, KeyPairs keypairs) {
         this.prevHash = prev_hash;
         this.transactions = transactions;
         this.merkleRoot = calculateMerkleRoot(transactions);
         this.blockHash = "";
+        this.publicKey = keypairs.getPublicKey();
     }
 
     //constructor for block received after being converted, needs fixing
-    public Block(String prev_hash, long timestamp, int nonce, String blockHash, String merkleRoot, List<Transaction> transactions){
-
+    public Block(String prev_hash, long timestamp, int nonce, String blockHash, String merkleRoot, List<Transaction> transactions, String publicKey){
+        this.transactions = transactions;
+        this.prevHash= prev_hash;
+        this.timestamp = timestamp;
+        this.blockHash = blockHash;
+        this.nonce = nonce;
+        this.publicKey = publicKey;
     }
 
     public String getPrevHash() {
@@ -62,18 +66,21 @@ public class Block {
         this.blockHash = currHash;
     }
 
-    private String calculateHash() {
+    public String calculateHash() {
         // Include nonce in the hash calculation
         String data = prevHash + merkleRoot + timestamp + nonce;
         return Hashing.applySHA256(data);
     }
 
-    //note fix here
-    private boolean isValidHash(String hash) {
+    public boolean isValidHash(String hash) {
+        
         // Check if the hash has the required number of leading zeros
-        //String prefix = "0".repeat(Config.DIFFICULTY);
-        //return hash.startsWith(prefix);
-        return true;
+        char[] prefixArray = new char[Config.DIFFICULTY];
+        for (int i = 0; i < Config.DIFFICULTY; i++) {
+            prefixArray[i] = '0';
+        }
+        String prefix = new String(prefixArray);
+        return hash.startsWith(prefix);
     }
 
     public boolean verifyBlock(){
