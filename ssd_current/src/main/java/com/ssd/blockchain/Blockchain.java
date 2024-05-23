@@ -3,11 +3,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Blockchain {
-    private List<Block> blockchain;
+    public ArrayList<Block> blockchain;
 
+    // criar vazio
     public Blockchain() {
+        blockchain = new ArrayList<>();
+    }
+
+    public Blockchain(KeyPairs keypairs) {
         this.blockchain= new ArrayList<>();
-        Block genesisBlock = createGenesisBlock();
+        Block genesisBlock = createGenesisBlock(keypairs);
         blockchain.add(genesisBlock);
     }
 
@@ -15,12 +20,12 @@ public class Blockchain {
         return blockchain;
     }
 
-    private Block createGenesisBlock() {
+    private Block createGenesisBlock(KeyPairs keypairs) {
         // For simplicity, the genesis block has no transactions and a previous hash of 0
         Transaction genesisTransaction = new Transaction(Transaction.TransactionType.START_AUCTION,"genesiscenas");
         List<Transaction> genesis_transactions = new ArrayList<>();
         genesis_transactions.add(genesisTransaction);
-        Block genesisBlock = new Block("0", genesis_transactions);
+        Block genesisBlock = new Block("0", genesis_transactions, keypairs);
         genesisBlock.mineBlock();
         return genesisBlock;
     }
