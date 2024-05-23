@@ -1,12 +1,14 @@
 package com.ssd.app;
 import java.util.Scanner;
+
 import com.ssd.grpc.Ack;
 import com.ssd.grpc.AuctionGrpc;
 import com.ssd.grpc.AuctionGrpc.AuctionBlockingStub;
 import com.ssd.grpc.AuctionGrpc.AuctionStub;
-import com.ssd.util.AuctionUtil;
 import com.ssd.grpc.Id;
 import com.ssd.grpc.TransactionApp;
+import com.ssd.util.AuctionUtil;
+
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -39,7 +41,19 @@ public class App {
 
     private void sendTransaction (int choice) {
         System.out.println("\nSending transaction\n");
-        TransactionApp t = AuctionUtil.createTransaction("bid", "A");
+        String type_of_transaction;
+        switch (choice) {
+            case 2:
+                type_of_transaction = "bid";
+                break;
+            case 3:
+                type_of_transaction = "start_auction";
+                break;
+            default:
+                type_of_transaction = "end_auction";
+                break;
+        }
+        TransactionApp t = AuctionUtil.createTransaction(type_of_transaction, "A");
         Ack ack;
         ack = blockingStub.submitTransaction(t);
         System.out.println(ack.getAcknowledge());
