@@ -3,6 +3,7 @@ package com.ssd.kademlia;
 import java.math.BigInteger;
 import java.util.List;
 import com.ssd.kademlia.KBucket;
+import com.ssd.grpc.NodeID;
 import com.ssd.grpc.NodeInfo;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,33 +42,39 @@ public class RoutingTable {
     private BigInteger xorDistance(BigInteger id1, BigInteger id2) {
         return id1.xor(id2);
     }
-    
+
     public List<NodeInfo> findClosestNodes(BigInteger targetId, int count) {
+        List<NodeInfo> allNodes = new ArrayList<>();
         
-        List<NodeInfo> closestNodes = new ArrayList<>();
-        int startBucketIndex = getBucketIndex(targetId);
+        allNodes = getAllRoutes(); 
 
-        // Collect nodes starting from the closest bucket to the targetId
-        for (int i = startBucketIndex; closestNodes.size() < count && i < kBuckets.size(); i++) {
-            closestNodes.addAll(kBuckets.get(i).getNodes());
-        }
-        for (int i = startBucketNextIndex - 1; closestNodes.size() < count && i >= 0; i--) {
-            closestNodes.addAll(kBuckets.get(i).getNodes());
-        }
+        // Sort nodes by XOR distance from the target ID
+        Collections.sort(allNodes, (node1, node2) -> {
+            BigInteger id1 = new BigInteger(node1.getId(), 16); 
+            BigInteger id2 = new BigInteger(node2.getId(), 16);
+            return xorDistance(id1, targetId).compareTo(xorDistance(id2, targetId));
+        });
 
-        // Sort the collected nodes by their XOR distance from the targetId
-        Collections.sort(closestNodes, (node1, node2) -> xorDistance(new BigInteger(node1.getId(), 16), targetId).compareTo(xorDistance(new BigInteger(node2.getId(), 16), targetId)));
-
-        // Return only the required number of closest nodes
-        return closestNodes.subList(0, Math.min(count, closestNodes.size()));
+        // Return the closest 'count' nodes, or the total number of nodes if fewer than 'count'
+        return allNodes.subList(0, Math.min(count, allNodes.size()));
     }
      
-    
-    /*
-    public List<kBuckets> getAllRoutes(){
-        
-        this.kBuckets.get();
-        
-    } 
-     */
+
+    public List<NodeInfo> getAllRoutes() {
+        List<NodeInfo> Nodes = new ArrayList<>();
+        for (KBucket kBucket : kBuckets) {
+            Nodes.addAll(kBucket.getNodes());  // Add all nodes from each KBucket
+        }
+        return Nodes;
+    }
+
+    public boolean containsNode(NodeInfo Node){
+        List<NodeInfo> Nodes = new ArrayList<>();
+        Nodes=getAllRoutes();
+        if(Nodes.contains(Node)){
+            return true;
+        }
+        return false;    
+    }
+     
 }
