@@ -7,6 +7,7 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
@@ -50,7 +51,7 @@ public class KeyPairs {
             PrivateKey priv = pair.getPrivate();
             this.publicKey = new String(Base64.encode(pub.getEncoded()));
             this.privateKey = new String(Base64.encode(priv.getEncoded()));
-        } catch (Exception e) {
+        } catch (NoSuchAlgorithmException | NoSuchProviderException e) {
             throw new RuntimeException(e);
         }
     }
