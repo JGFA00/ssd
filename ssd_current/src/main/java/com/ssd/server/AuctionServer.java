@@ -13,7 +13,7 @@ import com.ssd.grpc.Id;
 import com.ssd.grpc.NodeID;
 import com.ssd.grpc.PingResponse;
 import com.ssd.grpc.TransactionApp;
-import com.ssd.grpc.NodeInfo;
+import com.ssd.grpc.NodeInfoGRPC;
 import com.ssd.kademlia.RoutingTable;
 import com.ssd.util.AuctionUtil;
 
@@ -34,11 +34,11 @@ public class AuctionServer {
     private RoutingTable routingTable;
      */
 
-    public AuctionServer(NodeInfo nodeinfo, Blockchain blockchain, LinkedList<TransactionApp> tlist, RoutingTable routingTable) {
+    public AuctionServer(NodeInfoGRPC nodeinfo, Blockchain blockchain, LinkedList<TransactionApp> tlist, RoutingTable routingTable) {
         this(Grpc.newServerBuilderForPort(nodeinfo.getPort(), InsecureServerCredentials.create()),nodeinfo, blockchain, tlist, routingTable);
     }
 
-    public AuctionServer(ServerBuilder<?> serverBuilder,NodeInfo nodeinfo, Blockchain blockchain, LinkedList<TransactionApp> tlist, RoutingTable routingTable) {
+    public AuctionServer(ServerBuilder<?> serverBuilder,NodeInfoGRPC nodeinfo, Blockchain blockchain, LinkedList<TransactionApp> tlist, RoutingTable routingTable) {
         this.port = nodeinfo.getPort();
         server = serverBuilder.addService(new AuctionService(nodeinfo, blockchain, tlist, routingTable)).build();
         /*
@@ -83,13 +83,13 @@ public class AuctionServer {
 
 
     private static class AuctionService extends AuctionGrpc.AuctionImplBase {
-        private final NodeInfo nodeinfo;
+        private final NodeInfoGRPC nodeinfo;
         private Blockchain blockchain;
         private LinkedList<TransactionApp> tlist;
         private RoutingTable routingTable;
 
         //implementação do auction service, estes métodos todos são da perspetiva do servidor e estão à escuta de mensagens de outros nos
-        public AuctionService(NodeInfo nodeinfo, Blockchain blockchain, LinkedList<TransactionApp> tlist, RoutingTable routingTable){
+        public AuctionService(NodeInfoGRPC nodeinfo, Blockchain blockchain, LinkedList<TransactionApp> tlist, RoutingTable routingTable){
             this.nodeinfo = nodeinfo;
             this.blockchain = blockchain;
             this.tlist = tlist;
@@ -99,7 +99,7 @@ public class AuctionServer {
         //nodeid é do cliente, é possivel ter que fazer alguma coisa com o ping recebido (verificar o kbucket nós inativos)
         //verifica se tem o node na routing table, se não faz um find node
         @Override 
-        public void ping (NodeID nodeid, StreamObserver<PingResponse> responseObserver){ 
+        public void ping(NodeInfoGRPC nodeid, StreamObserver<PingResponse> responseObserver){ 
             //o que fazer com um ping? para já retorna só resposta ao cliente que enviou o ping
             PingResponse response = PingResponse.newBuilder().setResponse("active").build(); 
             responseObserver.onNext(response); 
@@ -109,12 +109,12 @@ public class AuctionServer {
  
         //à espera de pedidos find node de outros nós
         @Override 
-        public void findNode(NodeID nodeid, StreamObserver<NodeInfo> responseObserver){
+        public void findNode(NodeID nodeid, StreamObserver<NodeInfoGRPC> responseObserver){
             
             //Return the 3 closest nodes
-            List<NodeInfo> closestNodes = routingTable.findClosestNodes(new BigInteger(nodeid.getId(), 16), 3);
+            List<NodeInfoGRPC> closestNodes = routingTable.findClosestNodes(new BigInteger(nodeid.getId(), 16), 3);
             //este response observer.onnext(node) retorna o node para o canal com o cliente que invocou o findnode
-            for(NodeInfo node : closestNodes){ 
+            for(NodeInfoGRPC node : closestNodes){ 
                 responseObserver.onNext(node);           
                
             }

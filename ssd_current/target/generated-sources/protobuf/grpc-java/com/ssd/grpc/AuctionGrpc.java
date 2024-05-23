@@ -18,27 +18,27 @@ public final class AuctionGrpc {
   public static final java.lang.String SERVICE_NAME = "Auction";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<com.ssd.grpc.NodeID,
+  private static volatile io.grpc.MethodDescriptor<com.ssd.grpc.NodeInfoGRPC,
       com.ssd.grpc.PingResponse> getPingMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "Ping",
-      requestType = com.ssd.grpc.NodeID.class,
+      requestType = com.ssd.grpc.NodeInfoGRPC.class,
       responseType = com.ssd.grpc.PingResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.ssd.grpc.NodeID,
+  public static io.grpc.MethodDescriptor<com.ssd.grpc.NodeInfoGRPC,
       com.ssd.grpc.PingResponse> getPingMethod() {
-    io.grpc.MethodDescriptor<com.ssd.grpc.NodeID, com.ssd.grpc.PingResponse> getPingMethod;
+    io.grpc.MethodDescriptor<com.ssd.grpc.NodeInfoGRPC, com.ssd.grpc.PingResponse> getPingMethod;
     if ((getPingMethod = AuctionGrpc.getPingMethod) == null) {
       synchronized (AuctionGrpc.class) {
         if ((getPingMethod = AuctionGrpc.getPingMethod) == null) {
           AuctionGrpc.getPingMethod = getPingMethod =
-              io.grpc.MethodDescriptor.<com.ssd.grpc.NodeID, com.ssd.grpc.PingResponse>newBuilder()
+              io.grpc.MethodDescriptor.<com.ssd.grpc.NodeInfoGRPC, com.ssd.grpc.PingResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Ping"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.ssd.grpc.NodeID.getDefaultInstance()))
+                  com.ssd.grpc.NodeInfoGRPC.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.ssd.grpc.PingResponse.getDefaultInstance()))
               .setSchemaDescriptor(new AuctionMethodDescriptorSupplier("Ping"))
@@ -50,28 +50,28 @@ public final class AuctionGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<com.ssd.grpc.NodeID,
-      com.ssd.grpc.NodeInfo> getFindNodeMethod;
+      com.ssd.grpc.NodeInfoGRPC> getFindNodeMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "FindNode",
       requestType = com.ssd.grpc.NodeID.class,
-      responseType = com.ssd.grpc.NodeInfo.class,
+      responseType = com.ssd.grpc.NodeInfoGRPC.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
   public static io.grpc.MethodDescriptor<com.ssd.grpc.NodeID,
-      com.ssd.grpc.NodeInfo> getFindNodeMethod() {
-    io.grpc.MethodDescriptor<com.ssd.grpc.NodeID, com.ssd.grpc.NodeInfo> getFindNodeMethod;
+      com.ssd.grpc.NodeInfoGRPC> getFindNodeMethod() {
+    io.grpc.MethodDescriptor<com.ssd.grpc.NodeID, com.ssd.grpc.NodeInfoGRPC> getFindNodeMethod;
     if ((getFindNodeMethod = AuctionGrpc.getFindNodeMethod) == null) {
       synchronized (AuctionGrpc.class) {
         if ((getFindNodeMethod = AuctionGrpc.getFindNodeMethod) == null) {
           AuctionGrpc.getFindNodeMethod = getFindNodeMethod =
-              io.grpc.MethodDescriptor.<com.ssd.grpc.NodeID, com.ssd.grpc.NodeInfo>newBuilder()
+              io.grpc.MethodDescriptor.<com.ssd.grpc.NodeID, com.ssd.grpc.NodeInfoGRPC>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "FindNode"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.ssd.grpc.NodeID.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.ssd.grpc.NodeInfo.getDefaultInstance()))
+                  com.ssd.grpc.NodeInfoGRPC.getDefaultInstance()))
               .setSchemaDescriptor(new AuctionMethodDescriptorSupplier("FindNode"))
               .build();
         }
@@ -257,7 +257,7 @@ public final class AuctionGrpc {
 
     /**
      */
-    default void ping(com.ssd.grpc.NodeID request,
+    default void ping(com.ssd.grpc.NodeInfoGRPC request,
         io.grpc.stub.StreamObserver<com.ssd.grpc.PingResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getPingMethod(), responseObserver);
     }
@@ -265,7 +265,7 @@ public final class AuctionGrpc {
     /**
      */
     default void findNode(com.ssd.grpc.NodeID request,
-        io.grpc.stub.StreamObserver<com.ssd.grpc.NodeInfo> responseObserver) {
+        io.grpc.stub.StreamObserver<com.ssd.grpc.NodeInfoGRPC> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindNodeMethod(), responseObserver);
     }
 
@@ -333,7 +333,7 @@ public final class AuctionGrpc {
 
     /**
      */
-    public void ping(com.ssd.grpc.NodeID request,
+    public void ping(com.ssd.grpc.NodeInfoGRPC request,
         io.grpc.stub.StreamObserver<com.ssd.grpc.PingResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getPingMethod(), getCallOptions()), request, responseObserver);
@@ -342,7 +342,7 @@ public final class AuctionGrpc {
     /**
      */
     public void findNode(com.ssd.grpc.NodeID request,
-        io.grpc.stub.StreamObserver<com.ssd.grpc.NodeInfo> responseObserver) {
+        io.grpc.stub.StreamObserver<com.ssd.grpc.NodeInfoGRPC> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getFindNodeMethod(), getCallOptions()), request, responseObserver);
     }
@@ -401,14 +401,14 @@ public final class AuctionGrpc {
 
     /**
      */
-    public com.ssd.grpc.PingResponse ping(com.ssd.grpc.NodeID request) {
+    public com.ssd.grpc.PingResponse ping(com.ssd.grpc.NodeInfoGRPC request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getPingMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public java.util.Iterator<com.ssd.grpc.NodeInfo> findNode(
+    public java.util.Iterator<com.ssd.grpc.NodeInfoGRPC> findNode(
         com.ssd.grpc.NodeID request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getFindNodeMethod(), getCallOptions(), request);
@@ -467,7 +467,7 @@ public final class AuctionGrpc {
     /**
      */
     public com.google.common.util.concurrent.ListenableFuture<com.ssd.grpc.PingResponse> ping(
-        com.ssd.grpc.NodeID request) {
+        com.ssd.grpc.NodeInfoGRPC request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getPingMethod(), getCallOptions()), request);
     }
@@ -514,12 +514,12 @@ public final class AuctionGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_PING:
-          serviceImpl.ping((com.ssd.grpc.NodeID) request,
+          serviceImpl.ping((com.ssd.grpc.NodeInfoGRPC) request,
               (io.grpc.stub.StreamObserver<com.ssd.grpc.PingResponse>) responseObserver);
           break;
         case METHODID_FIND_NODE:
           serviceImpl.findNode((com.ssd.grpc.NodeID) request,
-              (io.grpc.stub.StreamObserver<com.ssd.grpc.NodeInfo>) responseObserver);
+              (io.grpc.stub.StreamObserver<com.ssd.grpc.NodeInfoGRPC>) responseObserver);
           break;
         case METHODID_PROPAGATE_BLOCK:
           serviceImpl.propagateBlock((com.ssd.grpc.BlockGRPC) request,
@@ -559,7 +559,7 @@ public final class AuctionGrpc {
           getPingMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              com.ssd.grpc.NodeID,
+              com.ssd.grpc.NodeInfoGRPC,
               com.ssd.grpc.PingResponse>(
                 service, METHODID_PING)))
         .addMethod(
@@ -567,7 +567,7 @@ public final class AuctionGrpc {
           io.grpc.stub.ServerCalls.asyncServerStreamingCall(
             new MethodHandlers<
               com.ssd.grpc.NodeID,
-              com.ssd.grpc.NodeInfo>(
+              com.ssd.grpc.NodeInfoGRPC>(
                 service, METHODID_FIND_NODE)))
         .addMethod(
           getPropagateBlockMethod(),

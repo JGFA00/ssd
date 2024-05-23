@@ -1,8 +1,9 @@
 package com.ssd.util;
+import java.util.ArrayList;
 import java.util.List;
 import com.ssd.grpc.BlockGRPC;
 import com.ssd.grpc.NodeID;
-import com.ssd.grpc.NodeInfo;
+import com.ssd.grpc.NodeInfoGRPC;
 import com.ssd.grpc.TransactionApp;
 import com.ssd.grpc.TransactionsList;
 import com.ssd.blockchain.Block;
@@ -16,8 +17,8 @@ public class AuctionUtil {
         return nid;
     }
 
-    public static NodeInfo createNodeInfo(String id, String ip, int port){
-        NodeInfo node = NodeInfo.newBuilder().setId(id).setIp(ip).setPort(port).build();
+    public static NodeInfoGRPC createNodeInfo(String id, String ip, int port){
+        NodeInfoGRPC node = NodeInfoGRPC.newBuilder().setId(id).setIp(ip).setPort(port).build();
         return node;
     }
 
@@ -60,7 +61,7 @@ public class AuctionUtil {
 
     //o que é esta list?
     public static List<Transaction> convertTransactionGrpctoTransaction(TransactionsList tlist){
-        List<Transaction> list = new List<>(); 
+        List<Transaction> list = new ArrayList<>(); 
         for(TransactionApp t: tlist.getTransactionListList()){
             list.add(convertTransactionApptoTransaction(t));
         }
@@ -72,6 +73,7 @@ public class AuctionUtil {
         Transaction t = new Transaction(null, null);
         return t;
     }
-        
+    
+    public static NodeInfo
 
 }

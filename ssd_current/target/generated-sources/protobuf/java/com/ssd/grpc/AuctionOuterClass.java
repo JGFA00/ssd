@@ -26,10 +26,10 @@ public final class AuctionOuterClass {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_NodeID_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_NodeInfo_descriptor;
+    internal_static_NodeInfoGRPC_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_NodeInfo_fieldAccessorTable;
+      internal_static_NodeInfoGRPC_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Ack_descriptor;
   static final 
@@ -65,23 +65,24 @@ public final class AuctionOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\rauction.proto\" \n\014PingResponse\022\020\n\010respo" +
-      "nse\030\001 \001(\t\"\024\n\006NodeID\022\n\n\002id\030\001 \001(\t\"0\n\010NodeI" +
-      "nfo\022\n\n\002id\030\001 \001(\t\022\n\n\002ip\030\002 \001(\t\022\014\n\004port\030\003 \001(" +
-      "\005\"\032\n\003Ack\022\023\n\013acknowledge\030\001 \001(\t\"<\n\020Transac" +
-      "tionsList\022(\n\017transactionList\030\001 \003(\0132\017.Tra" +
-      "nsactionApp\"3\n\016TransactionApp\022\023\n\013transac" +
-      "tion\030\001 \001(\t\022\014\n\004nome\030\002 \001(\t\"\223\001\n\tBlockGRPC\022\020" +
-      "\n\010prevHash\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001(\003\022\r\n\005n" +
-      "once\030\003 \001(\005\022\021\n\tblockHash\030\004 \001(\t\022\022\n\nmerkleR" +
-      "oot\030\005 \001(\t\022+\n\020transactionsList\030\006 \001(\0132\021.Tr" +
-      "ansactionsList\"\020\n\002Id\022\n\n\002id\030\001 \001(\0052\367\001\n\007Auc" +
-      "tion\022 \n\004Ping\022\007.NodeID\032\r.PingResponse\"\000\022\"" +
-      "\n\010FindNode\022\007.NodeID\032\t.NodeInfo\"\0000\001\022$\n\016Pr" +
-      "opagateBlock\022\n.BlockGRPC\032\004.Ack\"\000\022(\n\rgetB" +
-      "lockchain\022\007.NodeID\032\n.BlockGRPC\"\0000\001\022(\n\014Li" +
-      "stAuctions\022\003.Id\032\017.TransactionApp\"\0000\001\022,\n\021" +
-      "SubmitTransaction\022\017.TransactionApp\032\004.Ack" +
-      "\"\000B\020\n\014com.ssd.grpcP\001b\006proto3"
+      "nse\030\001 \001(\t\"\024\n\006NodeID\022\n\n\002id\030\001 \001(\t\"4\n\014NodeI" +
+      "nfoGRPC\022\n\n\002id\030\001 \001(\t\022\n\n\002ip\030\002 \001(\t\022\014\n\004port\030" +
+      "\003 \001(\005\"\032\n\003Ack\022\023\n\013acknowledge\030\001 \001(\t\"<\n\020Tra" +
+      "nsactionsList\022(\n\017transactionList\030\001 \003(\0132\017" +
+      ".TransactionApp\"3\n\016TransactionApp\022\023\n\013tra" +
+      "nsaction\030\001 \001(\t\022\014\n\004nome\030\002 \001(\t\"\223\001\n\tBlockGR" +
+      "PC\022\020\n\010prevHash\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001(\003\022" +
+      "\r\n\005nonce\030\003 \001(\005\022\021\n\tblockHash\030\004 \001(\t\022\022\n\nmer" +
+      "kleRoot\030\005 \001(\t\022+\n\020transactionsList\030\006 \001(\0132" +
+      "\021.TransactionsList\"\020\n\002Id\022\n\n\002id\030\001 \001(\0052\201\002\n" +
+      "\007Auction\022&\n\004Ping\022\r.NodeInfoGRPC\032\r.PingRe" +
+      "sponse\"\000\022&\n\010FindNode\022\007.NodeID\032\r.NodeInfo" +
+      "GRPC\"\0000\001\022$\n\016PropagateBlock\022\n.BlockGRPC\032\004" +
+      ".Ack\"\000\022(\n\rgetBlockchain\022\007.NodeID\032\n.Block" +
+      "GRPC\"\0000\001\022(\n\014ListAuctions\022\003.Id\032\017.Transact" +
+      "ionApp\"\0000\001\022,\n\021SubmitTransaction\022\017.Transa" +
+      "ctionApp\032\004.Ack\"\000B\020\n\014com.ssd.grpcP\001b\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -99,11 +100,11 @@ public final class AuctionOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_NodeID_descriptor,
         new java.lang.String[] { "Id", });
-    internal_static_NodeInfo_descriptor =
+    internal_static_NodeInfoGRPC_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_NodeInfo_fieldAccessorTable = new
+    internal_static_NodeInfoGRPC_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_NodeInfo_descriptor,
+        internal_static_NodeInfoGRPC_descriptor,
         new java.lang.String[] { "Id", "Ip", "Port", });
     internal_static_Ack_descriptor =
       getDescriptor().getMessageTypes().get(3);

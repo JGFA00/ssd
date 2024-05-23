@@ -6,7 +6,7 @@ import com.ssd.grpc.AuctionGrpc.AuctionBlockingStub;
 import com.ssd.grpc.AuctionGrpc.AuctionStub;
 import com.ssd.util.AuctionUtil;
 import com.ssd.grpc.NodeID;
-import com.ssd.grpc.NodeInfo;
+import com.ssd.grpc.NodeInfoGRPC;
 import com.ssd.grpc.PingResponse;
 import com.ssd.grpc.TransactionsList;
 
@@ -14,12 +14,12 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
 public class AuctionClient {
-    NodeInfo nodeinfo;
+    NodeInfoGRPC nodeinfo;
     final AuctionBlockingStub blockingStub;
     final AuctionStub asyncStub;
     final ManagedChannel channel;
 
-    public AuctionClient(NodeInfo nodeInfo) {
+    public AuctionClient(NodeInfoGRPC nodeInfo) {
         channel = ManagedChannelBuilder.forAddress(nodeInfo.getIp(), nodeInfo.getPort()).usePlaintext().build();
         blockingStub = AuctionGrpc.newBlockingStub(channel);
         asyncStub = AuctionGrpc.newStub(channel);
@@ -29,9 +29,8 @@ public class AuctionClient {
     //public AuctionClient(NodeInfo nodeInfo, RoutingTable routingTable)
     //este node id é o id do próprio nó que está a enviar o ping
     public Boolean ping() {
-        NodeID id = NodeID.newBuilder().setId(nodeinfo.getId()).build();
         PingResponse response;
-        response = blockingStub.ping(id);
+        response = blockingStub.ping(nodeinfo);
         System.out.println(response.getResponse());
         return true;
     }

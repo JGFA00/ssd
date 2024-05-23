@@ -4,8 +4,8 @@
 // Protobuf Java Version: 3.25.1
 package com.ssd.grpc;
 
-public interface NodeInfoOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:NodeInfo)
+public interface NodeInfoGRPCOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:NodeInfoGRPC)
     com.google.protobuf.MessageOrBuilder {
 
   /**

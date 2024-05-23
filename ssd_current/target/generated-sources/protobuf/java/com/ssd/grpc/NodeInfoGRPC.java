@@ -5,18 +5,18 @@
 package com.ssd.grpc;
 
 /**
- * Protobuf type {@code NodeInfo}
+ * Protobuf type {@code NodeInfoGRPC}
  */
-public final class NodeInfo extends
+public final class NodeInfoGRPC extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:NodeInfo)
-    NodeInfoOrBuilder {
+    // @@protoc_insertion_point(message_implements:NodeInfoGRPC)
+    NodeInfoGRPCOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use NodeInfo.newBuilder() to construct.
-  private NodeInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use NodeInfoGRPC.newBuilder() to construct.
+  private NodeInfoGRPC(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private NodeInfo() {
+  private NodeInfoGRPC() {
     id_ = "";
     ip_ = "";
   }
@@ -25,20 +25,20 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new NodeInfo();
+    return new NodeInfoGRPC();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.ssd.grpc.AuctionOuterClass.internal_static_NodeInfo_descriptor;
+    return com.ssd.grpc.AuctionOuterClass.internal_static_NodeInfoGRPC_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.ssd.grpc.AuctionOuterClass.internal_static_NodeInfo_fieldAccessorTable
+    return com.ssd.grpc.AuctionOuterClass.internal_static_NodeInfoGRPC_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.ssd.grpc.NodeInfo.class, com.ssd.grpc.NodeInfo.Builder.class);
+            com.ssd.grpc.NodeInfoGRPC.class, com.ssd.grpc.NodeInfoGRPC.Builder.class);
   }
 
   public static final int ID_FIELD_NUMBER = 1;
@@ -182,10 +182,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.ssd.grpc.NodeInfo)) {
+    if (!(obj instanceof com.ssd.grpc.NodeInfoGRPC)) {
       return super.equals(obj);
     }
-    com.ssd.grpc.NodeInfo other = (com.ssd.grpc.NodeInfo) obj;
+    com.ssd.grpc.NodeInfoGRPC other = (com.ssd.grpc.NodeInfoGRPC) obj;
 
     if (!getId()
         .equals(other.getId())) return false;
@@ -215,44 +215,44 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static com.ssd.grpc.NodeInfo parseFrom(
+  public static com.ssd.grpc.NodeInfoGRPC parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.ssd.grpc.NodeInfo parseFrom(
+  public static com.ssd.grpc.NodeInfoGRPC parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.ssd.grpc.NodeInfo parseFrom(
+  public static com.ssd.grpc.NodeInfoGRPC parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.ssd.grpc.NodeInfo parseFrom(
+  public static com.ssd.grpc.NodeInfoGRPC parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.ssd.grpc.NodeInfo parseFrom(byte[] data)
+  public static com.ssd.grpc.NodeInfoGRPC parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.ssd.grpc.NodeInfo parseFrom(
+  public static com.ssd.grpc.NodeInfoGRPC parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.ssd.grpc.NodeInfo parseFrom(java.io.InputStream input)
+  public static com.ssd.grpc.NodeInfoGRPC parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.ssd.grpc.NodeInfo parseFrom(
+  public static com.ssd.grpc.NodeInfoGRPC parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -260,26 +260,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.ssd.grpc.NodeInfo parseDelimitedFrom(java.io.InputStream input)
+  public static com.ssd.grpc.NodeInfoGRPC parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.ssd.grpc.NodeInfo parseDelimitedFrom(
+  public static com.ssd.grpc.NodeInfoGRPC parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.ssd.grpc.NodeInfo parseFrom(
+  public static com.ssd.grpc.NodeInfoGRPC parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.ssd.grpc.NodeInfo parseFrom(
+  public static com.ssd.grpc.NodeInfoGRPC parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -292,7 +292,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.ssd.grpc.NodeInfo prototype) {
+  public static Builder newBuilder(com.ssd.grpc.NodeInfoGRPC prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -308,26 +308,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code NodeInfo}
+   * Protobuf type {@code NodeInfoGRPC}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:NodeInfo)
-      com.ssd.grpc.NodeInfoOrBuilder {
+      // @@protoc_insertion_point(builder_implements:NodeInfoGRPC)
+      com.ssd.grpc.NodeInfoGRPCOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.ssd.grpc.AuctionOuterClass.internal_static_NodeInfo_descriptor;
+      return com.ssd.grpc.AuctionOuterClass.internal_static_NodeInfoGRPC_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.ssd.grpc.AuctionOuterClass.internal_static_NodeInfo_fieldAccessorTable
+      return com.ssd.grpc.AuctionOuterClass.internal_static_NodeInfoGRPC_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.ssd.grpc.NodeInfo.class, com.ssd.grpc.NodeInfo.Builder.class);
+              com.ssd.grpc.NodeInfoGRPC.class, com.ssd.grpc.NodeInfoGRPC.Builder.class);
     }
 
-    // Construct using com.ssd.grpc.NodeInfo.newBuilder()
+    // Construct using com.ssd.grpc.NodeInfoGRPC.newBuilder()
     private Builder() {
 
     }
@@ -350,17 +350,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.ssd.grpc.AuctionOuterClass.internal_static_NodeInfo_descriptor;
+      return com.ssd.grpc.AuctionOuterClass.internal_static_NodeInfoGRPC_descriptor;
     }
 
     @java.lang.Override
-    public com.ssd.grpc.NodeInfo getDefaultInstanceForType() {
-      return com.ssd.grpc.NodeInfo.getDefaultInstance();
+    public com.ssd.grpc.NodeInfoGRPC getDefaultInstanceForType() {
+      return com.ssd.grpc.NodeInfoGRPC.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.ssd.grpc.NodeInfo build() {
-      com.ssd.grpc.NodeInfo result = buildPartial();
+    public com.ssd.grpc.NodeInfoGRPC build() {
+      com.ssd.grpc.NodeInfoGRPC result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -368,14 +368,14 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.ssd.grpc.NodeInfo buildPartial() {
-      com.ssd.grpc.NodeInfo result = new com.ssd.grpc.NodeInfo(this);
+    public com.ssd.grpc.NodeInfoGRPC buildPartial() {
+      com.ssd.grpc.NodeInfoGRPC result = new com.ssd.grpc.NodeInfoGRPC(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(com.ssd.grpc.NodeInfo result) {
+    private void buildPartial0(com.ssd.grpc.NodeInfoGRPC result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.id_ = id_;
@@ -422,16 +422,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.ssd.grpc.NodeInfo) {
-        return mergeFrom((com.ssd.grpc.NodeInfo)other);
+      if (other instanceof com.ssd.grpc.NodeInfoGRPC) {
+        return mergeFrom((com.ssd.grpc.NodeInfoGRPC)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.ssd.grpc.NodeInfo other) {
-      if (other == com.ssd.grpc.NodeInfo.getDefaultInstance()) return this;
+    public Builder mergeFrom(com.ssd.grpc.NodeInfoGRPC other) {
+      if (other == com.ssd.grpc.NodeInfoGRPC.getDefaultInstance()) return this;
       if (!other.getId().isEmpty()) {
         id_ = other.id_;
         bitField0_ |= 0x00000001;
@@ -691,23 +691,23 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:NodeInfo)
+    // @@protoc_insertion_point(builder_scope:NodeInfoGRPC)
   }
 
-  // @@protoc_insertion_point(class_scope:NodeInfo)
-  private static final com.ssd.grpc.NodeInfo DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:NodeInfoGRPC)
+  private static final com.ssd.grpc.NodeInfoGRPC DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.ssd.grpc.NodeInfo();
+    DEFAULT_INSTANCE = new com.ssd.grpc.NodeInfoGRPC();
   }
 
-  public static com.ssd.grpc.NodeInfo getDefaultInstance() {
+  public static com.ssd.grpc.NodeInfoGRPC getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<NodeInfo>
-      PARSER = new com.google.protobuf.AbstractParser<NodeInfo>() {
+  private static final com.google.protobuf.Parser<NodeInfoGRPC>
+      PARSER = new com.google.protobuf.AbstractParser<NodeInfoGRPC>() {
     @java.lang.Override
-    public NodeInfo parsePartialFrom(
+    public NodeInfoGRPC parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -726,17 +726,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<NodeInfo> parser() {
+  public static com.google.protobuf.Parser<NodeInfoGRPC> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<NodeInfo> getParserForType() {
+  public com.google.protobuf.Parser<NodeInfoGRPC> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.ssd.grpc.NodeInfo getDefaultInstanceForType() {
+  public com.ssd.grpc.NodeInfoGRPC getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 
