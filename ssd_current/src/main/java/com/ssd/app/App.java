@@ -53,7 +53,7 @@ public class App {
                 type_of_transaction = "end_auction";
                 break;
         }
-        TransactionApp t = AuctionUtil.createTransaction(type_of_transaction, "A");
+        TransactionApp t = AuctionUtil.createTransactionAPP(type_of_transaction, "A");
         Ack ack;
         ack = blockingStub.submitTransaction(t);
         System.out.println(ack.getAcknowledge());

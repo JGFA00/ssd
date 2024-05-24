@@ -22,7 +22,7 @@ public class AuctionUtil {
         return node;
     }
 
-    public static TransactionApp createTransaction(String transaction, String nome){
+    public static TransactionApp createTransactionAPP(String transaction, String nome){
         TransactionApp t = TransactionApp.newBuilder().setTransaction(transaction).setNome(nome).build();
         return t;
     }
