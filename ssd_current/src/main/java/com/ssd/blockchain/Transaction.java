@@ -31,6 +31,17 @@ public class Transaction {
         validateTransaction();
     }
 
+    // Criar Transação recebida de outro no
+    public Transaction(String hash, String senderPK, String receiverPK, byte[] signature, long timestamp, TransactionType type, String data) {
+        this.hash = hash;
+        this.senderPublicKey = senderPK;
+        this.recieverPublicKey = receiverPK;
+        this.signature = signature;
+        this.type = type;
+        this.timestamp = timestamp;
+        this.data = data;
+    }
+
     public void validateTransaction() {
         this.timestamp = System.currentTimeMillis();
         this.hash = hashTransaction();
