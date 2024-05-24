@@ -9,62 +9,59 @@ import java.security.spec.InvalidKeySpecException;
 public class Transaction {
 
     public enum TransactionType {
-        START_AUCTION,
-        BID,
-        END_AUCTION
+        BID, START_AUCTION, END_AUCTION
     }
 
     public TransactionType type;
+    public int amount;
+    public String item;
+    public String userId;
+    public String auctionId;
     public String hash;
-    public long timestamp;
-    public String data;
     public byte[] signature;
-    public String senderPublicKey;
-    public String recieverPublicKey;
 
 
-    public Transaction(TransactionType type, String data, String senderPublicKey, String recieverPublicKey) {
+    // Cria Transação tchillad
+    public Transaction(TransactionType type, int amount, String item, String userId, String auctionId) {
         this.type = type;
-        this.data = data;
-        this.senderPublicKey = senderPublicKey;
-        this.recieverPublicKey = recieverPublicKey;
-        validateTransaction();
-    }
-
-    // Criar Transação recebida de outro no
-    public Transaction(String hash, String senderPK, String receiverPK, byte[] signature, long timestamp, TransactionType type, String data) {
-        this.hash = hash;
-        this.senderPublicKey = senderPK;
-        this.recieverPublicKey = receiverPK;
-        this.signature = signature;
-        this.type = type;
-        this.timestamp = timestamp;
-        this.data = data;
-    }
-
-    public void validateTransaction() {
-        this.timestamp = System.currentTimeMillis();
+        this.amount = amount;
+        this.item = item;
+        this.userId = userId;
+        this.auctionId = auctionId;
         this.hash = hashTransaction();
     }
 
-    public TransactionType getType() {
-        return type;
-    }
-
-    public void setType(TransactionType type) {
+    // Criar Transação recebida de outro no
+    public Transaction(String hash, byte[] signature, TransactionType type, int amount, String item, String userId, String auctionId) {
+        this.signature = signature;
         this.type = type;
+        this.hash = hash;
+        this.amount = amount;
+        this.item = item;
+        this.userId = userId;
+        this.auctionId = auctionId;
     }
 
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
+    public String buildHashString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(type);
+        if (amount != 0) {
+            builder.append(amount);
+        }
+        if (item != null) {
+            builder.append(item);
+        }
+        if (userId != null) {
+            builder.append(userId);
+        }
+        if (auctionId != null) {
+            builder.append(auctionId);
+        }
+        return builder.toString();
     }
     
-    public String hashTransaction() {
-        return Hashing.applySHA256(this.senderPublicKey + this.recieverPublicKey + this.timestamp + this.type + this.data);
+    private String hashTransaction() {
+        return Hashing.applySHA256(buildHashString());
     }
 
     public boolean isSigned() {
@@ -81,9 +78,11 @@ public class Transaction {
         return true;
     }
 
+
+    // Tenho de por um toString todo grifado para cada transacao
     @Override
     public String toString() {
         return "[" + type +
-                "] -> '" + data + '\'';
+                "] -> '" + userId + '\'';
     }
 }
