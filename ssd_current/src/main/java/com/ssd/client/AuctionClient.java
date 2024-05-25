@@ -30,7 +30,7 @@ public class AuctionClient {
     } 
 
     //public AuctionClient(NodeInfo nodeInfo, RoutingTable routingTable)
-    //este node id é o id do próprio nó que está a enviar o ping
+    //este node id é o id do nó que queremos contactar
     public Boolean ping() {
         PingResponse response;
         response = blockingStub.ping(targetnodeinfo);
@@ -39,7 +39,7 @@ public class AuctionClient {
     }
 
     //este node id é o id do nó que queremos encontrar
-    public List<NodeInfoGRPC> findNode(String nodeid) {
+    public List<NodeInfoGRPC> findNode() {
         List<NodeInfoGRPC> Nodes = new ArrayList<>();
         //aqui estamos a invocar o findNode do servidor, passando um id para o canal criado e a receber a resposta
         blockingStub.findNode(targetnodeinfo).forEachRemaining(Node -> {

@@ -208,6 +208,32 @@ private static final long serialVersionUID = 0L;
     return transactionsList_ == null ? com.ssd.grpc.TransactionsList.getDefaultInstance() : transactionsList_;
   }
 
+  public static final int NINFO_FIELD_NUMBER = 7;
+  private com.ssd.grpc.NodeInfoGRPC ninfo_;
+  /**
+   * <code>.NodeInfoGRPC ninfo = 7;</code>
+   * @return Whether the ninfo field is set.
+   */
+  @java.lang.Override
+  public boolean hasNinfo() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>.NodeInfoGRPC ninfo = 7;</code>
+   * @return The ninfo.
+   */
+  @java.lang.Override
+  public com.ssd.grpc.NodeInfoGRPC getNinfo() {
+    return ninfo_ == null ? com.ssd.grpc.NodeInfoGRPC.getDefaultInstance() : ninfo_;
+  }
+  /**
+   * <code>.NodeInfoGRPC ninfo = 7;</code>
+   */
+  @java.lang.Override
+  public com.ssd.grpc.NodeInfoGRPCOrBuilder getNinfoOrBuilder() {
+    return ninfo_ == null ? com.ssd.grpc.NodeInfoGRPC.getDefaultInstance() : ninfo_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -240,6 +266,9 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       output.writeMessage(6, getTransactionsList());
     }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeMessage(7, getNinfo());
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -269,6 +298,10 @@ private static final long serialVersionUID = 0L;
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(6, getTransactionsList());
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(7, getNinfo());
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -300,6 +333,11 @@ private static final long serialVersionUID = 0L;
       if (!getTransactionsList()
           .equals(other.getTransactionsList())) return false;
     }
+    if (hasNinfo() != other.hasNinfo()) return false;
+    if (hasNinfo()) {
+      if (!getNinfo()
+          .equals(other.getNinfo())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -325,6 +363,10 @@ private static final long serialVersionUID = 0L;
     if (hasTransactionsList()) {
       hash = (37 * hash) + TRANSACTIONSLIST_FIELD_NUMBER;
       hash = (53 * hash) + getTransactionsList().hashCode();
+    }
+    if (hasNinfo()) {
+      hash = (37 * hash) + NINFO_FIELD_NUMBER;
+      hash = (53 * hash) + getNinfo().hashCode();
     }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
@@ -457,6 +499,7 @@ private static final long serialVersionUID = 0L;
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
         getTransactionsListFieldBuilder();
+        getNinfoFieldBuilder();
       }
     }
     @java.lang.Override
@@ -472,6 +515,11 @@ private static final long serialVersionUID = 0L;
       if (transactionsListBuilder_ != null) {
         transactionsListBuilder_.dispose();
         transactionsListBuilder_ = null;
+      }
+      ninfo_ = null;
+      if (ninfoBuilder_ != null) {
+        ninfoBuilder_.dispose();
+        ninfoBuilder_ = null;
       }
       return this;
     }
@@ -527,6 +575,12 @@ private static final long serialVersionUID = 0L;
             ? transactionsList_
             : transactionsListBuilder_.build();
         to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000040) != 0)) {
+        result.ninfo_ = ninfoBuilder_ == null
+            ? ninfo_
+            : ninfoBuilder_.build();
+        to_bitField0_ |= 0x00000002;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -599,6 +653,9 @@ private static final long serialVersionUID = 0L;
       if (other.hasTransactionsList()) {
         mergeTransactionsList(other.getTransactionsList());
       }
+      if (other.hasNinfo()) {
+        mergeNinfo(other.getNinfo());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -657,6 +714,13 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000020;
               break;
             } // case 50
+            case 58: {
+              input.readMessage(
+                  getNinfoFieldBuilder().getBuilder(),
+                  extensionRegistry);
+              bitField0_ |= 0x00000040;
+              break;
+            } // case 58
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1073,6 +1137,127 @@ private static final long serialVersionUID = 0L;
         transactionsList_ = null;
       }
       return transactionsListBuilder_;
+    }
+
+    private com.ssd.grpc.NodeInfoGRPC ninfo_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.ssd.grpc.NodeInfoGRPC, com.ssd.grpc.NodeInfoGRPC.Builder, com.ssd.grpc.NodeInfoGRPCOrBuilder> ninfoBuilder_;
+    /**
+     * <code>.NodeInfoGRPC ninfo = 7;</code>
+     * @return Whether the ninfo field is set.
+     */
+    public boolean hasNinfo() {
+      return ((bitField0_ & 0x00000040) != 0);
+    }
+    /**
+     * <code>.NodeInfoGRPC ninfo = 7;</code>
+     * @return The ninfo.
+     */
+    public com.ssd.grpc.NodeInfoGRPC getNinfo() {
+      if (ninfoBuilder_ == null) {
+        return ninfo_ == null ? com.ssd.grpc.NodeInfoGRPC.getDefaultInstance() : ninfo_;
+      } else {
+        return ninfoBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.NodeInfoGRPC ninfo = 7;</code>
+     */
+    public Builder setNinfo(com.ssd.grpc.NodeInfoGRPC value) {
+      if (ninfoBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ninfo_ = value;
+      } else {
+        ninfoBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.NodeInfoGRPC ninfo = 7;</code>
+     */
+    public Builder setNinfo(
+        com.ssd.grpc.NodeInfoGRPC.Builder builderForValue) {
+      if (ninfoBuilder_ == null) {
+        ninfo_ = builderForValue.build();
+      } else {
+        ninfoBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.NodeInfoGRPC ninfo = 7;</code>
+     */
+    public Builder mergeNinfo(com.ssd.grpc.NodeInfoGRPC value) {
+      if (ninfoBuilder_ == null) {
+        if (((bitField0_ & 0x00000040) != 0) &&
+          ninfo_ != null &&
+          ninfo_ != com.ssd.grpc.NodeInfoGRPC.getDefaultInstance()) {
+          getNinfoBuilder().mergeFrom(value);
+        } else {
+          ninfo_ = value;
+        }
+      } else {
+        ninfoBuilder_.mergeFrom(value);
+      }
+      if (ninfo_ != null) {
+        bitField0_ |= 0x00000040;
+        onChanged();
+      }
+      return this;
+    }
+    /**
+     * <code>.NodeInfoGRPC ninfo = 7;</code>
+     */
+    public Builder clearNinfo() {
+      bitField0_ = (bitField0_ & ~0x00000040);
+      ninfo_ = null;
+      if (ninfoBuilder_ != null) {
+        ninfoBuilder_.dispose();
+        ninfoBuilder_ = null;
+      }
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>.NodeInfoGRPC ninfo = 7;</code>
+     */
+    public com.ssd.grpc.NodeInfoGRPC.Builder getNinfoBuilder() {
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return getNinfoFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.NodeInfoGRPC ninfo = 7;</code>
+     */
+    public com.ssd.grpc.NodeInfoGRPCOrBuilder getNinfoOrBuilder() {
+      if (ninfoBuilder_ != null) {
+        return ninfoBuilder_.getMessageOrBuilder();
+      } else {
+        return ninfo_ == null ?
+            com.ssd.grpc.NodeInfoGRPC.getDefaultInstance() : ninfo_;
+      }
+    }
+    /**
+     * <code>.NodeInfoGRPC ninfo = 7;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.ssd.grpc.NodeInfoGRPC, com.ssd.grpc.NodeInfoGRPC.Builder, com.ssd.grpc.NodeInfoGRPCOrBuilder> 
+        getNinfoFieldBuilder() {
+      if (ninfoBuilder_ == null) {
+        ninfoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.ssd.grpc.NodeInfoGRPC, com.ssd.grpc.NodeInfoGRPC.Builder, com.ssd.grpc.NodeInfoGRPCOrBuilder>(
+                getNinfo(),
+                getParentForChildren(),
+                isClean());
+        ninfo_ = null;
+      }
+      return ninfoBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

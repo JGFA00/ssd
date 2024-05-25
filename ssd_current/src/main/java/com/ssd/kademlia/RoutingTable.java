@@ -78,7 +78,7 @@ public class RoutingTable {
                 }
 
                 AuctionClient client = new AuctionClient(currentNode);
-                List<NodeInfoGRPC> foundNodes = client.findNode(currentNode.getId());
+                List<NodeInfoGRPC> foundNodes = client.findNode();
 
                 // Combine found nodes with nodes from the current routing table
                 Set<NodeInfoGRPC> allNodesSet = new HashSet<>(foundNodes);

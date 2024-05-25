@@ -43,7 +43,7 @@ public class KBucket {
         nodes.remove(node);
     }
 
-    public NodeInfoGRPC findNode(BigInteger nodeId) {
+    public NodeInfoGRPC findNode() {
         for (NodeInfoGRPC node : nodes) {
             if (node.getId().equals(nodeId)) {
                 return node;

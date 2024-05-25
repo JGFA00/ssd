@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import com.ssd.blockchain.Block;
 import com.ssd.blockchain.Blockchain;
 import com.ssd.blockchain.Transaction;
+import com.ssd.client.AuctionClient;
 import com.ssd.grpc.Ack;
 import com.ssd.grpc.AuctionGrpc;
 import com.ssd.grpc.BlockGRPC;
@@ -140,22 +141,14 @@ public class AuctionServer {
         //da perspetiva do cliente, envia um pedido get blockchain e manda o seu id, recebe uma stream de blocos (blockchain)
         //da perspetiva do servidor recebe um pedido get blockchain do no nodeid e envia uma stream de blocos (blockchain)
         @Override
-        public void getBlockchain(NodeID nodeid, StreamObserver<BlockGRPC> responseObserver) {
+        public void getBlockchain(NodeInfoGRPC ninfo, StreamObserver<BlockGRPC> responseObserver) {
             //converter todos os blocos e enviar
-            /*
-            for (Block block : blockchain){
-                BlockGRPC b = convertblocktoblockGRPC()
-                responseObserver.onNext(block);
-                
-                try {
-                    Thread.sleep(10000);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+            
+            for (Block block : blockchain.getBlockchain()){
+                BlockGRPC b = AuctionUtil.convertBlocktoBlockGRPC(block);
+                responseObserver.onNext(b);
                 
             }
-             */
             //on completed dá a call por terminada e termina o canal
             responseObserver.onCompleted();
         }
