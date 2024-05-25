@@ -80,6 +80,7 @@ public class AuctionServer {
           server.awaitTermination();
         }
     }
+    
 
 
 
@@ -100,7 +101,8 @@ public class AuctionServer {
         //nodeid é do cliente, é possivel ter que fazer alguma coisa com o ping recebido (verificar o kbucket nós inativos)
         //verifica se tem o node na routing table, se não faz um find node
         @Override 
-        public void ping(NodeInfoGRPC nodeid, StreamObserver<PingResponse> responseObserver){ 
+        public void ping(NodeInfoGRPC nodeInfo, StreamObserver<PingResponse> responseObserver){ 
+            checkNodeInRoutinTable(nodeInfo);
             //o que fazer com um ping? para já retorna só resposta ao cliente que enviou o ping
             PingResponse response = PingResponse.newBuilder().setResponse("active").build(); 
             responseObserver.onNext(response); 
@@ -111,7 +113,7 @@ public class AuctionServer {
         //à espera de pedidos find node de outros nós
         @Override 
         public void findNode(NodeID nodeid, StreamObserver<NodeInfoGRPC> responseObserver){
-            
+            checkNodeInRoutinTable(nodeInfo);
             //Return the 3 closest nodes
             List<NodeInfoGRPC> closestNodes = routingTable.findClosestNodes(new BigInteger(nodeid.getId(), 16), 3);
             //este response observer.onnext(node) retorna o node para o canal com o cliente que invocou o findnode
@@ -180,6 +182,11 @@ public class AuctionServer {
         @Override
         public void listAuctions(Id id, StreamObserver<TransactionApp> responseObserver){
             
+        }
+        public void checkNodeInRoutinTable(NodeInfoGRPC nodeInfo){
+            if(!this.routingTable.containsNode(nodeInfo)){
+                this.routingTable.addNode(nodeInfo);
+            }
         }
 
     }
