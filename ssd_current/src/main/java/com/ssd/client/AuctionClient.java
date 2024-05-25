@@ -7,7 +7,6 @@ import com.ssd.grpc.AuctionGrpc.AuctionStub;
 import com.ssd.util.AuctionUtil;
 import com.ssd.grpc.NodeID;
 import com.ssd.grpc.NodeInfoGRPC;
-import com.ssd.grpc.NodeInfoGRPC;
 import com.ssd.grpc.PingResponse;
 import com.ssd.grpc.TransactionsList;
 
@@ -18,7 +17,7 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
 public class AuctionClient {
-    NodeInfoGRPC nodeinfo;
+    NodeInfoGRPC targetnodeinfo;
     final AuctionBlockingStub blockingStub;
     final AuctionStub asyncStub;
     final ManagedChannel channel;
@@ -27,21 +26,18 @@ public class AuctionClient {
         channel = ManagedChannelBuilder.forAddress(nodeInfo.getIp(), nodeInfo.getPort()).usePlaintext().build();
         blockingStub = AuctionGrpc.newBlockingStub(channel);
         asyncStub = AuctionGrpc.newStub(channel);
-        this.nodeinfo = nodeInfo;
+        this.targetnodeinfo = nodeInfo;
     } 
 
     //public AuctionClient(NodeInfo nodeInfo, RoutingTable routingTable)
     //este node id é o id do próprio nó que está a enviar o ping
     public Boolean ping() {
         PingResponse response;
-        response = blockingStub.ping(nodeinfo);
+        response = blockingStub.ping(targetnodeinfo);
         System.out.println(response.getResponse());
         return true;
     }
 
-    //aqui implementa-se o find node da perspetiva do cliente, o que queremos fazer com os nós que recebemos? adicionar à 
-    //routing table etc etc
-    //Terá que ser asincrono? para já fica sincrono
     //este node id é o id do nó que queremos encontrar
     public List<NodeInfoGRPC> findNode(String nodeid) {
         NodeID id = NodeID.newBuilder().setId(nodeid).build();

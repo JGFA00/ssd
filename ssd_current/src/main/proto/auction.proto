@@ -23,11 +23,7 @@ message NodeInfoGRPC {
   string ip =2;
   int32 port = 3;
 }
-/*
-list auctions
-subscribe auction
-create auction, start auction, bid, end auction
-*/
+
 
 message Ack {
   string acknowledge = 1;
