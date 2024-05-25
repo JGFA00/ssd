@@ -53,15 +53,39 @@ public class App {
         //temp.signTransaction(keypair);
         TransactionApp transaction = AuctionUtil.convertTransactiontoTransactionAPP(temp);
         Ack ack;
-        //ack = blockingStub.submitTransaction(temp);
-        //System.out.println(ack.getAcknowledge());
+        ack = blockingStub.submitTransaction(transaction);
+        System.out.println(ack.getAcknowledge() + "\n");
+    }
+
+    private void sendAuctionStartTransaction(String item){
+        System.out.println("\nStarting auction of item " + item + "\n");
+        int auctionid = -1;
+        Transaction temp = new Transaction("start_auction", userid, auctionid, item);
+        TransactionApp transaction = AuctionUtil.convertTransactiontoTransactionAPP(temp);
+        Ack ack;
+        ack = blockingStub.submitTransaction(transaction);
+        System.out.println(ack.getAcknowledge() + "\n");
+
+    }
+
+    private void sendEndAuctionTransaction(int auctionid){
+        System.out.println("\nEnding auction" + auctionid + "\n");
+        Transaction temp = new Transaction("end_auction", userid, auctionid);
+        TransactionApp transaction = AuctionUtil.convertTransactiontoTransactionAPP(temp);
+        Ack ack;
+        ack = blockingStub.submitTransaction(transaction);
+        System.out.println(ack.getAcknowledge() + "\n");
     }
 
     public static void main(String[] args) {
         KeyPairs keypair = new KeyPairs();
         App app = new App("localhost", 5000, 1, keypair);
         Scanner s = new Scanner(System.in);
+        int auctionid = 0;
+        int amount =0;
         int choice;
+        String item = "";
+        int auction = 0;
         while(true){
             printMenu();
             choice = s.nextInt();
@@ -71,16 +95,20 @@ public class App {
                     break;
                 case 2:
                     System.out.println("Select auction to bid\n");
-                    int auctionid = s.nextInt();
+                    auctionid = s.nextInt();
                     System.out.println("Select amount to bid\n");
-                    int amount = s.nextInt();
+                    amount = s.nextInt();
                     app.sendBindTransaction(auctionid, amount);
                     break;
                 case 3:
-                    //app.sendTransaction(choice);
+                    System.out.println("What item to auction?\n");
+                    item = s.nextLine();
+                    app.sendAuctionStartTransaction(item);
                     break;
                 case 4:
-                    //app.sendTransaction(choice);
+                    System.out.println("Select auction to end\n");
+                    auction = s.nextInt();
+                    app.sendEndAuctionTransaction(auction);
                     break;
                 case 5:
                     System.out.println("\nExiting client\n");
