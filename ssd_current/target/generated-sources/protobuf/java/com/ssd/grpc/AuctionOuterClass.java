@@ -73,18 +73,19 @@ public final class AuctionOuterClass {
       "pe\030\001 \001(\t\022\016\n\006userId\030\002 \001(\005\022\026\n\tauctionId\030\004 " +
       "\001(\005H\000\210\001\001\022\023\n\006amount\030\005 \001(\005H\001\210\001\001\022\021\n\004item\030\006 " +
       "\001(\tH\002\210\001\001B\014\n\n_auctionIdB\t\n\007_amountB\007\n\005_it" +
-      "em\"\223\001\n\tBlockGRPC\022\020\n\010prevHash\030\001 \001(\t\022\021\n\tti" +
+      "em\"\261\001\n\tBlockGRPC\022\020\n\010prevHash\030\001 \001(\t\022\021\n\tti" +
       "mestamp\030\002 \001(\003\022\r\n\005nonce\030\003 \001(\005\022\021\n\tblockHas" +
       "h\030\004 \001(\t\022\022\n\nmerkleRoot\030\005 \001(\t\022+\n\020transacti" +
-      "onsList\030\006 \001(\0132\021.TransactionsList\"\020\n\002Id\022\n" +
-      "\n\002id\030\001 \001(\0052\215\002\n\007Auction\022&\n\004Ping\022\r.NodeInf" +
-      "oGRPC\032\r.PingResponse\"\000\022,\n\010FindNode\022\r.Nod" +
-      "eInfoGRPC\032\r.NodeInfoGRPC\"\0000\001\022$\n\016Propagat" +
-      "eBlock\022\n.BlockGRPC\032\004.Ack\"\000\022.\n\rgetBlockch" +
-      "ain\022\r.NodeInfoGRPC\032\n.BlockGRPC\"\0000\001\022(\n\014Li" +
-      "stAuctions\022\003.Id\032\017.TransactionApp\"\0000\001\022,\n\021" +
-      "SubmitTransaction\022\017.TransactionApp\032\004.Ack" +
-      "\"\000B\020\n\014com.ssd.grpcP\001b\006proto3"
+      "onsList\030\006 \001(\0132\021.TransactionsList\022\034\n\005ninf" +
+      "o\030\007 \001(\0132\r.NodeInfoGRPC\"\020\n\002Id\022\n\n\002id\030\001 \001(\005" +
+      "2\215\002\n\007Auction\022&\n\004Ping\022\r.NodeInfoGRPC\032\r.Pi" +
+      "ngResponse\"\000\022,\n\010FindNode\022\r.NodeInfoGRPC\032" +
+      "\r.NodeInfoGRPC\"\0000\001\022$\n\016PropagateBlock\022\n.B" +
+      "lockGRPC\032\004.Ack\"\000\022.\n\rgetBlockchain\022\r.Node" +
+      "InfoGRPC\032\n.BlockGRPC\"\0000\001\022(\n\014ListAuctions" +
+      "\022\003.Id\032\017.TransactionApp\"\0000\001\022,\n\021SubmitTran" +
+      "saction\022\017.TransactionApp\032\004.Ack\"\000B\020\n\014com." +
+      "ssd.grpcP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -131,7 +132,7 @@ public final class AuctionOuterClass {
     internal_static_BlockGRPC_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_BlockGRPC_descriptor,
-        new java.lang.String[] { "PrevHash", "Timestamp", "Nonce", "BlockHash", "MerkleRoot", "TransactionsList", });
+        new java.lang.String[] { "PrevHash", "Timestamp", "Nonce", "BlockHash", "MerkleRoot", "TransactionsList", "Ninfo", });
     internal_static_Id_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_Id_fieldAccessorTable = new

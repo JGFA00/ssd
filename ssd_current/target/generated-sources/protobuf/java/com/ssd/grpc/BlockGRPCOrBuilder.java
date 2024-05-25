@@ -70,4 +70,19 @@ public interface BlockGRPCOrBuilder extends
    * <code>.TransactionsList transactionsList = 6;</code>
    */
   com.ssd.grpc.TransactionsListOrBuilder getTransactionsListOrBuilder();
+
+  /**
+   * <code>.NodeInfoGRPC ninfo = 7;</code>
+   * @return Whether the ninfo field is set.
+   */
+  boolean hasNinfo();
+  /**
+   * <code>.NodeInfoGRPC ninfo = 7;</code>
+   * @return The ninfo.
+   */
+  com.ssd.grpc.NodeInfoGRPC getNinfo();
+  /**
+   * <code>.NodeInfoGRPC ninfo = 7;</code>
+   */
+  com.ssd.grpc.NodeInfoGRPCOrBuilder getNinfoOrBuilder();
 }

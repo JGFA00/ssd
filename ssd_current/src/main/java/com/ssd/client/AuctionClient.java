@@ -30,7 +30,7 @@ public class AuctionClient {
     } 
 
     //public AuctionClient(NodeInfo nodeInfo, RoutingTable routingTable)
-    //este node id é o id do próprio nó que está a enviar o ping
+    //este node id é o id do nó que queremos contactar
     public Boolean ping() {
         PingResponse response;
         response = blockingStub.ping(targetnodeinfo);

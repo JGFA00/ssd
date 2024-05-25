@@ -47,6 +47,7 @@ message BlockGRPC {
   string blockHash = 4;
   string merkleRoot = 5;
   TransactionsList transactionsList = 6;
+  NodeInfoGRPC ninfo = 7;
 }
 
 message Id {
