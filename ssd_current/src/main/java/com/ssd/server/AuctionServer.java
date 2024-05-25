@@ -112,10 +112,10 @@ public class AuctionServer {
  
         //à espera de pedidos find node de outros nós
         @Override 
-        public void findNode(NodeID nodeid, StreamObserver<NodeInfoGRPC> responseObserver){
+        public void findNode(NodeInfoGRPC nodeInfo, StreamObserver<NodeInfoGRPC> responseObserver){
             checkNodeInRoutinTable(nodeInfo);
             //Return the 3 closest nodes
-            List<NodeInfoGRPC> closestNodes = routingTable.findClosestNodes(new BigInteger(nodeid.getId(), 16), 3);
+            List<NodeInfoGRPC> closestNodes = routingTable.findClosestNodes(new BigInteger(nodeInfo.getId(), 16), 3);
             //este response observer.onnext(node) retorna o node para o canal com o cliente que invocou o findnode
             for(NodeInfoGRPC node : closestNodes){ 
                 responseObserver.onNext(node);           

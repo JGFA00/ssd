@@ -49,27 +49,27 @@ public final class AuctionGrpc {
     return getPingMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.ssd.grpc.NodeID,
+  private static volatile io.grpc.MethodDescriptor<com.ssd.grpc.NodeInfoGRPC,
       com.ssd.grpc.NodeInfoGRPC> getFindNodeMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "FindNode",
-      requestType = com.ssd.grpc.NodeID.class,
+      requestType = com.ssd.grpc.NodeInfoGRPC.class,
       responseType = com.ssd.grpc.NodeInfoGRPC.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<com.ssd.grpc.NodeID,
+  public static io.grpc.MethodDescriptor<com.ssd.grpc.NodeInfoGRPC,
       com.ssd.grpc.NodeInfoGRPC> getFindNodeMethod() {
-    io.grpc.MethodDescriptor<com.ssd.grpc.NodeID, com.ssd.grpc.NodeInfoGRPC> getFindNodeMethod;
+    io.grpc.MethodDescriptor<com.ssd.grpc.NodeInfoGRPC, com.ssd.grpc.NodeInfoGRPC> getFindNodeMethod;
     if ((getFindNodeMethod = AuctionGrpc.getFindNodeMethod) == null) {
       synchronized (AuctionGrpc.class) {
         if ((getFindNodeMethod = AuctionGrpc.getFindNodeMethod) == null) {
           AuctionGrpc.getFindNodeMethod = getFindNodeMethod =
-              io.grpc.MethodDescriptor.<com.ssd.grpc.NodeID, com.ssd.grpc.NodeInfoGRPC>newBuilder()
+              io.grpc.MethodDescriptor.<com.ssd.grpc.NodeInfoGRPC, com.ssd.grpc.NodeInfoGRPC>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "FindNode"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.ssd.grpc.NodeID.getDefaultInstance()))
+                  com.ssd.grpc.NodeInfoGRPC.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.ssd.grpc.NodeInfoGRPC.getDefaultInstance()))
               .setSchemaDescriptor(new AuctionMethodDescriptorSupplier("FindNode"))
@@ -264,7 +264,7 @@ public final class AuctionGrpc {
 
     /**
      */
-    default void findNode(com.ssd.grpc.NodeID request,
+    default void findNode(com.ssd.grpc.NodeInfoGRPC request,
         io.grpc.stub.StreamObserver<com.ssd.grpc.NodeInfoGRPC> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFindNodeMethod(), responseObserver);
     }
@@ -341,7 +341,7 @@ public final class AuctionGrpc {
 
     /**
      */
-    public void findNode(com.ssd.grpc.NodeID request,
+    public void findNode(com.ssd.grpc.NodeInfoGRPC request,
         io.grpc.stub.StreamObserver<com.ssd.grpc.NodeInfoGRPC> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getFindNodeMethod(), getCallOptions()), request, responseObserver);
@@ -409,7 +409,7 @@ public final class AuctionGrpc {
     /**
      */
     public java.util.Iterator<com.ssd.grpc.NodeInfoGRPC> findNode(
-        com.ssd.grpc.NodeID request) {
+        com.ssd.grpc.NodeInfoGRPC request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getFindNodeMethod(), getCallOptions(), request);
     }
@@ -518,7 +518,7 @@ public final class AuctionGrpc {
               (io.grpc.stub.StreamObserver<com.ssd.grpc.PingResponse>) responseObserver);
           break;
         case METHODID_FIND_NODE:
-          serviceImpl.findNode((com.ssd.grpc.NodeID) request,
+          serviceImpl.findNode((com.ssd.grpc.NodeInfoGRPC) request,
               (io.grpc.stub.StreamObserver<com.ssd.grpc.NodeInfoGRPC>) responseObserver);
           break;
         case METHODID_PROPAGATE_BLOCK:
@@ -566,7 +566,7 @@ public final class AuctionGrpc {
           getFindNodeMethod(),
           io.grpc.stub.ServerCalls.asyncServerStreamingCall(
             new MethodHandlers<
-              com.ssd.grpc.NodeID,
+              com.ssd.grpc.NodeInfoGRPC,
               com.ssd.grpc.NodeInfoGRPC>(
                 service, METHODID_FIND_NODE)))
         .addMethod(

@@ -74,15 +74,15 @@ public final class AuctionOuterClass {
       "PC\022\020\n\010prevHash\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001(\003\022" +
       "\r\n\005nonce\030\003 \001(\005\022\021\n\tblockHash\030\004 \001(\t\022\022\n\nmer" +
       "kleRoot\030\005 \001(\t\022+\n\020transactionsList\030\006 \001(\0132" +
-      "\021.TransactionsList\"\020\n\002Id\022\n\n\002id\030\001 \001(\0052\201\002\n" +
+      "\021.TransactionsList\"\020\n\002Id\022\n\n\002id\030\001 \001(\0052\207\002\n" +
       "\007Auction\022&\n\004Ping\022\r.NodeInfoGRPC\032\r.PingRe" +
-      "sponse\"\000\022&\n\010FindNode\022\007.NodeID\032\r.NodeInfo" +
-      "GRPC\"\0000\001\022$\n\016PropagateBlock\022\n.BlockGRPC\032\004" +
-      ".Ack\"\000\022(\n\rgetBlockchain\022\007.NodeID\032\n.Block" +
-      "GRPC\"\0000\001\022(\n\014ListAuctions\022\003.Id\032\017.Transact" +
-      "ionApp\"\0000\001\022,\n\021SubmitTransaction\022\017.Transa" +
-      "ctionApp\032\004.Ack\"\000B\020\n\014com.ssd.grpcP\001b\006prot" +
-      "o3"
+      "sponse\"\000\022,\n\010FindNode\022\r.NodeInfoGRPC\032\r.No" +
+      "deInfoGRPC\"\0000\001\022$\n\016PropagateBlock\022\n.Block" +
+      "GRPC\032\004.Ack\"\000\022(\n\rgetBlockchain\022\007.NodeID\032\n" +
+      ".BlockGRPC\"\0000\001\022(\n\014ListAuctions\022\003.Id\032\017.Tr" +
+      "ansactionApp\"\0000\001\022,\n\021SubmitTransaction\022\017." +
+      "TransactionApp\032\004.Ack\"\000B\020\n\014com.ssd.grpcP\001" +
+      "b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

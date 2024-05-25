@@ -4,7 +4,7 @@ option java_package = "com.ssd.grpc";
 // The greeting service definition.
 service Auction {
   rpc Ping (NodeInfoGRPC) returns (PingResponse) {}
-  rpc FindNode (NodeID) returns (stream NodeInfoGRPC) {}
+  rpc FindNode (NodeInfoGRPC) returns (stream NodeInfoGRPC) {}
   rpc PropagateBlock (BlockGRPC) returns (Ack) {}
   rpc getBlockchain (NodeID) returns (stream BlockGRPC) {}
   rpc ListAuctions(Id) returns (stream TransactionApp) {}
