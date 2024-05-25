@@ -20,6 +20,12 @@ public class Blockchain {
         return blockchain;
     }
 
+    public String getPrevHash(){
+        String prevhash = (blockchain.get(blockchain.size() - 1)).prevHash;
+        return prevhash;
+
+    }
+
     private Block createGenesisBlock(KeyPairs keypairs) {
         // For simplicity, the genesis block has no transactions and a previous hash of 0
         Transaction genesisTransaction = new Transaction(Transaction.TransactionType.START_AUCTION,"genesiscenas");

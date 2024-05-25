@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.ssd.blockchain.Block;
 import com.ssd.blockchain.Blockchain;
+import com.ssd.blockchain.Transaction;
 import com.ssd.grpc.Ack;
 import com.ssd.grpc.AuctionGrpc;
 import com.ssd.grpc.BlockGRPC;
@@ -34,11 +35,11 @@ public class AuctionServer {
     private RoutingTable routingTable;
      */
 
-    public AuctionServer(NodeInfoGRPC nodeinfo, Blockchain blockchain, LinkedList<TransactionApp> tlist, RoutingTable routingTable) {
+    public AuctionServer(NodeInfoGRPC nodeinfo, Blockchain blockchain, LinkedList<Transaction> tlist, RoutingTable routingTable) {
         this(Grpc.newServerBuilderForPort(nodeinfo.getPort(), InsecureServerCredentials.create()),nodeinfo, blockchain, tlist, routingTable);
     }
 
-    public AuctionServer(ServerBuilder<?> serverBuilder,NodeInfoGRPC nodeinfo, Blockchain blockchain, LinkedList<TransactionApp> tlist, RoutingTable routingTable) {
+    public AuctionServer(ServerBuilder<?> serverBuilder,NodeInfoGRPC nodeinfo, Blockchain blockchain, LinkedList<Transaction> tlist, RoutingTable routingTable) {
         this.port = nodeinfo.getPort();
         server = serverBuilder.addService(new AuctionService(nodeinfo, blockchain, tlist, routingTable)).build();
         /*
@@ -89,7 +90,7 @@ public class AuctionServer {
         private RoutingTable routingTable;
 
         //implementação do auction service, estes métodos todos são da perspetiva do servidor e estão à escuta de mensagens de outros nos
-        public AuctionService(NodeInfoGRPC nodeinfo, Blockchain blockchain, LinkedList<TransactionApp> tlist, RoutingTable routingTable){
+        public AuctionService(NodeInfoGRPC nodeinfo, Blockchain blockchain, LinkedList<Transaction> tlist, RoutingTable routingTable){
             this.nodeinfo = nodeinfo;
             this.blockchain = blockchain;
             this.tlist = tlist;
@@ -163,6 +164,8 @@ public class AuctionServer {
         @Override
         public void submitTransaction(TransactionApp t, StreamObserver<Ack> responseObserver){
             //eventualmente um verify transaction que verifica a chave publica do user, que a auction está a decorrer etc etc
+            TransactionApp trans = AuctionUtil.convertTransactionApptoTransaction(t);
+            Boolean verify = trans.validateTransaction(id nó);
             Ack ack = Ack.newBuilder().setAcknowledge("Transaction received").build();
             responseObserver.onNext(ack);
             responseObserver.onCompleted();
