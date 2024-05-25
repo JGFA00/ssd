@@ -4,12 +4,12 @@ import java.math.BigInteger;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import com.ssd.grpc.NodeInfo;
+import com.ssd.grpc.NodeInfoGRPC;
 
 import java.util.Iterator;
 
 public class KBucket {
-    public final Set<NodeInfo> nodes;
+    public final Set<NodeInfoGRPC> nodes;
     public final int capacity;
 
     public KBucket(int capacity) {
@@ -17,7 +17,7 @@ public class KBucket {
         this.capacity = capacity;
     }
 
-    public synchronized void addNode(NodeInfo node) {
+    public synchronized void addNode(NodeInfoGRPC node) {
         /*
         if (nodes.contains(node)) {
             // Node is already in the KBucket, move it to the end to mark as recently seen
@@ -39,12 +39,12 @@ public class KBucket {
          */
     }
 
-    public synchronized void removeNode(NodeInfo node) {
+    public synchronized void removeNode(NodeInfoGRPC node) {
         nodes.remove(node);
     }
 
-    public NodeInfo findNode(BigInteger nodeId) {
-        for (NodeInfo node : nodes) {
+    public NodeInfoGRPC findNode(BigInteger nodeId) {
+        for (NodeInfoGRPC node : nodes) {
             if (node.getId().equals(nodeId)) {
                 return node;
             }
@@ -52,20 +52,20 @@ public class KBucket {
         return null;
     }
 
-    public Set<NodeInfo> getNodes() {
+    public Set<NodeInfoGRPC> getNodes() {
         return new LinkedHashSet<>(nodes);
     }
 
-    public boolean isNodePresent(NodeInfo node) {
+    public boolean isNodePresent(NodeInfoGRPC node) {
         return nodes.contains(node);
     }
 
     public synchronized void refresh() {
         /*
         //Ping all Nodes and update
-        Iterator<NodeInfo> it = nodes.iterator();
+        Iterator<NodeInfoGRPC> it = nodes.iterator();
         while (it.hasNext()) {
-            NodeInfo node = it.next();
+            NodeInfoGRPC node = it.next();
             if (!ping(node)) {
                 it.remove();
             }

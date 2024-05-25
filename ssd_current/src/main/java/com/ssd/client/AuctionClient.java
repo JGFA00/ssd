@@ -7,8 +7,12 @@ import com.ssd.grpc.AuctionGrpc.AuctionStub;
 import com.ssd.util.AuctionUtil;
 import com.ssd.grpc.NodeID;
 import com.ssd.grpc.NodeInfoGRPC;
+import com.ssd.grpc.NodeInfoGRPC;
 import com.ssd.grpc.PingResponse;
 import com.ssd.grpc.TransactionsList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -39,12 +43,14 @@ public class AuctionClient {
     //routing table etc etc
     //Terá que ser asincrono? para já fica sincrono
     //este node id é o id do nó que queremos encontrar
-    public void findNode(String nodeid) {
+    public List<NodeInfoGRPC> findNode(String nodeid) {
         NodeID id = NodeID.newBuilder().setId(nodeid).build();
+        List<NodeInfoGRPC> Nodes = new ArrayList<>();
         //aqui estamos a invocar o findNode do servidor, passando um id para o canal criado e a receber a resposta
         blockingStub.findNode(id).forEachRemaining(Node -> {
-            System.out.println(Node.getId());
+            Nodes.add(Node);
         });
+        return Nodes;
     }
 
     public void propagateBlock(BlockGRPC block){

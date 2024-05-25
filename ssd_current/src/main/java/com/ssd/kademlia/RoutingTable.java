@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import com.ssd.kademlia.KBucket;
+import com.ssd.client.AuctionClient;
 import com.ssd.grpc.NodeID;
-import com.ssd.grpc.NodeInfo;
+import com.ssd.grpc.NodeInfoGRPC;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Set;
+import java.util.HashSet;
 
 public class RoutingTable {
     private final BigInteger nodeId;
@@ -26,12 +29,12 @@ public class RoutingTable {
     public RoutingTable(String nodeIdHex) {
         this(new BigInteger(nodeIdHex, 16));  
     }
-    public void addNode(NodeInfo node) {
+    public void addNode(NodeInfoGRPC node) {
         int bucketIndex = getBucketIndex(new BigInteger(node.getId(), 16));
         kBuckets.get(bucketIndex).addNode(node);
     }
 
-    public void removeNode(NodeInfo node) {
+    public void removeNode(NodeInfoGRPC node) {
         int bucketIndex = getBucketIndex(new BigInteger(node.getId(), 16));
         kBuckets.get(bucketIndex).removeNode(node);
     }
@@ -45,8 +48,8 @@ public class RoutingTable {
         return id1.xor(id2);
     }
 
-    public List<NodeInfo> findClosestNodes(BigInteger targetId, int count) {
-        List<NodeInfo> allNodes = new ArrayList<>();
+    public List<NodeInfoGRPC> findClosestNodes(BigInteger targetId, int count) {
+        List<NodeInfoGRPC> allNodes = new ArrayList<>();
         
         allNodes = getAllRoutes(); 
 
@@ -61,22 +64,72 @@ public class RoutingTable {
         return allNodes.subList(0, Math.min(count, allNodes.size()));
     }
     
-    public void nodeLookup(NodeInfo nodeInfo){
-        AuctionClient client = new AuctionClient(nodeInfo);
-        Queue q = client.findNode();
-        
+    public List<NodeInfoGRPC> nodeLookup(NodeInfoGRPC nodeInfo) {
+        Set<NodeInfoGRPC> queriedNodes = new HashSet<>();
+        List<NodeInfoGRPC> resultNodes = new ArrayList<>();
+        List<NodeInfoGRPC> toQuery = new ArrayList<>();
+        toQuery.add(nodeInfo);
+
+        int iterations = 0;
+        while (!toQuery.isEmpty() && iterations < 3) {  // Limit to 3 iterations
+            List<NodeInfoGRPC> newNodesToQuery = new ArrayList<>();
+            for (NodeInfoGRPC currentNode : toQuery) {
+                if (!queriedNodes.add(currentNode)) {
+                    continue;  // Skip already queried nodes
+                }
+
+                AuctionClient client = new AuctionClient(currentNode);
+                List<NodeInfoGRPC> foundNodes = client.findNode();
+
+                // Combine found nodes with nodes from the current routing table
+                Set<NodeInfoGRPC> allNodesSet = new HashSet<>(foundNodes);
+                allNodesSet.addAll(getAllRoutes());
+
+                List<NodeInfoGRPC> allNodes = new ArrayList<>(allNodesSet);
+
+                // Sort nodes by XOR distance from the NodeInfoGRPC's ID
+                Collections.sort(allNodes, (node1, node2) -> {
+                    BigInteger id1 = new BigInteger(node1.getId(), 16);
+                    BigInteger id2 = new BigInteger(node2.getId(), 16);
+                    BigInteger targetId = new BigInteger(nodeInfo.getId(), 16);
+                    return xorDistance(id1, targetId).compareTo(xorDistance(id2, targetId));
+                });
+
+                // Add the closest nodes to the result and queue for further lookup
+                int nodesToTake = Math.min(3, allNodes.size());
+                List<NodeInfoGRPC> closestNodes = allNodes.subList(0, nodesToTake);
+                resultNodes.addAll(closestNodes);
+                newNodesToQuery.addAll(closestNodes);
+            }
+
+            toQuery = newNodesToQuery;
+            iterations++;
+        }
+
+        // Ensure unique results
+        List<NodeInfoGRPC> uniqueResultNodes = new ArrayList<>(new HashSet<>(resultNodes));
+
+        // Sort final result by XOR distance
+        Collections.sort(uniqueResultNodes, (node1, node2) -> {
+            BigInteger id1 = new BigInteger(node1.getId(), 16);
+            BigInteger id2 = new BigInteger(node2.getId(), 16);
+            BigInteger targetId = new BigInteger(nodeInfo.getId(), 16);
+            return xorDistance(id1, targetId).compareTo(xorDistance(id2, targetId));
+        });
+
+        return uniqueResultNodes;
     }
 
-    public List<NodeInfo> getAllRoutes() {
-        List<NodeInfo> Nodes = new ArrayList<>();
+    public List<NodeInfoGRPC> getAllRoutes() {
+        List<NodeInfoGRPC> Nodes = new ArrayList<>();
         for (KBucket kBucket : kBuckets) {
             Nodes.addAll(kBucket.getNodes());  // Add all nodes from each KBucket
         }
         return Nodes;
     }
 
-    public boolean containsNode(NodeInfo Node){
-        List<NodeInfo> Nodes = new ArrayList<>();
+    public boolean containsNode(NodeInfoGRPC Node){
+        List<NodeInfoGRPC> Nodes = new ArrayList<>();
         Nodes=getAllRoutes();
         if(Nodes.contains(Node)){
             return true;
