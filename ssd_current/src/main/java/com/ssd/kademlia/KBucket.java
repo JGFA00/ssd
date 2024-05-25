@@ -4,6 +4,8 @@ import java.math.BigInteger;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import com.ssd.client.AuctionClient;
+import com.ssd.util.AuctionUtil;
 import com.ssd.grpc.NodeInfoGRPC;
 
 import java.util.Iterator;
@@ -18,7 +20,6 @@ public class KBucket {
     }
 
     public synchronized void addNode(NodeInfoGRPC node) {
-        /*
         if (nodes.contains(node)) {
             // Node is already in the KBucket, move it to the end to mark as recently seen
             nodes.remove(node);
@@ -36,7 +37,7 @@ public class KBucket {
                 nodes.add(node);
             }
         }
-         */
+         
     }
 
     public synchronized void removeNode(NodeInfoGRPC node) {

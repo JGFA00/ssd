@@ -64,9 +64,8 @@ public class RoutingTable {
         return allNodes.subList(0, Math.min(count, allNodes.size()));
     }
     
-    public List<NodeInfoGRPC> nodeLookup(NodeInfoGRPC nodeInfo) {
+    public void nodeLookup(NodeInfoGRPC nodeInfo) {
         Set<NodeInfoGRPC> queriedNodes = new HashSet<>();
-        List<NodeInfoGRPC> resultNodes = new ArrayList<>();
         List<NodeInfoGRPC> toQuery = new ArrayList<>();
         toQuery.add(nodeInfo);
 
@@ -79,7 +78,7 @@ public class RoutingTable {
                 }
 
                 AuctionClient client = new AuctionClient(currentNode);
-                List<NodeInfoGRPC> foundNodes = client.findNode();
+                List<NodeInfoGRPC> foundNodes = client.findNode(currentNode.getId());
 
                 // Combine found nodes with nodes from the current routing table
                 Set<NodeInfoGRPC> allNodesSet = new HashSet<>(foundNodes);
@@ -87,7 +86,7 @@ public class RoutingTable {
 
                 List<NodeInfoGRPC> allNodes = new ArrayList<>(allNodesSet);
 
-                // Sort nodes by XOR distance from the NodeInfoGRPC's ID
+                // Sort nodes by XOR distance from the nodeInfo's ID
                 Collections.sort(allNodes, (node1, node2) -> {
                     BigInteger id1 = new BigInteger(node1.getId(), 16);
                     BigInteger id2 = new BigInteger(node2.getId(), 16);
@@ -95,29 +94,18 @@ public class RoutingTable {
                     return xorDistance(id1, targetId).compareTo(xorDistance(id2, targetId));
                 });
 
-                // Add the closest nodes to the result and queue for further lookup
+                // Add the closest nodes to the routing table and queue for further lookup
                 int nodesToTake = Math.min(3, allNodes.size());
                 List<NodeInfoGRPC> closestNodes = allNodes.subList(0, nodesToTake);
-                resultNodes.addAll(closestNodes);
+                for (NodeInfoGRPC node : closestNodes) {
+                    addNode(node);
+                }
                 newNodesToQuery.addAll(closestNodes);
             }
 
             toQuery = newNodesToQuery;
             iterations++;
         }
-
-        // Ensure unique results
-        List<NodeInfoGRPC> uniqueResultNodes = new ArrayList<>(new HashSet<>(resultNodes));
-
-        // Sort final result by XOR distance
-        Collections.sort(uniqueResultNodes, (node1, node2) -> {
-            BigInteger id1 = new BigInteger(node1.getId(), 16);
-            BigInteger id2 = new BigInteger(node2.getId(), 16);
-            BigInteger targetId = new BigInteger(nodeInfo.getId(), 16);
-            return xorDistance(id1, targetId).compareTo(xorDistance(id2, targetId));
-        });
-
-        return uniqueResultNodes;
     }
 
     public List<NodeInfoGRPC> getAllRoutes() {
