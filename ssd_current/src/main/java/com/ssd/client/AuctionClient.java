@@ -18,17 +18,15 @@ import io.grpc.ManagedChannelBuilder;
 
 public class AuctionClient {
     NodeInfoGRPC targetnodeinfo;
-    NodeInfoGRPC selfnodeinfo;
     final AuctionBlockingStub blockingStub;
     final AuctionStub asyncStub;
     final ManagedChannel channel;
 
-    public AuctionClient(NodeInfoGRPC targetnodeInfo, NodeInfoGRPC selfnodeinfo) {
+    public AuctionClient(NodeInfoGRPC targetnodeInfo) {
         channel = ManagedChannelBuilder.forAddress(targetnodeInfo.getIp(), targetnodeInfo.getPort()).usePlaintext().build();
         blockingStub = AuctionGrpc.newBlockingStub(channel);
         asyncStub = AuctionGrpc.newStub(channel);
         this.targetnodeinfo = targetnodeInfo;
-        this.selfnodeinfo = selfnodeinfo;
     } 
 
     //public AuctionClient(NodeInfo nodeInfo, RoutingTable routingTable)
@@ -42,10 +40,9 @@ public class AuctionClient {
 
     //este node id é o id do nó que queremos encontrar
     public List<NodeInfoGRPC> findNode(String nodeid) {
-        NodeID id = NodeID.newBuilder().setId(nodeid).build();
         List<NodeInfoGRPC> Nodes = new ArrayList<>();
         //aqui estamos a invocar o findNode do servidor, passando um id para o canal criado e a receber a resposta
-        blockingStub.findNode(selfnodeinfo).forEachRemaining(Node -> {
+        blockingStub.findNode(targetnodeinfo).forEachRemaining(Node -> {
             Nodes.add(Node);
         });
         return Nodes;
@@ -58,9 +55,8 @@ public class AuctionClient {
     }
 
     public void getBlockchain(String nodeid) {
-        NodeID id = NodeID.newBuilder().setId(nodeid).build();
         //aqui estamos a invocar o findNode do servidor, passando um id para o canal criado e a receber a resposta
-        blockingStub.getBlockchain(id).forEachRemaining(Block -> {
+        blockingStub.getBlockchain(targetnodeinfo).forEachRemaining(Block -> {
             System.out.println(Block.getAllFields());
         });
     }
