@@ -31,8 +31,7 @@ public class KBucket {
             Iterator<NodeInfo> it = nodes.iterator();
             NodeInfo oldestNode = it.next();
             AuctionClient client = new AuctionClient(convertNodeInfotoNodeInfoGRPC(oldestNode));
-            client.Ping()
-            if (!ping(oldestNode)) {
+            if (!client.ping()) {
                 it.remove();
                 nodes.add(node);
             }
