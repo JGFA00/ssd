@@ -23,4 +23,13 @@ public class NodeInfo {
     public int getPort() {
         return port;
     }
+
+    @Override
+    public String toString() {
+        return "NodeInfo{" +
+                "id=" + id +
+                ", ipAddress='" + ipAddress + '\'' +
+                ", port=" + port +
+                '}';
+    }
 }
