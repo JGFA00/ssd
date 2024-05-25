@@ -135,7 +135,7 @@ public class AuctionUtil {
     }
 
     public static NodeInfoGRPC convertNodeInfotoNodeInfoGRPC(NodeInfo ninfo) {
-        NodeInfoGRPC ngrpc = NodeInfoGRPC.newBuilder().setId(ninfo.getIpAddress()).build();
+        NodeInfoGRPC ngrpc = NodeInfoGRPC.newBuilder().setId(ninfo.getId().toString(16)).setIp(ninfo.getIpAddress()).setPort(ninfo.getPort()).build();
         return ngrpc;
         
     }
