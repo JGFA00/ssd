@@ -87,7 +87,7 @@ public class AuctionServer {
     private static class AuctionService extends AuctionGrpc.AuctionImplBase {
         private final NodeInfoGRPC nodeinfo;
         private Blockchain blockchain;
-        private LinkedList<TransactionApp> tlist;
+        private LinkedList<Transaction> tlist;
         private RoutingTable routingTable;
 
         //implementação do auction service, estes métodos todos são da perspetiva do servidor e estão à escuta de mensagens de outros nos
@@ -166,12 +166,12 @@ public class AuctionServer {
         @Override
         public void submitTransaction(TransactionApp t, StreamObserver<Ack> responseObserver){
             //eventualmente um verify transaction que verifica a chave publica do user, que a auction está a decorrer etc etc
-            TransactionApp trans = AuctionUtil.convertTransactionApptoTransaction(t);
-            Boolean verify = trans.validateTransaction(id nó);
+            Transaction trans = AuctionUtil.convertTransactionApptoTransaction(t);
+            //Boolean verify = trans.validateTransaction(id nó);
             Ack ack = Ack.newBuilder().setAcknowledge("Transaction received").build();
             responseObserver.onNext(ack);
             responseObserver.onCompleted();
-            tlist.add(t);
+            tlist.add(trans);
             System.out.println(tlist.toString());
 
             

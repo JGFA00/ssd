@@ -28,7 +28,7 @@ public class Blockchain {
 
     private Block createGenesisBlock(KeyPairs keypairs) {
         // For simplicity, the genesis block has no transactions and a previous hash of 0
-        Transaction genesisTransaction = new Transaction(Transaction.TransactionType.START_AUCTION,"genesiscenas");
+        Transaction genesisTransaction = new Transaction();
         List<Transaction> genesis_transactions = new ArrayList<>();
         genesis_transactions.add(genesisTransaction);
         Block genesisBlock = new Block("0", genesis_transactions, keypairs);

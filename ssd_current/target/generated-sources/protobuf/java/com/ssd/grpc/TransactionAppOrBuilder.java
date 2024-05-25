@@ -9,26 +9,59 @@ public interface TransactionAppOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string transaction = 1;</code>
-   * @return The transaction.
+   * <code>string type = 1;</code>
+   * @return The type.
    */
-  java.lang.String getTransaction();
+  java.lang.String getType();
   /**
-   * <code>string transaction = 1;</code>
-   * @return The bytes for transaction.
+   * <code>string type = 1;</code>
+   * @return The bytes for type.
    */
   com.google.protobuf.ByteString
-      getTransactionBytes();
+      getTypeBytes();
 
   /**
-   * <code>string nome = 2;</code>
-   * @return The nome.
+   * <code>int32 userId = 2;</code>
+   * @return The userId.
    */
-  java.lang.String getNome();
+  int getUserId();
+
   /**
-   * <code>string nome = 2;</code>
-   * @return The bytes for nome.
+   * <code>optional int32 auctionId = 4;</code>
+   * @return Whether the auctionId field is set.
+   */
+  boolean hasAuctionId();
+  /**
+   * <code>optional int32 auctionId = 4;</code>
+   * @return The auctionId.
+   */
+  int getAuctionId();
+
+  /**
+   * <code>optional int32 amount = 5;</code>
+   * @return Whether the amount field is set.
+   */
+  boolean hasAmount();
+  /**
+   * <code>optional int32 amount = 5;</code>
+   * @return The amount.
+   */
+  int getAmount();
+
+  /**
+   * <code>optional string item = 6;</code>
+   * @return Whether the item field is set.
+   */
+  boolean hasItem();
+  /**
+   * <code>optional string item = 6;</code>
+   * @return The item.
+   */
+  java.lang.String getItem();
+  /**
+   * <code>optional string item = 6;</code>
+   * @return The bytes for item.
    */
   com.google.protobuf.ByteString
-      getNomeBytes();
+      getItemBytes();
 }

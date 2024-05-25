@@ -17,8 +17,8 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private TransactionApp() {
-    transaction_ = "";
-    nome_ = "";
+    type_ = "";
+    item_ = "";
   }
 
   @java.lang.Override
@@ -41,78 +41,136 @@ private static final long serialVersionUID = 0L;
             com.ssd.grpc.TransactionApp.class, com.ssd.grpc.TransactionApp.Builder.class);
   }
 
-  public static final int TRANSACTION_FIELD_NUMBER = 1;
+  private int bitField0_;
+  public static final int TYPE_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object transaction_ = "";
+  private volatile java.lang.Object type_ = "";
   /**
-   * <code>string transaction = 1;</code>
-   * @return The transaction.
+   * <code>string type = 1;</code>
+   * @return The type.
    */
   @java.lang.Override
-  public java.lang.String getTransaction() {
-    java.lang.Object ref = transaction_;
+  public java.lang.String getType() {
+    java.lang.Object ref = type_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      transaction_ = s;
+      type_ = s;
       return s;
     }
   }
   /**
-   * <code>string transaction = 1;</code>
-   * @return The bytes for transaction.
+   * <code>string type = 1;</code>
+   * @return The bytes for type.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getTransactionBytes() {
-    java.lang.Object ref = transaction_;
+      getTypeBytes() {
+    java.lang.Object ref = type_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      transaction_ = b;
+      type_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int NOME_FIELD_NUMBER = 2;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object nome_ = "";
+  public static final int USERID_FIELD_NUMBER = 2;
+  private int userId_ = 0;
   /**
-   * <code>string nome = 2;</code>
-   * @return The nome.
+   * <code>int32 userId = 2;</code>
+   * @return The userId.
    */
   @java.lang.Override
-  public java.lang.String getNome() {
-    java.lang.Object ref = nome_;
+  public int getUserId() {
+    return userId_;
+  }
+
+  public static final int AUCTIONID_FIELD_NUMBER = 4;
+  private int auctionId_ = 0;
+  /**
+   * <code>optional int32 auctionId = 4;</code>
+   * @return Whether the auctionId field is set.
+   */
+  @java.lang.Override
+  public boolean hasAuctionId() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>optional int32 auctionId = 4;</code>
+   * @return The auctionId.
+   */
+  @java.lang.Override
+  public int getAuctionId() {
+    return auctionId_;
+  }
+
+  public static final int AMOUNT_FIELD_NUMBER = 5;
+  private int amount_ = 0;
+  /**
+   * <code>optional int32 amount = 5;</code>
+   * @return Whether the amount field is set.
+   */
+  @java.lang.Override
+  public boolean hasAmount() {
+    return ((bitField0_ & 0x00000002) != 0);
+  }
+  /**
+   * <code>optional int32 amount = 5;</code>
+   * @return The amount.
+   */
+  @java.lang.Override
+  public int getAmount() {
+    return amount_;
+  }
+
+  public static final int ITEM_FIELD_NUMBER = 6;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object item_ = "";
+  /**
+   * <code>optional string item = 6;</code>
+   * @return Whether the item field is set.
+   */
+  @java.lang.Override
+  public boolean hasItem() {
+    return ((bitField0_ & 0x00000004) != 0);
+  }
+  /**
+   * <code>optional string item = 6;</code>
+   * @return The item.
+   */
+  @java.lang.Override
+  public java.lang.String getItem() {
+    java.lang.Object ref = item_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      nome_ = s;
+      item_ = s;
       return s;
     }
   }
   /**
-   * <code>string nome = 2;</code>
-   * @return The bytes for nome.
+   * <code>optional string item = 6;</code>
+   * @return The bytes for item.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getNomeBytes() {
-    java.lang.Object ref = nome_;
+      getItemBytes() {
+    java.lang.Object ref = item_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      nome_ = b;
+      item_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -133,11 +191,20 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(transaction_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, transaction_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(type_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, type_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(nome_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nome_);
+    if (userId_ != 0) {
+      output.writeInt32(2, userId_);
+    }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeInt32(4, auctionId_);
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      output.writeInt32(5, amount_);
+    }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, item_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -148,11 +215,23 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(transaction_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, transaction_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(type_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, type_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(nome_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nome_);
+    if (userId_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, userId_);
+    }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(4, auctionId_);
+    }
+    if (((bitField0_ & 0x00000002) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(5, amount_);
+    }
+    if (((bitField0_ & 0x00000004) != 0)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, item_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -169,10 +248,25 @@ private static final long serialVersionUID = 0L;
     }
     com.ssd.grpc.TransactionApp other = (com.ssd.grpc.TransactionApp) obj;
 
-    if (!getTransaction()
-        .equals(other.getTransaction())) return false;
-    if (!getNome()
-        .equals(other.getNome())) return false;
+    if (!getType()
+        .equals(other.getType())) return false;
+    if (getUserId()
+        != other.getUserId()) return false;
+    if (hasAuctionId() != other.hasAuctionId()) return false;
+    if (hasAuctionId()) {
+      if (getAuctionId()
+          != other.getAuctionId()) return false;
+    }
+    if (hasAmount() != other.hasAmount()) return false;
+    if (hasAmount()) {
+      if (getAmount()
+          != other.getAmount()) return false;
+    }
+    if (hasItem() != other.hasItem()) return false;
+    if (hasItem()) {
+      if (!getItem()
+          .equals(other.getItem())) return false;
+    }
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -184,10 +278,22 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + TRANSACTION_FIELD_NUMBER;
-    hash = (53 * hash) + getTransaction().hashCode();
-    hash = (37 * hash) + NOME_FIELD_NUMBER;
-    hash = (53 * hash) + getNome().hashCode();
+    hash = (37 * hash) + TYPE_FIELD_NUMBER;
+    hash = (53 * hash) + getType().hashCode();
+    hash = (37 * hash) + USERID_FIELD_NUMBER;
+    hash = (53 * hash) + getUserId();
+    if (hasAuctionId()) {
+      hash = (37 * hash) + AUCTIONID_FIELD_NUMBER;
+      hash = (53 * hash) + getAuctionId();
+    }
+    if (hasAmount()) {
+      hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
+      hash = (53 * hash) + getAmount();
+    }
+    if (hasItem()) {
+      hash = (37 * hash) + ITEM_FIELD_NUMBER;
+      hash = (53 * hash) + getItem().hashCode();
+    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -319,8 +425,11 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      transaction_ = "";
-      nome_ = "";
+      type_ = "";
+      userId_ = 0;
+      auctionId_ = 0;
+      amount_ = 0;
+      item_ = "";
       return this;
     }
 
@@ -355,11 +464,25 @@ private static final long serialVersionUID = 0L;
     private void buildPartial0(com.ssd.grpc.TransactionApp result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.transaction_ = transaction_;
+        result.type_ = type_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.nome_ = nome_;
+        result.userId_ = userId_;
       }
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.auctionId_ = auctionId_;
+        to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.amount_ = amount_;
+        to_bitField0_ |= 0x00000002;
+      }
+      if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.item_ = item_;
+        to_bitField0_ |= 0x00000004;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -406,14 +529,23 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.ssd.grpc.TransactionApp other) {
       if (other == com.ssd.grpc.TransactionApp.getDefaultInstance()) return this;
-      if (!other.getTransaction().isEmpty()) {
-        transaction_ = other.transaction_;
+      if (!other.getType().isEmpty()) {
+        type_ = other.type_;
         bitField0_ |= 0x00000001;
         onChanged();
       }
-      if (!other.getNome().isEmpty()) {
-        nome_ = other.nome_;
-        bitField0_ |= 0x00000002;
+      if (other.getUserId() != 0) {
+        setUserId(other.getUserId());
+      }
+      if (other.hasAuctionId()) {
+        setAuctionId(other.getAuctionId());
+      }
+      if (other.hasAmount()) {
+        setAmount(other.getAmount());
+      }
+      if (other.hasItem()) {
+        item_ = other.item_;
+        bitField0_ |= 0x00000010;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -443,15 +575,30 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              transaction_ = input.readStringRequireUtf8();
+              type_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
             } // case 10
-            case 18: {
-              nome_ = input.readStringRequireUtf8();
+            case 16: {
+              userId_ = input.readInt32();
               bitField0_ |= 0x00000002;
               break;
-            } // case 18
+            } // case 16
+            case 32: {
+              auctionId_ = input.readInt32();
+              bitField0_ |= 0x00000004;
+              break;
+            } // case 32
+            case 40: {
+              amount_ = input.readInt32();
+              bitField0_ |= 0x00000008;
+              break;
+            } // case 40
+            case 50: {
+              item_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000010;
+              break;
+            } // case 50
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -469,146 +616,265 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.lang.Object transaction_ = "";
+    private java.lang.Object type_ = "";
     /**
-     * <code>string transaction = 1;</code>
-     * @return The transaction.
+     * <code>string type = 1;</code>
+     * @return The type.
      */
-    public java.lang.String getTransaction() {
-      java.lang.Object ref = transaction_;
+    public java.lang.String getType() {
+      java.lang.Object ref = type_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        transaction_ = s;
+        type_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string transaction = 1;</code>
-     * @return The bytes for transaction.
+     * <code>string type = 1;</code>
+     * @return The bytes for type.
      */
     public com.google.protobuf.ByteString
-        getTransactionBytes() {
-      java.lang.Object ref = transaction_;
+        getTypeBytes() {
+      java.lang.Object ref = type_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        transaction_ = b;
+        type_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string transaction = 1;</code>
-     * @param value The transaction to set.
+     * <code>string type = 1;</code>
+     * @param value The type to set.
      * @return This builder for chaining.
      */
-    public Builder setTransaction(
+    public Builder setType(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      transaction_ = value;
+      type_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
-     * <code>string transaction = 1;</code>
+     * <code>string type = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearTransaction() {
-      transaction_ = getDefaultInstance().getTransaction();
+    public Builder clearType() {
+      type_ = getDefaultInstance().getType();
       bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
     /**
-     * <code>string transaction = 1;</code>
-     * @param value The bytes for transaction to set.
+     * <code>string type = 1;</code>
+     * @param value The bytes for type to set.
      * @return This builder for chaining.
      */
-    public Builder setTransactionBytes(
+    public Builder setTypeBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      transaction_ = value;
+      type_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
 
-    private java.lang.Object nome_ = "";
+    private int userId_ ;
     /**
-     * <code>string nome = 2;</code>
-     * @return The nome.
+     * <code>int32 userId = 2;</code>
+     * @return The userId.
      */
-    public java.lang.String getNome() {
-      java.lang.Object ref = nome_;
+    @java.lang.Override
+    public int getUserId() {
+      return userId_;
+    }
+    /**
+     * <code>int32 userId = 2;</code>
+     * @param value The userId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setUserId(int value) {
+
+      userId_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 userId = 2;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearUserId() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      userId_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int auctionId_ ;
+    /**
+     * <code>optional int32 auctionId = 4;</code>
+     * @return Whether the auctionId field is set.
+     */
+    @java.lang.Override
+    public boolean hasAuctionId() {
+      return ((bitField0_ & 0x00000004) != 0);
+    }
+    /**
+     * <code>optional int32 auctionId = 4;</code>
+     * @return The auctionId.
+     */
+    @java.lang.Override
+    public int getAuctionId() {
+      return auctionId_;
+    }
+    /**
+     * <code>optional int32 auctionId = 4;</code>
+     * @param value The auctionId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setAuctionId(int value) {
+
+      auctionId_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional int32 auctionId = 4;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearAuctionId() {
+      bitField0_ = (bitField0_ & ~0x00000004);
+      auctionId_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int amount_ ;
+    /**
+     * <code>optional int32 amount = 5;</code>
+     * @return Whether the amount field is set.
+     */
+    @java.lang.Override
+    public boolean hasAmount() {
+      return ((bitField0_ & 0x00000008) != 0);
+    }
+    /**
+     * <code>optional int32 amount = 5;</code>
+     * @return The amount.
+     */
+    @java.lang.Override
+    public int getAmount() {
+      return amount_;
+    }
+    /**
+     * <code>optional int32 amount = 5;</code>
+     * @param value The amount to set.
+     * @return This builder for chaining.
+     */
+    public Builder setAmount(int value) {
+
+      amount_ = value;
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional int32 amount = 5;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearAmount() {
+      bitField0_ = (bitField0_ & ~0x00000008);
+      amount_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object item_ = "";
+    /**
+     * <code>optional string item = 6;</code>
+     * @return Whether the item field is set.
+     */
+    public boolean hasItem() {
+      return ((bitField0_ & 0x00000010) != 0);
+    }
+    /**
+     * <code>optional string item = 6;</code>
+     * @return The item.
+     */
+    public java.lang.String getItem() {
+      java.lang.Object ref = item_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        nome_ = s;
+        item_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string nome = 2;</code>
-     * @return The bytes for nome.
+     * <code>optional string item = 6;</code>
+     * @return The bytes for item.
      */
     public com.google.protobuf.ByteString
-        getNomeBytes() {
-      java.lang.Object ref = nome_;
+        getItemBytes() {
+      java.lang.Object ref = item_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        nome_ = b;
+        item_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string nome = 2;</code>
-     * @param value The nome to set.
+     * <code>optional string item = 6;</code>
+     * @param value The item to set.
      * @return This builder for chaining.
      */
-    public Builder setNome(
+    public Builder setItem(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      nome_ = value;
-      bitField0_ |= 0x00000002;
+      item_ = value;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
     /**
-     * <code>string nome = 2;</code>
+     * <code>optional string item = 6;</code>
      * @return This builder for chaining.
      */
-    public Builder clearNome() {
-      nome_ = getDefaultInstance().getNome();
-      bitField0_ = (bitField0_ & ~0x00000002);
+    public Builder clearItem() {
+      item_ = getDefaultInstance().getItem();
+      bitField0_ = (bitField0_ & ~0x00000010);
       onChanged();
       return this;
     }
     /**
-     * <code>string nome = 2;</code>
-     * @param value The bytes for nome to set.
+     * <code>optional string item = 6;</code>
+     * @param value The bytes for item to set.
      * @return This builder for chaining.
      */
-    public Builder setNomeBytes(
+    public Builder setItemBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      nome_ = value;
-      bitField0_ |= 0x00000002;
+      item_ = value;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }

@@ -27,9 +27,10 @@ public class Main {
         server.blockUntilShutdown();
         //NodeInfo bootstrap = AuctionUtil.createNodeInfo("2", "173", 9000);
         //AuctionClient bootstrapClient = new AuctionClient(bootstrap);
-        routingTable.nodeLookup(bootstrap);
+        //routingTable.nodeLookup(bootstrap);
         //bootstrapClient.nodeLookup(nodeid.getId());
         
+        /*
         ArrayList<Transaction> tempMiningList = new ArrayList<>();
         //mining functionality
         while(true){
@@ -42,6 +43,7 @@ public class Main {
             }
             
         }
+         */
 
 
     }

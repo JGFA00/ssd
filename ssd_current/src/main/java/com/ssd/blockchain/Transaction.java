@@ -2,46 +2,87 @@ package com.ssd.blockchain;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
+import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
 import java.security.spec.InvalidKeySpecException;
 
 public class Transaction {
 
-    public enum TransactionType {
-        BID, START_AUCTION, END_AUCTION
-    }
-
-    public TransactionType type;
+    public String type;
     public int amount;
     public String item;
-    public String userId;
-    public String auctionId;
-    public String hash;
-    public byte[] signature;
+    public int userId;
+    public int auctionId;
+    public String signature;
 
-
-    // Cria Transação tchillad
-    public Transaction(TransactionType type, int amount, String item, String userId, String auctionId) {
+    //genesis transaction
+    public Transaction(){
+        this.type = "Genesis";
+    }
+    //bid transaction
+    public Transaction(String type, int userId, int auctionId, int amount) {
         this.type = type;
         this.amount = amount;
-        this.item = item;
         this.userId = userId;
-        this.auctionId = auctionId;
-        this.hash = hashTransaction();
+        this.auctionId = auctionId;        
     }
 
-    // Criar Transação recebida de outro no
-    public Transaction(String hash, byte[] signature, TransactionType type, int amount, String item, String userId, String auctionId) {
+    //start_auction
+    public Transaction(String type, int userId, int auctionId, String item){
+        this.type = type;
+        this.item = item;
+        this.userId = userId;
+        this.auctionId = auctionId;  
+    }
+
+    //end_auction
+    public Transaction(String type, int userId, int auctionId){
+        this.type = type;
+        this.auctionId = auctionId;  
+        this.userId = userId;
+          
+    }
+
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
+    }
+    public int getAmount() {
+        return amount;
+    }
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+    public String getItem() {
+        return item;
+    }
+    public void setItem(String item) {
+        this.item = item;
+    }
+    public int getUserId() {
+        return userId;
+    }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+    public int getAuctionId() {
+        return auctionId;
+    }
+    public void setAuctionId(int auctionId) {
+        this.auctionId = auctionId;
+    }
+    public String getSignature() {
+        return signature;
+    }
+    public void setSignature(String signature) {
         this.signature = signature;
-        this.type = type;
-        this.hash = hash;
-        this.amount = amount;
-        this.item = item;
-        this.userId = userId;
-        this.auctionId = auctionId;
     }
 
+    
+    /*
     public String buildHashString() {
         StringBuilder builder = new StringBuilder();
         builder.append(type);
@@ -85,4 +126,6 @@ public class Transaction {
         return "[" + type +
                 "] -> '" + userId + '\'';
     }
+
+     */
 }

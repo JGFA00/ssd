@@ -1,28 +1,35 @@
 package com.ssd.app;
+import java.security.KeyPair;
 import java.util.Scanner;
 
+import com.ssd.blockchain.KeyPairs;
+import com.ssd.blockchain.Transaction;
 import com.ssd.grpc.Ack;
 import com.ssd.grpc.AuctionGrpc;
 import com.ssd.grpc.AuctionGrpc.AuctionBlockingStub;
 import com.ssd.grpc.AuctionGrpc.AuctionStub;
-import com.ssd.grpc.Id;
 import com.ssd.grpc.TransactionApp;
+import com.ssd.grpc.Id;
 import com.ssd.util.AuctionUtil;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
 public class App {
+    final int userid;
     final Id id;
     final AuctionBlockingStub blockingStub;
     final AuctionStub asyncStub;
     final ManagedChannel channel;
+    //final KeyPairs keypair;
 
-    public App(String host, int port, int id) {
+    public App(String host, int port, int id, KeyPairs keypair) {
         channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
         blockingStub = AuctionGrpc.newBlockingStub(channel);
         asyncStub = AuctionGrpc.newStub(channel);
         this.id = Id.newBuilder().setId(id).build();
+        this.userid = id;
+        //this.keypair = keypair;
     } 
 
     private static void printMenu(){
@@ -39,28 +46,20 @@ public class App {
         System.out.println("\n" + "\n");
     }
 
-    private void sendTransaction (int choice) {
-        System.out.println("\nSending transaction\n");
-        String type_of_transaction;
-        switch (choice) {
-            case 2:
-                type_of_transaction = "bid";
-                break;
-            case 3:
-                type_of_transaction = "start_auction";
-                break;
-            default:
-                type_of_transaction = "end_auction";
-                break;
-        }
-        TransactionApp t = AuctionUtil.createTransactionAPP(type_of_transaction, "A");
+
+    private void sendBindTransaction(int auctionid, int amount){
+        System.out.println("\nSending bid\n");
+        Transaction temp = new Transaction("bid", auctionid, amount, userid);
+        //temp.signTransaction(keypair);
+        TransactionApp transaction = AuctionUtil.convertTransactiontoTransactionAPP(temp);
         Ack ack;
-        ack = blockingStub.submitTransaction(t);
-        System.out.println(ack.getAcknowledge());
+        //ack = blockingStub.submitTransaction(temp);
+        //System.out.println(ack.getAcknowledge());
     }
 
     public static void main(String[] args) {
-        App app = new App("localhost", 5000, 1);
+        KeyPairs keypair = new KeyPairs();
+        App app = new App("localhost", 5000, 1, keypair);
         Scanner s = new Scanner(System.in);
         int choice;
         while(true){
@@ -71,13 +70,17 @@ public class App {
                     app.listAuctions();
                     break;
                 case 2:
-                    app.sendTransaction(choice);
+                    System.out.println("Select auction to bid\n");
+                    int auctionid = s.nextInt();
+                    System.out.println("Select amount to bid\n");
+                    int amount = s.nextInt();
+                    app.sendBindTransaction(auctionid, amount);
                     break;
                 case 3:
-                    app.sendTransaction(choice);
+                    //app.sendTransaction(choice);
                     break;
                 case 4:
-                    app.sendTransaction(choice);
+                    //app.sendTransaction(choice);
                     break;
                 case 5:
                     System.out.println("\nExiting client\n");
@@ -89,6 +92,3 @@ public class App {
         }
     }
 }
-
-
-

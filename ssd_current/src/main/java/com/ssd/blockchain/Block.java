@@ -8,24 +8,22 @@ public class Block {
     public int nonce=0;
     public String merkleRoot;
     public List<Transaction> transactions;
-    public String publicKey;
     
-    public Block(String prev_hash, List<Transaction> transactions, KeyPairs keypairs) {
+    public Block(String prev_hash, List<Transaction> transactions) {
         this.prevHash = prev_hash;
         this.transactions = transactions;
         this.merkleRoot = calculateMerkleRoot(transactions);
         this.blockHash = "";
-        this.publicKey = keypairs.getPublicKey();
     }
 
     //constructor for block received after being converted, needs fixing
-    public Block(String prev_hash, long timestamp, int nonce, String blockHash, String merkleRoot, List<Transaction> transactions, String publicKey){
+    public Block(String prev_hash, long timestamp, int nonce, String blockHash, String merkleRoot, List<Transaction> transactions){
         this.transactions = transactions;
         this.prevHash= prev_hash;
         this.timestamp = timestamp;
         this.blockHash = blockHash;
         this.nonce = nonce;
-        this.publicKey = publicKey;
+        
     }
 
     public String getPrevHash() {
