@@ -39,7 +39,7 @@ public class AuctionClient {
     }
 
     //este node id é o id do nó que queremos encontrar
-    public List<NodeInfoGRPC> findNode(String nodeid) {
+    public List<NodeInfoGRPC> findNode() {
         List<NodeInfoGRPC> Nodes = new ArrayList<>();
         //aqui estamos a invocar o findNode do servidor, passando um id para o canal criado e a receber a resposta
         blockingStub.findNode(targetnodeinfo).forEachRemaining(Node -> {
