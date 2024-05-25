@@ -77,14 +77,14 @@ public final class AuctionOuterClass {
       "mestamp\030\002 \001(\003\022\r\n\005nonce\030\003 \001(\005\022\021\n\tblockHas" +
       "h\030\004 \001(\t\022\022\n\nmerkleRoot\030\005 \001(\t\022+\n\020transacti" +
       "onsList\030\006 \001(\0132\021.TransactionsList\"\020\n\002Id\022\n" +
-      "\n\002id\030\001 \001(\0052\207\002\n\007Auction\022&\n\004Ping\022\r.NodeInf" +
+      "\n\002id\030\001 \001(\0052\215\002\n\007Auction\022&\n\004Ping\022\r.NodeInf" +
       "oGRPC\032\r.PingResponse\"\000\022,\n\010FindNode\022\r.Nod" +
       "eInfoGRPC\032\r.NodeInfoGRPC\"\0000\001\022$\n\016Propagat" +
-      "eBlock\022\n.BlockGRPC\032\004.Ack\"\000\022(\n\rgetBlockch" +
-      "ain\022\007.NodeID\032\n.BlockGRPC\"\0000\001\022(\n\014ListAuct" +
-      "ions\022\003.Id\032\017.TransactionApp\"\0000\001\022,\n\021Submit" +
-      "Transaction\022\017.TransactionApp\032\004.Ack\"\000B\020\n\014" +
-      "com.ssd.grpcP\001b\006proto3"
+      "eBlock\022\n.BlockGRPC\032\004.Ack\"\000\022.\n\rgetBlockch" +
+      "ain\022\r.NodeInfoGRPC\032\n.BlockGRPC\"\0000\001\022(\n\014Li" +
+      "stAuctions\022\003.Id\032\017.TransactionApp\"\0000\001\022,\n\021" +
+      "SubmitTransaction\022\017.TransactionApp\032\004.Ack" +
+      "\"\000B\020\n\014com.ssd.grpcP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

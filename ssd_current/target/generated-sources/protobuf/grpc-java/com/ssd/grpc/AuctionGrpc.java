@@ -111,27 +111,27 @@ public final class AuctionGrpc {
     return getPropagateBlockMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.ssd.grpc.NodeID,
+  private static volatile io.grpc.MethodDescriptor<com.ssd.grpc.NodeInfoGRPC,
       com.ssd.grpc.BlockGRPC> getGetBlockchainMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "getBlockchain",
-      requestType = com.ssd.grpc.NodeID.class,
+      requestType = com.ssd.grpc.NodeInfoGRPC.class,
       responseType = com.ssd.grpc.BlockGRPC.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<com.ssd.grpc.NodeID,
+  public static io.grpc.MethodDescriptor<com.ssd.grpc.NodeInfoGRPC,
       com.ssd.grpc.BlockGRPC> getGetBlockchainMethod() {
-    io.grpc.MethodDescriptor<com.ssd.grpc.NodeID, com.ssd.grpc.BlockGRPC> getGetBlockchainMethod;
+    io.grpc.MethodDescriptor<com.ssd.grpc.NodeInfoGRPC, com.ssd.grpc.BlockGRPC> getGetBlockchainMethod;
     if ((getGetBlockchainMethod = AuctionGrpc.getGetBlockchainMethod) == null) {
       synchronized (AuctionGrpc.class) {
         if ((getGetBlockchainMethod = AuctionGrpc.getGetBlockchainMethod) == null) {
           AuctionGrpc.getGetBlockchainMethod = getGetBlockchainMethod =
-              io.grpc.MethodDescriptor.<com.ssd.grpc.NodeID, com.ssd.grpc.BlockGRPC>newBuilder()
+              io.grpc.MethodDescriptor.<com.ssd.grpc.NodeInfoGRPC, com.ssd.grpc.BlockGRPC>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getBlockchain"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.ssd.grpc.NodeID.getDefaultInstance()))
+                  com.ssd.grpc.NodeInfoGRPC.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.ssd.grpc.BlockGRPC.getDefaultInstance()))
               .setSchemaDescriptor(new AuctionMethodDescriptorSupplier("getBlockchain"))
@@ -278,7 +278,7 @@ public final class AuctionGrpc {
 
     /**
      */
-    default void getBlockchain(com.ssd.grpc.NodeID request,
+    default void getBlockchain(com.ssd.grpc.NodeInfoGRPC request,
         io.grpc.stub.StreamObserver<com.ssd.grpc.BlockGRPC> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetBlockchainMethod(), responseObserver);
     }
@@ -357,7 +357,7 @@ public final class AuctionGrpc {
 
     /**
      */
-    public void getBlockchain(com.ssd.grpc.NodeID request,
+    public void getBlockchain(com.ssd.grpc.NodeInfoGRPC request,
         io.grpc.stub.StreamObserver<com.ssd.grpc.BlockGRPC> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getGetBlockchainMethod(), getCallOptions()), request, responseObserver);
@@ -424,7 +424,7 @@ public final class AuctionGrpc {
     /**
      */
     public java.util.Iterator<com.ssd.grpc.BlockGRPC> getBlockchain(
-        com.ssd.grpc.NodeID request) {
+        com.ssd.grpc.NodeInfoGRPC request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getGetBlockchainMethod(), getCallOptions(), request);
     }
@@ -526,7 +526,7 @@ public final class AuctionGrpc {
               (io.grpc.stub.StreamObserver<com.ssd.grpc.Ack>) responseObserver);
           break;
         case METHODID_GET_BLOCKCHAIN:
-          serviceImpl.getBlockchain((com.ssd.grpc.NodeID) request,
+          serviceImpl.getBlockchain((com.ssd.grpc.NodeInfoGRPC) request,
               (io.grpc.stub.StreamObserver<com.ssd.grpc.BlockGRPC>) responseObserver);
           break;
         case METHODID_LIST_AUCTIONS:
@@ -580,7 +580,7 @@ public final class AuctionGrpc {
           getGetBlockchainMethod(),
           io.grpc.stub.ServerCalls.asyncServerStreamingCall(
             new MethodHandlers<
-              com.ssd.grpc.NodeID,
+              com.ssd.grpc.NodeInfoGRPC,
               com.ssd.grpc.BlockGRPC>(
                 service, METHODID_GET_BLOCKCHAIN)))
         .addMethod(

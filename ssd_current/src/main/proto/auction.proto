@@ -6,7 +6,7 @@ service Auction {
   rpc Ping (NodeInfoGRPC) returns (PingResponse) {}
   rpc FindNode (NodeInfoGRPC) returns (stream NodeInfoGRPC) {}
   rpc PropagateBlock (BlockGRPC) returns (Ack) {}
-  rpc getBlockchain (NodeID) returns (stream BlockGRPC) {}
+  rpc getBlockchain (NodeInfoGRPC) returns (stream BlockGRPC) {}
   rpc ListAuctions(Id) returns (stream TransactionApp) {}
   rpc SubmitTransaction(TransactionApp) returns (Ack) {}
 }

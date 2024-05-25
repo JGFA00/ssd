@@ -18,15 +18,17 @@ import io.grpc.ManagedChannelBuilder;
 
 public class AuctionClient {
     NodeInfoGRPC targetnodeinfo;
+    NodeInfoGRPC selfnodeinfo;
     final AuctionBlockingStub blockingStub;
     final AuctionStub asyncStub;
     final ManagedChannel channel;
 
-    public AuctionClient(NodeInfoGRPC nodeInfo) {
-        channel = ManagedChannelBuilder.forAddress(nodeInfo.getIp(), nodeInfo.getPort()).usePlaintext().build();
+    public AuctionClient(NodeInfoGRPC targetnodeInfo, NodeInfoGRPC selfnodeinfo) {
+        channel = ManagedChannelBuilder.forAddress(targetnodeInfo.getIp(), targetnodeInfo.getPort()).usePlaintext().build();
         blockingStub = AuctionGrpc.newBlockingStub(channel);
         asyncStub = AuctionGrpc.newStub(channel);
-        this.targetnodeinfo = nodeInfo;
+        this.targetnodeinfo = targetnodeInfo;
+        this.selfnodeinfo = selfnodeinfo;
     } 
 
     //public AuctionClient(NodeInfo nodeInfo, RoutingTable routingTable)
@@ -43,7 +45,7 @@ public class AuctionClient {
         NodeID id = NodeID.newBuilder().setId(nodeid).build();
         List<NodeInfoGRPC> Nodes = new ArrayList<>();
         //aqui estamos a invocar o findNode do servidor, passando um id para o canal criado e a receber a resposta
-        blockingStub.findNode(id).forEachRemaining(Node -> {
+        blockingStub.findNode(selfnodeinfo).forEachRemaining(Node -> {
             Nodes.add(Node);
         });
         return Nodes;
