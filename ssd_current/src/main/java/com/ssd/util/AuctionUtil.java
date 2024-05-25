@@ -1,6 +1,7 @@
 package com.ssd.util;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import com.ssd.grpc.BlockGRPC;
 import com.ssd.grpc.NodeID;
@@ -53,20 +54,32 @@ public class AuctionUtil {
     }
     
     public static Block convertBlockGrpctoBlock(BlockGRPC block){
-        Block b = new Block(block.getPrevHash(), block.getTimestamp(), block.getNonce(), block.getBlockHash(), block.getMerkleRoot(), convertTransactionlistGrpctoTransaction(block.getTransactionsList()));
+        Block b = new Block(block.getPrevHash(), block.getTimestamp(), block.getNonce(), block.getBlockHash(), block.getMerkleRoot(), convertTransactionlistGrpctoTransactionList(block.getTransactionsList()));
         return b;
     }
 
     public static BlockGRPC convertBlocktoBlockGRPC(Block block){
+        TransactionsList tlist = convertTransactionListtoTransactionsListGRPC(block.getTransactions());
         BlockGRPC b = BlockGRPC.newBuilder().setPrevHash(block.getPrevHash())
         .setTimestamp(block.timestamp).setNonce(block.nonce).setBlockHash(block.getBlockHash())
-        .setMerkleRoot(block.merkleRoot).setTransactionsList()
+        .setMerkleRoot(block.merkleRoot).setTransactionsList(tlist)
         .build();
         return b;
     }
 
+    public static TransactionsList convertTransactionListtoTransactionsListGRPC(List<Transaction> list){
+        //first convert the transactions to transactionApp, then add to transaction list
+        List<TransactionApp> temp = new LinkedList<>();
+        for (Transaction t: list){
+            TransactionApp tapp = convertTransactiontoTransactionAPP(t);
+            temp.add(tapp);
+        }
+        TransactionsList tlist = TransactionsList.newBuilder().addAllTransactionList(temp).build();
+        return tlist;
+
+    }
     //o que é esta list?
-    public static List<Transaction> convertTransactionlistGrpctoTransaction(TransactionsList tlist){
+    public static List<Transaction> convertTransactionlistGrpctoTransactionList(TransactionsList tlist){
         List<Transaction> list = new ArrayList<>(); 
         for(TransactionApp t: tlist.getTransactionListList()){
             list.add(convertTransactionApptoTransaction(t));

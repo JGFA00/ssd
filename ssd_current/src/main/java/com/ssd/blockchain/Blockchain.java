@@ -31,7 +31,7 @@ public class Blockchain {
         Transaction genesisTransaction = new Transaction();
         List<Transaction> genesis_transactions = new ArrayList<>();
         genesis_transactions.add(genesisTransaction);
-        Block genesisBlock = new Block("0", genesis_transactions, keypairs);
+        Block genesisBlock = new Block("0", genesis_transactions);
         genesisBlock.mineBlock();
         return genesisBlock;
     }
