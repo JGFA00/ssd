@@ -225,6 +225,7 @@ public class AuctionServer {
             Ack ack = Ack.newBuilder().setAcknowledge(responsemessage).build();
             responseObserver.onNext(ack);
             responseObserver.onCompleted();
+            System.out.println("transaction list: " + tlist + "\n");
 
         }
 
@@ -234,6 +235,7 @@ public class AuctionServer {
             List<TransactionApp> activeAuctions = new ArrayList<>();
             HashMap<Integer, Transaction> map = blockchain.getActiveAuctions();
             map.forEach((key, value) -> {
+                System.out.println(key);
                 activeAuctions.add(AuctionUtil.convertTransactiontoTransactionAPP(value));
             });
 

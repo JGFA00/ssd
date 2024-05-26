@@ -57,19 +57,24 @@ public class Main {
                     if(tlist.size() >= 3){
                         System.out.println("Mining process will start, minimum size of transactions achieved \n\n");
                         tempMiningList.clear();
+                        
                         //size achieved, prep for mining
                         int size = blockchain.getBlockchain().size();
                         for(int i=0; i<3; i++ ){
-                            tempMiningList.add(tlist.getFirst());
+                            tempMiningList.add(tlist.get(i));
                         }
+                        
                         Block tempBlock = new Block(blockchain.getLastHash(), tempMiningList, AuctionUtil.convertNodeInfoGRPCtoNodeInfo(nodeinfo));
                         tempBlock.mineBlock();
-
+                        
                         if (size == blockchain.getBlockchain().size()) {
                             for(int i=0; i<3; i++ ){
                                 tlist.removeFirst();
                             }
+                            System.out.println("Transactions list after mining" + tlist + "\n");
                             blockchain.addBlock(tempBlock);
+                            System.out.println(blockchain.toString());
+                            /*
                             BlockGRPC bgrpc= AuctionUtil.convertBlocktoBlockGRPC(tempBlock); 
                             List<NodeInfo> clients = routingTable.getAllRoutes();
                             for (NodeInfo c : clients){
@@ -77,6 +82,7 @@ public class Main {
                                 AuctionClient target = new AuctionClient(cl);
                                 target.propagateBlock(bgrpc);
                             }
+                             */
                         }
                     }
                     

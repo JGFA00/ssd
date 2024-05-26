@@ -81,7 +81,7 @@ public class App {
 
     public static void main(String[] args) {
         KeyPairs keypair = new KeyPairs();
-        App app = new App("localhost", 5000, 2, keypair);
+        App app = new App("localhost", 5000, 1, keypair);
         Scanner s = new Scanner(System.in);
         int auctionid = 0;
         int amount =0;
