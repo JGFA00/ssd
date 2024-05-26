@@ -103,10 +103,10 @@ public class AuctionServer {
         //à espera de pedidos find node de outros nós
         @Override 
         public void findNode(NodeInfoGRPC nodeInfo, StreamObserver<NodeInfoGRPC> responseObserver){
-            System.out.println("Find Node received printing my routing table\n");
-            this.routingTable.print();
             NodeInfo convertedNode =AuctionUtil.convertNodeInfoGRPCtoNodeInfo(nodeInfo);
             checkNodeInRoutinTable(convertedNode);
+            System.out.println("Find Node received printing my routing table\n");
+            this.routingTable.print();
             //Return the 3 closest nodes
             List<NodeInfo> closestNodes = routingTable.findClosestNodes(convertedNode.getId(), 3);
             List<NodeInfoGRPC> grpcClosestNodes = AuctionUtil.convertNodeInfoListToNodeInfoGRPCList(closestNodes);
@@ -120,7 +120,7 @@ public class AuctionServer {
         }
 
         //este método está a escuta de outros nós enviarem um bloco
-        @Override   
+        /* @Override   
         public void propagateBlock(BlockGRPC block, StreamObserver<Ack> responseObserver) {
             NodeInfo convertedNode =AuctionUtil.convertNodeInfoGRPCtoNodeInfo(block.getNinfo());
             checkNodeInRoutinTable(convertedNode);
@@ -154,7 +154,7 @@ public class AuctionServer {
                 }
             }
             
-        }
+        } */
 
         //da perspetiva do cliente, envia um pedido get blockchain e manda o seu id, recebe uma stream de blocos (blockchain)
         //da perspetiva do servidor recebe um pedido get blockchain do no nodeid e envia uma stream de blocos (blockchain)
@@ -247,8 +247,9 @@ public class AuctionServer {
 
         
         public void checkNodeInRoutinTable(NodeInfo nodeInfo){
-            if(!this.routingTable.containsNode(nodeInfo)){
-                this.routingTable.addNode(nodeInfo);
+            if(!routingTable.containsNode(nodeInfo)){
+                routingTable.addNode(nodeInfo);
+                System.out.println("Adding to RT");
             }
         }
 

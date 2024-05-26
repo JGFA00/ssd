@@ -118,7 +118,11 @@ public class RoutingTable {
     }
 
     public boolean containsNode(NodeInfo node) {
-        return getAllRoutes().contains(node);
+        List<NodeInfo> nodes = getAllRoutes();
+        if(nodes.contains(node)){
+            return true;
+        }
+        return false;
     }
 
     public void print() {

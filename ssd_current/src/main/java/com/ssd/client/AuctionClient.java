@@ -17,6 +17,7 @@ import java.util.List;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.StatusRuntimeException;
 
 public class AuctionClient {
     NodeInfoGRPC targetnodeinfo;
@@ -33,22 +34,29 @@ public class AuctionClient {
 
     //public AuctionClient(NodeInfo nodeInfo, RoutingTable routingTable)
     //este node id é o id do nó que queremos contactar
-    public Boolean ping(NodeInfoGRPC nodeInfo) {
-        System.out.println(nodeInfo.toString());
-        PingResponse response;
-        response = blockingStub.ping(nodeInfo);
-        System.out.println(response.getResponse());
-        return true;
+     public Boolean ping(NodeInfoGRPC nodeInfo) {
+        try {
+            System.out.println(nodeInfo.toString());
+            PingResponse response = blockingStub.ping(nodeInfo);
+            System.out.println(response.getResponse());
+            return true;
+        } catch (StatusRuntimeException e) {
+            System.err.println("Error: Unable to reach the target node. Details: " + e.getStatus().getDescription());
+            return false;
+        }
     }
 
     //este node id é o id do nó que queremos encontrar
-    public List<NodeInfoGRPC> findNode(NodeInfoGRPC nodeInfo) {
+    public List<NodeInfoGRPC> findNode(NodeInfoGRPC nodeInfo) {        
         List<NodeInfoGRPC> Nodes = new ArrayList<>();
-        //aqui estamos a invocar o findNode do servidor, passando um id para o canal criado e a receber a resposta
-        blockingStub.findNode(targetnodeinfo).forEachRemaining(Node -> {
-            Nodes.add(Node);
-            System.out.println(Node.getId());
-        });
+        try {
+            blockingStub.findNode(nodeInfo).forEachRemaining(Node -> {
+                Nodes.add(Node);
+                System.out.println(Node.getId());
+            });
+        } catch (StatusRuntimeException e) {
+            System.err.println("Error: Unable to reach the target node. Details: " + e.getStatus().getDescription());
+        }
         return Nodes;
     }
 
