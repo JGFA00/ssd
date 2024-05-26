@@ -15,6 +15,8 @@ import com.ssd.server.AuctionServer;
 import com.ssd.util.AuctionUtil;
 
 public class Main {
+
+    
     public static void main(String[] args) throws IOException, InterruptedException {
         //aqui pode estar um generatenodeid() que retorna um id de 160 bytes
         NodeInfoGRPC nodeinfo = AuctionUtil.createNodeInfo("1", "172", 5000);
@@ -30,7 +32,6 @@ public class Main {
         //routingTable.nodeLookup(bootstrap);
         //bootstrapClient.nodeLookup(nodeid.getId());
         
-        /*
         ArrayList<Transaction> tempMiningList = new ArrayList<>();
         //mining functionality
         while(true){
@@ -43,7 +44,6 @@ public class Main {
             }
             
         }
-         */
 
 
     }
