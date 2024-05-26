@@ -120,7 +120,7 @@ public class AuctionServer {
         }
 
         //este método está a escuta de outros nós enviarem um bloco
-        /* @Override   
+        @Override   
         public void propagateBlock(BlockGRPC block, StreamObserver<Ack> responseObserver) {
             NodeInfo convertedNode =AuctionUtil.convertNodeInfoGRPCtoNodeInfo(block.getNinfo());
             checkNodeInRoutinTable(convertedNode);
@@ -154,7 +154,7 @@ public class AuctionServer {
                 }
             }
             
-        } */
+        }
 
         //da perspetiva do cliente, envia um pedido get blockchain e manda o seu id, recebe uma stream de blocos (blockchain)
         //da perspetiva do servidor recebe um pedido get blockchain do no nodeid e envia uma stream de blocos (blockchain)

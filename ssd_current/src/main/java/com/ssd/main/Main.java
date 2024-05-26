@@ -79,7 +79,7 @@ public class Main {
                             }
                         }
                     }
-                    System.out.println("minning finished \n");
+                    
                     try{
                         Thread.sleep(500);
                     } catch (InterruptedException e) {}
