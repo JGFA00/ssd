@@ -98,7 +98,7 @@ public class AuctionServer {
             System.out.println("ping responded"); 
             responseObserver.onCompleted(); 
         } 
- 
+
         //à espera de pedidos find node de outros nós
         @Override 
         public void findNode(NodeInfoGRPC nodeInfo, StreamObserver<NodeInfoGRPC> responseObserver){
@@ -129,14 +129,17 @@ public class AuctionServer {
                 if(verifyPrevHash(b)){
                     blockchain.addBlock(b);
                 }
-                //conflict in blockchain
+                //conflict in blockchain, check timestamp
                 else{
                     System.out.println("Conflict in blockchain, resolving\n");
                     Block current = blockchain.getLastBlock();
                     Block secondlast = blockchain.getSecondLastBlock();
                     if(b.getPrevHash() == secondlast.getBlockHash()){
-                        if(b.getBlockHash() < current.getBlockHash())
-                        blockchain.blockchain.remove(current);
+                        if(new BigInteger(b.getBlockHash(),16).compareTo(new BigInteger(current.getBlockHash(), 16)) == -1){
+                            blockchain.blockchain.remove(current);
+                            blockchain.addBlock(b);
+                        }
+                        
                     }
                 }
             }
