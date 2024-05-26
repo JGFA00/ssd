@@ -123,7 +123,7 @@ public class AuctionServer {
             responseObserver.onNext(ack);
             responseObserver.onCompleted();
             Block b = AuctionUtil.convertBlockGrpctoBlock(block);
-            // validar o bloco aqui antes de adicionar a blockchain
+            if(b.verifyBlock())
             blockchain.addBlock(b);
             
         }
@@ -202,7 +202,18 @@ public class AuctionServer {
         //ao receber um pedido de listAuctions, percorrer a blockchain e retornar as auctions ativas
         @Override
         public void listAuctions(Id id, StreamObserver<TransactionApp> responseObserver){
-            
+            List<TransactionApp> activeAuctions = new ArrayList<>();
+            HashMap<Integer, Transaction> map = blockchain.getActiveAuctions();
+            map.forEach((key, value) -> {
+                activeAuctions.add(AuctionUtil.convertTransactiontoTransactionAPP(value));
+            });
+
+            for(TransactionApp t : activeAuctions){
+                responseObserver.onNext(t);
+            }
+
+            responseObserver.onCompleted();
+
         }
 
         

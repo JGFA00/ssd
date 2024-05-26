@@ -56,6 +56,7 @@ public class Blockchain {
         return true;
     }
 
+    //needs verifying integer conversions and returning only the first n-2 blocks
     public  HashMap<Integer, Transaction> getActiveAuctions(){
         HashMap<Integer, Transaction> map = new HashMap<>();
         for (Block b : blockchain){
@@ -68,11 +69,7 @@ public class Blockchain {
                 }
             }
         }
-        /*
-        map.forEach((key, value) -> {
-            tlist.add(value);
-        });
-         */
+    
         return map;
     }
 
