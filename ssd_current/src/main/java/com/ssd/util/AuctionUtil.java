@@ -1,5 +1,7 @@
 package com.ssd.util;
+
 import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,8 +14,10 @@ import com.ssd.kademlia.NodeInfo;
 import com.ssd.blockchain.Block;
 import com.ssd.blockchain.Transaction;
 
-
 public class AuctionUtil {
+    private static final SecureRandom random = new SecureRandom();
+    private static final int PORT_MIN = 5001;
+    private static final int PORT_MAX = 65535; // Max port number for TCP/UDP
 
     public static NodeID createNodeId(String nodeid){
         NodeID nid = NodeID.newBuilder().setId(nodeid).build();
@@ -25,13 +29,6 @@ public class AuctionUtil {
         return node;
     }
 
-    /* 
-    public static TransactionApp createTransactionApp(String transaction, String nome){
-        TransactionApp t = TransactionApp.newBuilder().set
-        return t;
-    }
-    */
-    
     public static TransactionsList createTransactionsList(List<TransactionApp> tl){
         TransactionsList tlist = TransactionsList.newBuilder().addAllTransactionList(tl).build();
         return tlist;
@@ -54,7 +51,7 @@ public class AuctionUtil {
 
         return block;
     }
-    
+
     public static Block convertBlockGrpctoBlock(BlockGRPC block){
         Block b = new Block(block.getPrevHash(), block.getTimestamp(), block.getNonce(), block.getBlockHash(), block.getMerkleRoot(), 
         convertTransactionlistGrpctoTransactionList(block.getTransactionsList()), convertNodeInfoGRPCtoNodeInfo(block.getNinfo()));
@@ -71,7 +68,6 @@ public class AuctionUtil {
     }
 
     public static TransactionsList convertTransactionListtoTransactionsListGRPC(List<Transaction> list){
-        //first convert the transactions to transactionApp, then add to transaction list
         List<TransactionApp> temp = new LinkedList<>();
         for (Transaction t: list){
             TransactionApp tapp = convertTransactiontoTransactionAPP(t);
@@ -81,7 +77,7 @@ public class AuctionUtil {
         return tlist;
 
     }
-    //o que é esta list?
+
     public static List<Transaction> convertTransactionlistGrpctoTransactionList(TransactionsList tlist){
         List<Transaction> list = new ArrayList<>(); 
         for(TransactionApp t: tlist.getTransactionListList()){
@@ -108,7 +104,6 @@ public class AuctionUtil {
                 Transaction def = new Transaction();
                 return def;
         }
-        
     }
 
     public static TransactionApp convertTransactiontoTransactionAPP(Transaction transaction){
@@ -121,7 +116,7 @@ public class AuctionUtil {
             case "start_auction":
                 t = TransactionApp.newBuilder().setType(transaction.getType()).setUserId(transaction.getUserId()).
                 setAuctionId(transaction.getAuctionId()).setItem(transaction.getItem()).build();
-            //atenção que pode dar erro por causa do auctionid
+                return t;
             case "end_auction":
                 t = TransactionApp.newBuilder().setType(transaction.getType()).setUserId(transaction.getUserId()).
                 setAuctionId(transaction.getAuctionId()).build();
@@ -129,7 +124,6 @@ public class AuctionUtil {
                 TransactionApp def = TransactionApp.newBuilder().build();
                 return def;
         }
-        
     }
 
     public static NodeInfo convertNodeInfoGRPCtoNodeInfo(NodeInfoGRPC ngrpc) {
@@ -140,8 +134,8 @@ public class AuctionUtil {
     public static NodeInfoGRPC convertNodeInfotoNodeInfoGRPC(NodeInfo ninfo) {
         NodeInfoGRPC ngrpc = NodeInfoGRPC.newBuilder().setId(ninfo.getId().toString(16)).setIp(ninfo.getIpAddress()).setPort(ninfo.getPort()).build();
         return ngrpc;
-        
     }
+
     public static List<NodeInfo> convertNodeInfoGRPCListToNodeInfoList(List<NodeInfoGRPC> nodeInfoGRPCList) {
         List<NodeInfo> nodeInfoList = new ArrayList<>();
         for (NodeInfoGRPC nodeInfoGRPC : nodeInfoGRPCList) {
@@ -160,4 +154,11 @@ public class AuctionUtil {
         return nodeInfoGRPCList;
     }
 
+    public static String generateRandomID() {
+        return new BigInteger(160, random).toString(16);
+    }
+
+    public static int generateRandomPort() {
+        return PORT_MIN + random.nextInt(PORT_MAX - PORT_MIN + 1);
+    }
 }
