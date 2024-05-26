@@ -56,7 +56,7 @@ public class Blockchain {
         return true;
     }
 
-    public  HashMap<Integer, Transaction> getActiveAuctions(){
+    public HashMap<Integer, Transaction> getActiveAuctions(){
         
         HashMap<Integer, Transaction> map = new HashMap<>();
         int size = blockchain.size();
@@ -70,6 +70,7 @@ public class Blockchain {
                 if(t.getType() == "end_auction"){
                     map.remove(t.getAuctionId());
                 }
+            }
         }
         return map;
     }
