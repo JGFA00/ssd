@@ -150,12 +150,51 @@ public class AuctionServer {
         public void submitTransaction(TransactionApp t, StreamObserver<Ack> responseObserver){
             //eventualmente um verify transaction que verifica a chave publica do user, que a auction está a decorrer etc etc
             Transaction trans = AuctionUtil.convertTransactionApptoTransaction(t);
+            String responsemessage = "";
+            Random rand = new Random();
+            int upperbound = 1000;
+            switch (trans.getType()) {
+                case "bid":
+                    if(verifyValidAuctionId(trans.getAuctionId())){
+                        responsemessage = "Bid accepted";
+                        tlist.add(trans);
+                    }
+                    else {
+                        responsemessage = "Auction not ongoing, try again";
+                    }
+                    break;
+                case "start_auction":
+                    int auctionid = rand.nextInt(upperbound);
+                    while(checkExistingAuctionId(auctionid) == false){
+                        auctionid = rand.nextInt(upperbound);
+                    }
+                    trans.setAuctionId(auctionid);
+                    tlist.add(trans);
+                    responsemessage = "Auction will be started";
+                    break;
+
+                case "end_auction":
+                    if(verifyCorrectUser(trans.getUserId())){
+
+                        if(verifyValidAuctionId(trans.getAuctionId())){
+                            responsemessage = "Auction will be ended soon";
+                            tlist.add(trans);
+                        }
+                        else {
+                            responsemessage = "auction not ongoing";
+                        }
+                    }
+                    else{
+                        responsemessage = "You don't own the auction";
+                    }
+                    break;
+                default:
+                    responsemessage = "transaction not supported";
+            }
             //Boolean verify = trans.validateTransaction(id nó);
-            Ack ack = Ack.newBuilder().setAcknowledge("Transaction received").build();
+            Ack ack = Ack.newBuilder().setAcknowledge(responsemessage).build();
             responseObserver.onNext(ack);
             responseObserver.onCompleted();
-            tlist.add(trans);
-            System.out.println(tlist.toString());
 
         }
 
@@ -164,11 +203,14 @@ public class AuctionServer {
         public void listAuctions(Id id, StreamObserver<TransactionApp> responseObserver){
             
         }
+
+        
         public void checkNodeInRoutinTable(NodeInfo nodeInfo){
             if(!this.routingTable.containsNode(nodeInfo)){
                 this.routingTable.addNode(nodeInfo);
             }
         }
+
 
     }
 
