@@ -61,7 +61,7 @@ public class AuctionClient {
     public Blockchain getBlockchain(NodeInfoGRPC nodeinfo) {
         Blockchain bchain = new Blockchain();
         //aqui estamos a invocar o findNode do servidor, passando um id para o canal criado e a receber a resposta
-        blockingStub.getBlockchain(targetnodeinfo).forEachRemaining(Block -> {
+        blockingStub.getBlockchain(nodeinfo).forEachRemaining(Block -> {
             bchain.addBlock(AuctionUtil.convertBlockGrpctoBlock(Block));
         });
         return bchain;

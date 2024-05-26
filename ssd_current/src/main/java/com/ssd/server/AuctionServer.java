@@ -139,7 +139,7 @@ public class AuctionServer {
                     Block secondlast = blockchain.getSecondLastBlock();
                     if(b.getPrevHash() == secondlast.getBlockHash()){
                         if(new BigInteger(b.getBlockHash(),16).compareTo(new BigInteger(current.getBlockHash(), 16)) == -1){
-                            blockchain.removeLast();
+                            blockchain.removeLastBlock();
                             blockchain.addBlock(b);
                             //get transactions back to queue
                             if(current.getNodeInfo().getId() == AuctionUtil.convertNodeInfoGRPCtoNodeInfo(nodeinfo).getId()){
