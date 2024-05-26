@@ -9,6 +9,7 @@ import com.ssd.grpc.NodeID;
 import com.ssd.grpc.NodeInfoGRPC;
 import com.ssd.grpc.PingResponse;
 import com.ssd.grpc.TransactionsList;
+import com.ssd.kademlia.NodeInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,15 +32,16 @@ public class AuctionClient {
 
     //public AuctionClient(NodeInfo nodeInfo, RoutingTable routingTable)
     //este node id é o id do nó que queremos contactar
-    public Boolean ping() {
+    public Boolean ping(NodeInfoGRPC nodeInfo) {
+        System.out.println(nodeInfo.toString());
         PingResponse response;
-        response = blockingStub.ping(targetnodeinfo);
+        response = blockingStub.ping(nodeInfo);
         System.out.println(response.getResponse());
         return true;
     }
 
     //este node id é o id do nó que queremos encontrar
-    public List<NodeInfoGRPC> findNode() {
+    public List<NodeInfoGRPC> findNode(NodeInfoGRPC nodeInfo) {
         List<NodeInfoGRPC> Nodes = new ArrayList<>();
         //aqui estamos a invocar o findNode do servidor, passando um id para o canal criado e a receber a resposta
         blockingStub.findNode(targetnodeinfo).forEachRemaining(Node -> {
