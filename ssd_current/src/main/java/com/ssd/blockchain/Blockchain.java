@@ -18,6 +18,14 @@ public class Blockchain {
         return blockchain;
     }
 
+    public Block getLastBlock() {
+        return blockchain.get(blockchain.size() - 1);
+    }
+
+    public Block getSecondLastBlock() {
+        return blockchain.get(blockchain.size() - 2);
+    }
+
     public String getLastHash(){
         String lasthash = (blockchain.get(blockchain.size() - 1)).blockHash;
         return lasthash;
