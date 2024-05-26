@@ -128,8 +128,21 @@ public class AuctionServer {
             responseObserver.onNext(ack);
             responseObserver.onCompleted();
             Block b = AuctionUtil.convertBlockGrpctoBlock(block);
-            if(b.verifyBlock())
-            blockchain.addBlock(b);
+            if(b.verifyBlock()){
+                if(verifyPrevHash(b)){
+                    blockchain.addBlock(b);
+                }
+                //conflict in blockchain
+                else{
+                    System.out.println("Conflict in blockchain, resolving\n");
+                    Block current = blockchain.getLastBlock();
+                    Block secondlast = blockchain.getSecondLastBlock();
+                    if(b.getPrevHash() == secondlast.getBlockHash()){
+                        if(b.getBlockHash() < current.getBlockHash())
+                        blockchain.blockchain.remove(current);
+                    }
+                }
+            }
             
         }
 
