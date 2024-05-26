@@ -35,9 +35,9 @@ message TransactionsList {
 message TransactionApp {
   string type =1;       
   int32 userId =2;
-  optional int32 auctionId = 4; 
-  optional int32 amount = 5;
-  optional string item = 6;
+  int32 auctionId = 4; 
+  int32 amount = 5;
+  string item = 6;
 }
 
 message BlockGRPC {

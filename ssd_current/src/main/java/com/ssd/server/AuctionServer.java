@@ -177,6 +177,7 @@ public class AuctionServer {
         @Override
         public void submitTransaction(TransactionApp t, StreamObserver<Ack> responseObserver){
             //eventualmente um verify transaction que verifica a chave publica do user, que a auction está a decorrer etc etc
+            System.out.println("Received transaction: " +  t.getAllFields() + "\n");
             Transaction trans = AuctionUtil.convertTransactionApptoTransaction(t);
             String responsemessage = "";
             Random rand = new Random();

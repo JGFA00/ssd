@@ -44,12 +44,13 @@ public class Main {
         server.start();
         NodeInfoGRPC test = AuctionUtil.createNodeInfo("1b2d3c4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c", "localhost",5001);
         AuctionClient client = new AuctionClient(test);
-        client.ping(nodeinfo);
-        client.getBlockchain(nodeinfo);
+        //client.ping(nodeinfo);
+        //client.getBlockchain(nodeinfo);
         
         
         ArrayList<Transaction> tempMiningList = new ArrayList<>();
         //mining functionality
+        
         Thread t = new Thread(new Runnable() {
             public void run() {
                 while(true){
@@ -78,6 +79,7 @@ public class Main {
                             }
                         }
                     }
+                    System.out.println("minning finished \n");
                     try{
                         Thread.sleep(500);
                     } catch (InterruptedException e) {}
@@ -85,6 +87,7 @@ public class Main {
                 }
             }
         });
+
 
         t.start();
         server.blockUntilShutdown();

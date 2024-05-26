@@ -30,15 +30,17 @@ public class Transaction {
         this.type = type;
         this.amount = amount;
         this.userId = userId;
-        this.auctionId = auctionId;        
+        this.auctionId = auctionId;
+        this.item = "";       
     }
 
     //start_auction
     public Transaction(String type, int userId, int auctionId, String item){
         this.type = type;
-        this.item = item;
         this.userId = userId;
-        this.auctionId = auctionId;  
+        this.auctionId = auctionId; 
+        this.item = item; 
+        this.amount = 0;
     }
 
     //end_auction
@@ -46,6 +48,8 @@ public class Transaction {
         this.type = type;
         this.auctionId = auctionId;  
         this.userId = userId;
+        this.amount = 0;
+        this.item = "";
           
     }
 

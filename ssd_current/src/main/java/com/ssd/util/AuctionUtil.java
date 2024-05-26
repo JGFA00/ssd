@@ -113,18 +113,20 @@ public class AuctionUtil {
 
     public static TransactionApp convertTransactiontoTransactionAPP(Transaction transaction){
         TransactionApp t;
+        System.out.println(transaction.getType());
         switch(transaction.getType()){
             case "bid":
                 t= TransactionApp.newBuilder().setType(transaction.getType()).setUserId(transaction.getUserId()).
-                setAuctionId(transaction.getAuctionId()).setAmount(transaction.getAmount()).build();
+                setAuctionId(transaction.getAuctionId()).setAmount(transaction.getAmount()).setItem(transaction.getItem()).build();
                 return t;
             case "start_auction":
                 t = TransactionApp.newBuilder().setType(transaction.getType()).setUserId(transaction.getUserId()).
-                setAuctionId(transaction.getAuctionId()).setItem(transaction.getItem()).build();
+                setAuctionId(transaction.getAuctionId()).setItem(transaction.getItem()).setAmount(transaction.getAmount()).build();
             //atenção que pode dar erro por causa do auctionid
+                return t;
             case "end_auction":
                 t = TransactionApp.newBuilder().setType(transaction.getType()).setUserId(transaction.getUserId()).
-                setAuctionId(transaction.getAuctionId()).build();
+                setAuctionId(transaction.getAuctionId()).setAmount(transaction.getAmount()).setItem(transaction.getItem()).build();
             default:
                 TransactionApp def = TransactionApp.newBuilder().build();
                 return def;

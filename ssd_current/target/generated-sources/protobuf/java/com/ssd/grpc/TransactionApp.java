@@ -41,7 +41,6 @@ private static final long serialVersionUID = 0L;
             com.ssd.grpc.TransactionApp.class, com.ssd.grpc.TransactionApp.Builder.class);
   }
 
-  private int bitField0_;
   public static final int TYPE_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
   private volatile java.lang.Object type_ = "";
@@ -95,15 +94,7 @@ private static final long serialVersionUID = 0L;
   public static final int AUCTIONID_FIELD_NUMBER = 4;
   private int auctionId_ = 0;
   /**
-   * <code>optional int32 auctionId = 4;</code>
-   * @return Whether the auctionId field is set.
-   */
-  @java.lang.Override
-  public boolean hasAuctionId() {
-    return ((bitField0_ & 0x00000001) != 0);
-  }
-  /**
-   * <code>optional int32 auctionId = 4;</code>
+   * <code>int32 auctionId = 4;</code>
    * @return The auctionId.
    */
   @java.lang.Override
@@ -114,15 +105,7 @@ private static final long serialVersionUID = 0L;
   public static final int AMOUNT_FIELD_NUMBER = 5;
   private int amount_ = 0;
   /**
-   * <code>optional int32 amount = 5;</code>
-   * @return Whether the amount field is set.
-   */
-  @java.lang.Override
-  public boolean hasAmount() {
-    return ((bitField0_ & 0x00000002) != 0);
-  }
-  /**
-   * <code>optional int32 amount = 5;</code>
+   * <code>int32 amount = 5;</code>
    * @return The amount.
    */
   @java.lang.Override
@@ -134,15 +117,7 @@ private static final long serialVersionUID = 0L;
   @SuppressWarnings("serial")
   private volatile java.lang.Object item_ = "";
   /**
-   * <code>optional string item = 6;</code>
-   * @return Whether the item field is set.
-   */
-  @java.lang.Override
-  public boolean hasItem() {
-    return ((bitField0_ & 0x00000004) != 0);
-  }
-  /**
-   * <code>optional string item = 6;</code>
+   * <code>string item = 6;</code>
    * @return The item.
    */
   @java.lang.Override
@@ -159,7 +134,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>optional string item = 6;</code>
+   * <code>string item = 6;</code>
    * @return The bytes for item.
    */
   @java.lang.Override
@@ -197,13 +172,13 @@ private static final long serialVersionUID = 0L;
     if (userId_ != 0) {
       output.writeInt32(2, userId_);
     }
-    if (((bitField0_ & 0x00000001) != 0)) {
+    if (auctionId_ != 0) {
       output.writeInt32(4, auctionId_);
     }
-    if (((bitField0_ & 0x00000002) != 0)) {
+    if (amount_ != 0) {
       output.writeInt32(5, amount_);
     }
-    if (((bitField0_ & 0x00000004) != 0)) {
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(item_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 6, item_);
     }
     getUnknownFields().writeTo(output);
@@ -222,15 +197,15 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(2, userId_);
     }
-    if (((bitField0_ & 0x00000001) != 0)) {
+    if (auctionId_ != 0) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(4, auctionId_);
     }
-    if (((bitField0_ & 0x00000002) != 0)) {
+    if (amount_ != 0) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(5, amount_);
     }
-    if (((bitField0_ & 0x00000004) != 0)) {
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(item_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, item_);
     }
     size += getUnknownFields().getSerializedSize();
@@ -252,21 +227,12 @@ private static final long serialVersionUID = 0L;
         .equals(other.getType())) return false;
     if (getUserId()
         != other.getUserId()) return false;
-    if (hasAuctionId() != other.hasAuctionId()) return false;
-    if (hasAuctionId()) {
-      if (getAuctionId()
-          != other.getAuctionId()) return false;
-    }
-    if (hasAmount() != other.hasAmount()) return false;
-    if (hasAmount()) {
-      if (getAmount()
-          != other.getAmount()) return false;
-    }
-    if (hasItem() != other.hasItem()) return false;
-    if (hasItem()) {
-      if (!getItem()
-          .equals(other.getItem())) return false;
-    }
+    if (getAuctionId()
+        != other.getAuctionId()) return false;
+    if (getAmount()
+        != other.getAmount()) return false;
+    if (!getItem()
+        .equals(other.getItem())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -282,18 +248,12 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getType().hashCode();
     hash = (37 * hash) + USERID_FIELD_NUMBER;
     hash = (53 * hash) + getUserId();
-    if (hasAuctionId()) {
-      hash = (37 * hash) + AUCTIONID_FIELD_NUMBER;
-      hash = (53 * hash) + getAuctionId();
-    }
-    if (hasAmount()) {
-      hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
-      hash = (53 * hash) + getAmount();
-    }
-    if (hasItem()) {
-      hash = (37 * hash) + ITEM_FIELD_NUMBER;
-      hash = (53 * hash) + getItem().hashCode();
-    }
+    hash = (37 * hash) + AUCTIONID_FIELD_NUMBER;
+    hash = (53 * hash) + getAuctionId();
+    hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
+    hash = (53 * hash) + getAmount();
+    hash = (37 * hash) + ITEM_FIELD_NUMBER;
+    hash = (53 * hash) + getItem().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -469,20 +429,15 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000002) != 0)) {
         result.userId_ = userId_;
       }
-      int to_bitField0_ = 0;
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.auctionId_ = auctionId_;
-        to_bitField0_ |= 0x00000001;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
         result.amount_ = amount_;
-        to_bitField0_ |= 0x00000002;
       }
       if (((from_bitField0_ & 0x00000010) != 0)) {
         result.item_ = item_;
-        to_bitField0_ |= 0x00000004;
       }
-      result.bitField0_ |= to_bitField0_;
     }
 
     @java.lang.Override
@@ -537,13 +492,13 @@ private static final long serialVersionUID = 0L;
       if (other.getUserId() != 0) {
         setUserId(other.getUserId());
       }
-      if (other.hasAuctionId()) {
+      if (other.getAuctionId() != 0) {
         setAuctionId(other.getAuctionId());
       }
-      if (other.hasAmount()) {
+      if (other.getAmount() != 0) {
         setAmount(other.getAmount());
       }
-      if (other.hasItem()) {
+      if (!other.getItem().isEmpty()) {
         item_ = other.item_;
         bitField0_ |= 0x00000010;
         onChanged();
@@ -722,15 +677,7 @@ private static final long serialVersionUID = 0L;
 
     private int auctionId_ ;
     /**
-     * <code>optional int32 auctionId = 4;</code>
-     * @return Whether the auctionId field is set.
-     */
-    @java.lang.Override
-    public boolean hasAuctionId() {
-      return ((bitField0_ & 0x00000004) != 0);
-    }
-    /**
-     * <code>optional int32 auctionId = 4;</code>
+     * <code>int32 auctionId = 4;</code>
      * @return The auctionId.
      */
     @java.lang.Override
@@ -738,7 +685,7 @@ private static final long serialVersionUID = 0L;
       return auctionId_;
     }
     /**
-     * <code>optional int32 auctionId = 4;</code>
+     * <code>int32 auctionId = 4;</code>
      * @param value The auctionId to set.
      * @return This builder for chaining.
      */
@@ -750,7 +697,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>optional int32 auctionId = 4;</code>
+     * <code>int32 auctionId = 4;</code>
      * @return This builder for chaining.
      */
     public Builder clearAuctionId() {
@@ -762,15 +709,7 @@ private static final long serialVersionUID = 0L;
 
     private int amount_ ;
     /**
-     * <code>optional int32 amount = 5;</code>
-     * @return Whether the amount field is set.
-     */
-    @java.lang.Override
-    public boolean hasAmount() {
-      return ((bitField0_ & 0x00000008) != 0);
-    }
-    /**
-     * <code>optional int32 amount = 5;</code>
+     * <code>int32 amount = 5;</code>
      * @return The amount.
      */
     @java.lang.Override
@@ -778,7 +717,7 @@ private static final long serialVersionUID = 0L;
       return amount_;
     }
     /**
-     * <code>optional int32 amount = 5;</code>
+     * <code>int32 amount = 5;</code>
      * @param value The amount to set.
      * @return This builder for chaining.
      */
@@ -790,7 +729,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>optional int32 amount = 5;</code>
+     * <code>int32 amount = 5;</code>
      * @return This builder for chaining.
      */
     public Builder clearAmount() {
@@ -802,14 +741,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object item_ = "";
     /**
-     * <code>optional string item = 6;</code>
-     * @return Whether the item field is set.
-     */
-    public boolean hasItem() {
-      return ((bitField0_ & 0x00000010) != 0);
-    }
-    /**
-     * <code>optional string item = 6;</code>
+     * <code>string item = 6;</code>
      * @return The item.
      */
     public java.lang.String getItem() {
@@ -825,7 +757,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>optional string item = 6;</code>
+     * <code>string item = 6;</code>
      * @return The bytes for item.
      */
     public com.google.protobuf.ByteString
@@ -842,7 +774,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>optional string item = 6;</code>
+     * <code>string item = 6;</code>
      * @param value The item to set.
      * @return This builder for chaining.
      */
@@ -855,7 +787,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>optional string item = 6;</code>
+     * <code>string item = 6;</code>
      * @return This builder for chaining.
      */
     public Builder clearItem() {
@@ -865,7 +797,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>optional string item = 6;</code>
+     * <code>string item = 6;</code>
      * @param value The bytes for item to set.
      * @return This builder for chaining.
      */

@@ -71,10 +71,8 @@ public class Blockchain {
     public HashMap<Integer, Transaction> getActiveAuctions(){
         
         HashMap<Integer, Transaction> map = new HashMap<>();
-        int size = blockchain.size();
         // Loop through all blocks excluding the last two
-        for (int i = 0; i < size - 2; i++) {
-            Block b = blockchain.get(i);
+        for (Block b : blockchain) {
             for (Transaction t : b.getTransactions()){
                 if(t.getType() == "start_auction"){
                     map.put(t.getAuctionId(),t);

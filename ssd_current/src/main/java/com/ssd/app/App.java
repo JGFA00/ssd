@@ -52,6 +52,7 @@ public class App {
         Transaction temp = new Transaction("bid", auctionid, amount, userid);
         //temp.signTransaction(keypair);
         TransactionApp transaction = AuctionUtil.convertTransactiontoTransactionAPP(temp);
+        System.out.println(temp);
         Ack ack;
         ack = blockingStub.submitTransaction(transaction);
         System.out.println(ack.getAcknowledge() + "\n");
@@ -62,6 +63,7 @@ public class App {
         int auctionid = -1;
         Transaction temp = new Transaction("start_auction", userid, auctionid, item);
         TransactionApp transaction = AuctionUtil.convertTransactiontoTransactionAPP(temp);
+        System.out.println(transaction.getItem());
         Ack ack;
         ack = blockingStub.submitTransaction(transaction);
         System.out.println(ack.getAcknowledge() + "\n");
@@ -79,7 +81,7 @@ public class App {
 
     public static void main(String[] args) {
         KeyPairs keypair = new KeyPairs();
-        App app = new App("localhost", 5000, 1, keypair);
+        App app = new App("localhost", 5000, 2, keypair);
         Scanner s = new Scanner(System.in);
         int auctionid = 0;
         int amount =0;
@@ -89,6 +91,7 @@ public class App {
         while(true){
             printMenu();
             choice = s.nextInt();
+            s.nextLine();
             switch(choice){
                 case 1:
                     app.listAuctions();
@@ -96,8 +99,10 @@ public class App {
                 case 2:
                     System.out.println("Select auction to bid\n");
                     auctionid = s.nextInt();
+                    s.nextLine();
                     System.out.println("Select amount to bid\n");
                     amount = s.nextInt();
+                    s.nextLine();
                     app.sendBindTransaction(auctionid, amount);
                     break;
                 case 3:
@@ -108,6 +113,7 @@ public class App {
                 case 4:
                     System.out.println("Select auction to end\n");
                     auction = s.nextInt();
+                    s.nextLine();
                     app.sendEndAuctionTransaction(auction);
                     break;
                 case 5:

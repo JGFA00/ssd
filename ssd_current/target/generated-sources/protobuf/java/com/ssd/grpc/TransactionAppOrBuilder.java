@@ -27,39 +27,24 @@ public interface TransactionAppOrBuilder extends
   int getUserId();
 
   /**
-   * <code>optional int32 auctionId = 4;</code>
-   * @return Whether the auctionId field is set.
-   */
-  boolean hasAuctionId();
-  /**
-   * <code>optional int32 auctionId = 4;</code>
+   * <code>int32 auctionId = 4;</code>
    * @return The auctionId.
    */
   int getAuctionId();
 
   /**
-   * <code>optional int32 amount = 5;</code>
-   * @return Whether the amount field is set.
-   */
-  boolean hasAmount();
-  /**
-   * <code>optional int32 amount = 5;</code>
+   * <code>int32 amount = 5;</code>
    * @return The amount.
    */
   int getAmount();
 
   /**
-   * <code>optional string item = 6;</code>
-   * @return Whether the item field is set.
-   */
-  boolean hasItem();
-  /**
-   * <code>optional string item = 6;</code>
+   * <code>string item = 6;</code>
    * @return The item.
    */
   java.lang.String getItem();
   /**
-   * <code>optional string item = 6;</code>
+   * <code>string item = 6;</code>
    * @return The bytes for item.
    */
   com.google.protobuf.ByteString
