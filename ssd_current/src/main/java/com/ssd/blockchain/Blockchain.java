@@ -1,6 +1,8 @@
 package com.ssd.blockchain;
 import java.util.ArrayList;
 import java.util.List;
+import java.math.BigInteger;
+import com.ssd.kademlia.NodeInfo;
 
 public class Blockchain {
     public ArrayList<Block> blockchain;
