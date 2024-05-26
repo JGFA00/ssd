@@ -22,7 +22,7 @@ public class KBucket {
     }
 
     public synchronized void addNode(NodeInfo node) {
-       /*  if (nodes.contains(node)) {
+        if (nodes.contains(node)) {
             // Node is already in the KBucket, move it to the end to mark as recently seen
             nodes.remove(node);
             nodes.add(node);
@@ -38,7 +38,7 @@ public class KBucket {
                 it.remove();
                 nodes.add(node);
             }
-        } */
+        }
          
     }
 
@@ -46,14 +46,7 @@ public class KBucket {
         nodes.remove(node);
     }
 
-    public NodeInfoGRPC findNode() {
-        for (NodeInfoGRPC node : nodes) {
-            if (node.getId().equals(nodeId)) {
-                return node;
-            }
-        }
-        return null;
-    }
+    
 
     public Set<NodeInfo> getNodes() {
         return new LinkedHashSet<>(nodes);
@@ -64,16 +57,18 @@ public class KBucket {
     }
 
     public synchronized void refresh() {
-        /*
+        
         //Ping all Nodes and update
         Iterator<NodeInfo> it = nodes.iterator();
-        while (it.hasNext()) {
+        while (it.hasNext()) {            
             NodeInfo node = it.next();
-            if (!ping(node)) {
+            NodeInfoGRPC convertedNode = AuctionUtil.convertNodeInfotoNodeInfoGRPC(node);
+            AuctionClient client = new AuctionClient(convertedNode);
+            if (!client.ping()) {
                 it.remove();
             }
         }
-         */
+        
     }
 
     public boolean isEmpty() {
