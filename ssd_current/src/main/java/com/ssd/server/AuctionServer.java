@@ -141,6 +141,13 @@ public class AuctionServer {
                         if(new BigInteger(b.getBlockHash(),16).compareTo(new BigInteger(current.getBlockHash(), 16)) == -1){
                             blockchain.blockchain.remove(current);
                             blockchain.addBlock(b);
+                            //get transactions back to queue
+                            if(current.getNodeInfo().getId() == AuctionUtil.convertNodeInfoGRPCtoNodeInfo(nodeinfo).getId()){
+                                for (Transaction t : current.getTransactions()){
+                                    tlist.addFirst(t);
+                                }
+                                
+                            }
                         }
                         
                     }
@@ -257,6 +264,14 @@ public class AuctionServer {
             }
             return false;
         }
+
+        public Boolean verifyPrevHash(Block b){
+            if(b.getPrevHash() == blockchain.getLastHash()){
+                return true;
+            }
+            return false;
+        }
+
 
 
     }
