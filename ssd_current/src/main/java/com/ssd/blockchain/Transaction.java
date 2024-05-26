@@ -19,7 +19,12 @@ public class Transaction {
     //genesis transaction
     public Transaction(){
         this.type = "Genesis";
+        this.amount=0;
+        this.item = "";
+        this.userId = 0;
+        this.auctionId = 0;
     }
+    
     //bid transaction
     public Transaction(String type, int userId, int auctionId, int amount) {
         this.type = type;
@@ -119,13 +124,12 @@ public class Transaction {
         return true;
     }
 
+    */
 
     // Tenho de por um toString todo grifado para cada transacao
     @Override
     public String toString() {
-        return "[" + type +
-                "] -> '" + userId + '\'';
+        return type + auctionId + userId + item + amount;
     }
 
-     */
 }
