@@ -18,7 +18,7 @@ public class Blockchain {
     }
 
     public String getLastHash(){
-        String lasthash = (blockchain.get(blockchain.size() - 1)).hash;
+        String lasthash = (blockchain.get(blockchain.size() - 1)).blockHash;
         return lasthash;
     }
 
