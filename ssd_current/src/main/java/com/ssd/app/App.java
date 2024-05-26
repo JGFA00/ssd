@@ -1,4 +1,5 @@
 package com.ssd.app;
+import java.io.IOException;
 import java.security.KeyPair;
 import java.util.Scanner;
 
@@ -79,9 +80,17 @@ public class App {
         System.out.println(ack.getAcknowledge() + "\n");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
+        if (args.length < 3) {
+            System.err.println("Usage: java App <ip_address> <port> <client_id>");
+            System.exit(1);
+        }
+        int id = Integer.parseInt(args[2]);
+        String ipAddress = args[0];
+        int port = Integer.parseInt(args[1]);
+
         KeyPairs keypair = new KeyPairs();
-        App app = new App("localhost", 5000, 1, keypair);
+        App app = new App(ipAddress, port, id, keypair);
         Scanner s = new Scanner(System.in);
         int auctionid = 0;
         int amount =0;

@@ -25,13 +25,14 @@ public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         if (args.length < 3) {
-            System.err.println("Usage: java Main <node_id> <ip_address> <port>");
+            System.err.println("Usage: java Main <node_id> <ip_address> <port> <bootstrap 0/1");
             System.exit(1);
         }
 
         String nodeIdString = args[0];
         String ipAddress = args[1];
         int port = Integer.parseInt(args[2]);
+        int isbootstrap = Integer.parseInt(args[3]);
 
         //aqui pode estar um generatenodeid() que retorna um id de 160 bytes
         
@@ -42,10 +43,13 @@ public class Main {
         LinkedList<Transaction> tlist = new LinkedList<>();
         AuctionServer server = new AuctionServer(nodeinfo, blockchain, tlist, routingTable);
         server.start();
-        NodeInfoGRPC test = AuctionUtil.createNodeInfo("1b2d3c4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c", "localhost",5001);
-        AuctionClient client = new AuctionClient(test);
-        //client.ping(nodeinfo);
-        //client.getBlockchain(nodeinfo);
+        if(isbootstrap == 0){
+            NodeInfoGRPC test = AuctionUtil.createNodeInfo("1b2d3c4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c", "localhost",5001);
+            AuctionClient client = new AuctionClient(test);
+        
+            client.findNode(nodeinfo);
+            client.getBlockchain(nodeinfo);
+        }
         
         
         ArrayList<Transaction> tempMiningList = new ArrayList<>();
@@ -74,7 +78,7 @@ public class Main {
                             System.out.println("Transactions list after mining" + tlist + "\n");
                             blockchain.addBlock(tempBlock);
                             System.out.println(blockchain.toString());
-                            /*
+                            
                             BlockGRPC bgrpc= AuctionUtil.convertBlocktoBlockGRPC(tempBlock); 
                             List<NodeInfo> clients = routingTable.getAllRoutes();
                             for (NodeInfo c : clients){
@@ -82,7 +86,7 @@ public class Main {
                                 AuctionClient target = new AuctionClient(cl);
                                 target.propagateBlock(bgrpc);
                             }
-                             */
+                             
                         }
                     }
                     
