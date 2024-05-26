@@ -99,7 +99,7 @@ public class AuctionServer {
             System.out.println("ping responded"); 
             responseObserver.onCompleted(); 
         } 
- 
+
         //à espera de pedidos find node de outros nós
         @Override 
         public void findNode(NodeInfoGRPC nodeInfo, StreamObserver<NodeInfoGRPC> responseObserver){
@@ -124,7 +124,7 @@ public class AuctionServer {
         public void propagateBlock(BlockGRPC block, StreamObserver<Ack> responseObserver) {
             NodeInfo convertedNode =AuctionUtil.convertNodeInfoGRPCtoNodeInfo(block.getNinfo());
             checkNodeInRoutinTable(convertedNode);
-            Ack ack = Ack.newBuilder().setAcknowledge("received").build();
+            Ack ack = Ack.newBuilder().setAcknowledge("Block received").build();
             responseObserver.onNext(ack);
             responseObserver.onCompleted();
             Block b = AuctionUtil.convertBlockGrpctoBlock(block);
@@ -132,14 +132,24 @@ public class AuctionServer {
                 if(verifyPrevHash(b)){
                     blockchain.addBlock(b);
                 }
-                //conflict in blockchain
+                //conflict in blockchain, check timestamp
                 else{
                     System.out.println("Conflict in blockchain, resolving\n");
                     Block current = blockchain.getLastBlock();
                     Block secondlast = blockchain.getSecondLastBlock();
                     if(b.getPrevHash() == secondlast.getBlockHash()){
-                        if(b.getBlockHash() < current.getBlockHash())
-                        blockchain.blockchain.remove(current);
+                        if(new BigInteger(b.getBlockHash(),16).compareTo(new BigInteger(current.getBlockHash(), 16)) == -1){
+                            blockchain.removeLastBlock();
+                            blockchain.addBlock(b);
+                            //get transactions back to queue
+                            if(current.getNodeInfo().getId() == AuctionUtil.convertNodeInfoGRPCtoNodeInfo(nodeinfo).getId()){
+                                for (Transaction t : current.getTransactions()){
+                                    tlist.addFirst(t);
+                                }
+                                
+                            }
+                        }
+                        
                     }
                 }
             }
@@ -255,6 +265,14 @@ public class AuctionServer {
             }
             return false;
         }
+
+        public Boolean verifyPrevHash(Block b){
+            if(b.getPrevHash() == blockchain.getLastHash()){
+                return true;
+            }
+            return false;
+        }
+
 
 
     }

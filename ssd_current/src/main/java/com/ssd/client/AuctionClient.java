@@ -1,4 +1,5 @@
 package com.ssd.client;
+import com.ssd.blockchain.Blockchain;
 import com.ssd.grpc.Ack;
 import com.ssd.grpc.AuctionGrpc;
 import com.ssd.grpc.BlockGRPC;
@@ -62,14 +63,16 @@ public class AuctionClient {
     public void propagateBlock(BlockGRPC block){
         Ack ack;
         ack = blockingStub.propagateBlock(block);
-        System.out.println(ack.getAcknowledge());
+        System.out.println(ack.getAcknowledge() + "\n");
     }
 
-    public void getBlockchain(String nodeid) {
+    public Blockchain getBlockchain(NodeInfoGRPC nodeinfo) {
+        Blockchain bchain = new Blockchain();
         //aqui estamos a invocar o findNode do servidor, passando um id para o canal criado e a receber a resposta
-        blockingStub.getBlockchain(targetnodeinfo).forEachRemaining(Block -> {
-            System.out.println(Block.getAllFields());
+        blockingStub.getBlockchain(nodeinfo).forEachRemaining(Block -> {
+            bchain.addBlock(AuctionUtil.convertBlockGrpctoBlock(Block));
         });
+        return bchain;
     }
     
 }
