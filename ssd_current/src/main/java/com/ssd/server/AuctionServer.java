@@ -16,6 +16,7 @@ import com.ssd.grpc.NodeID;
 import com.ssd.grpc.PingResponse;
 import com.ssd.grpc.TransactionApp;
 import com.ssd.grpc.NodeInfoGRPC;
+import com.ssd.kademlia.NodeInfo;
 import com.ssd.kademlia.RoutingTable;
 import com.ssd.util.AuctionUtil;
 
@@ -102,8 +103,9 @@ public class AuctionServer {
         //nodeid é do cliente, é possivel ter que fazer alguma coisa com o ping recebido (verificar o kbucket nós inativos)
         //verifica se tem o node na routing table, se não faz um find node
         @Override 
-        public void ping(NodeInfoGRPC nodeInfo, StreamObserver<PingResponse> responseObserver){ 
-            checkNodeInRoutinTable(nodeInfo);
+        public void ping(NodeInfoGRPC nodeInfo, StreamObserver<PingResponse> responseObserver){
+            NodeInfo convertedNode =AuctionUtil.convertNodeInfoGRPCtoNodeInfo(nodeInfo); 
+            checkNodeInRoutinTable(convertedNode);
             //o que fazer com um ping? para já retorna só resposta ao cliente que enviou o ping
             PingResponse response = PingResponse.newBuilder().setResponse("active").build(); 
             responseObserver.onNext(response); 
@@ -114,11 +116,13 @@ public class AuctionServer {
         //à espera de pedidos find node de outros nós
         @Override 
         public void findNode(NodeInfoGRPC nodeInfo, StreamObserver<NodeInfoGRPC> responseObserver){
-            checkNodeInRoutinTable(nodeInfo);
+            NodeInfo convertedNode =AuctionUtil.convertNodeInfoGRPCtoNodeInfo(nodeInfo);
+            checkNodeInRoutinTable(convertedNode);
             //Return the 3 closest nodes
-            List<NodeInfoGRPC> closestNodes = routingTable.findClosestNodes(new BigInteger(nodeInfo.getId(), 16), 3);
+            List<NodeInfo> closestNodes = routingTable.findClosestNodes(convertedNode.getId(), 3);
+            List<NodeInfoGRPC> grpcClosestNodes = AuctionUtil.convertNodeInfoListToNodeInfoGRPCList(closestNodes);
             //este response observer.onnext(node) retorna o node para o canal com o cliente que invocou o findnode
-            for(NodeInfoGRPC node : closestNodes){ 
+            for(NodeInfoGRPC node : grpcClosestNodes){ 
                 responseObserver.onNext(node);           
                
             }
@@ -176,7 +180,7 @@ public class AuctionServer {
         public void listAuctions(Id id, StreamObserver<TransactionApp> responseObserver){
             
         }
-        public void checkNodeInRoutinTable(NodeInfoGRPC nodeInfo){
+        public void checkNodeInRoutinTable(NodeInfo nodeInfo){
             if(!this.routingTable.containsNode(nodeInfo)){
                 this.routingTable.addNode(nodeInfo);
             }

@@ -139,5 +139,22 @@ public class AuctionUtil {
         return ngrpc;
         
     }
+    public static List<NodeInfo> convertNodeInfoGRPCListToNodeInfoList(List<NodeInfoGRPC> nodeInfoGRPCList) {
+        List<NodeInfo> nodeInfoList = new ArrayList<>();
+        for (NodeInfoGRPC nodeInfoGRPC : nodeInfoGRPCList) {
+            NodeInfo nodeInfo = convertNodeInfoGRPCtoNodeInfo(nodeInfoGRPC);
+            nodeInfoList.add(nodeInfo);
+        }
+        return nodeInfoList;
+    }
+
+    public static List<NodeInfoGRPC> convertNodeInfoListToNodeInfoGRPCList(List<NodeInfo> nodeInfoList) {
+        List<NodeInfoGRPC> nodeInfoGRPCList = new ArrayList<>();
+        for (NodeInfo nodeInfo : nodeInfoList) {
+            NodeInfoGRPC nodeInfoGRPC = convertNodeInfotoNodeInfoGRPC(nodeInfo);
+            nodeInfoGRPCList.add(nodeInfoGRPC);
+        }
+        return nodeInfoGRPCList;
+    }
 
 }

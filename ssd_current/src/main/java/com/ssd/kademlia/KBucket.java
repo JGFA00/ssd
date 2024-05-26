@@ -6,12 +6,14 @@ import java.util.Set;
 
 import com.ssd.client.AuctionClient;
 import com.ssd.util.AuctionUtil;
+import com.ssd.kademlia.NodeInfo;
+import com.ssd.util.AuctionUtil;
+import java.util.Iterator;
 import com.ssd.grpc.NodeInfoGRPC;
 
-import java.util.Iterator;
 
 public class KBucket {
-    public final Set<NodeInfoGRPC> nodes;
+    public final Set<NodeInfo> nodes;
     public final int capacity;
 
     public KBucket(int capacity) {
@@ -19,8 +21,8 @@ public class KBucket {
         this.capacity = capacity;
     }
 
-    public synchronized void addNode(NodeInfoGRPC node) {
-        if (nodes.contains(node)) {
+    public synchronized void addNode(NodeInfo node) {
+       /*  if (nodes.contains(node)) {
             // Node is already in the KBucket, move it to the end to mark as recently seen
             nodes.remove(node);
             nodes.add(node);
@@ -30,21 +32,22 @@ public class KBucket {
             // KBucket is full, check the oldest node's responsiveness if unresponsive remove it and add the new one
             Iterator<NodeInfo> it = nodes.iterator();
             NodeInfo oldestNode = it.next();
-            AuctionClient client = new AuctionClient(convertNodeInfotoNodeInfoGRPC(oldestNode));
+            NodeInfoGRPC convertedNode = AuctionUtil.convertNodeInfotoNodeInfoGRPC(oldestNode);
+            AuctionClient client = new AuctionClient(convertedNode);
             if (!client.ping()) {
                 it.remove();
                 nodes.add(node);
             }
-        }
+        } */
          
     }
 
-    public synchronized void removeNode(NodeInfoGRPC node) {
+    public synchronized void removeNode(NodeInfo node) {
         nodes.remove(node);
     }
 
-    public NodeInfoGRPC findNode(BigInteger nodeId) {
-        for (NodeInfoGRPC node : nodes) {
+    public NodeInfo findNode(BigInteger nodeId) {
+        for (NodeInfo node : nodes) {
             if (node.getId().equals(nodeId)) {
                 return node;
             }
@@ -52,20 +55,20 @@ public class KBucket {
         return null;
     }
 
-    public Set<NodeInfoGRPC> getNodes() {
+    public Set<NodeInfo> getNodes() {
         return new LinkedHashSet<>(nodes);
     }
 
-    public boolean isNodePresent(NodeInfoGRPC node) {
+    public boolean isNodePresent(NodeInfo node) {
         return nodes.contains(node);
     }
 
     public synchronized void refresh() {
         /*
         //Ping all Nodes and update
-        Iterator<NodeInfoGRPC> it = nodes.iterator();
+        Iterator<NodeInfo> it = nodes.iterator();
         while (it.hasNext()) {
-            NodeInfoGRPC node = it.next();
+            NodeInfo node = it.next();
             if (!ping(node)) {
                 it.remove();
             }
