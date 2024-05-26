@@ -119,6 +119,8 @@ public class AuctionServer {
         //este método está a escuta de outros nós enviarem um bloco
         @Override   
         public void propagateBlock(BlockGRPC block, StreamObserver<Ack> responseObserver) {
+            NodeInfo convertedNode =AuctionUtil.convertNodeInfoGRPCtoNodeInfo(block.getNinfo());
+            checkNodeInRoutinTable(convertedNode);
             Ack ack = Ack.newBuilder().setAcknowledge("received").build();
             responseObserver.onNext(ack);
             responseObserver.onCompleted();
