@@ -25,12 +25,13 @@ public class AuctionUtil {
         return node;
     }
 
-    /*
-    public static TransactionApp createTransactionAPP(String transaction, String nome){
+    /* 
+    public static TransactionApp createTransactionApp(String transaction, String nome){
         TransactionApp t = TransactionApp.newBuilder().set
         return t;
     }
     */
+    
     public static TransactionsList createTransactionsList(List<TransactionApp> tl){
         TransactionsList tlist = TransactionsList.newBuilder().addAllTransactionList(tl).build();
         return tlist;
@@ -41,20 +42,22 @@ public class AuctionUtil {
         return tlist;
     }
 
-    public static BlockGRPC createBlockGRPC(String prevHash, int timestamp, int nonce, String blockHash, String merkleRoot, TransactionsList transactions){
+    public static BlockGRPC createBlockGRPC(String prevHash, int timestamp, int nonce, String blockHash, String merkleRoot, TransactionsList transactions, NodeInfoGRPC ngrpc){
         BlockGRPC block = BlockGRPC.newBuilder().setPrevHash(prevHash)
         .setTimestamp(timestamp)
         .setNonce(nonce)
         .setBlockHash(blockHash)
         .setMerkleRoot(merkleRoot)
         .setTransactionsList(transactions)
+        .setNinfo(ngrpc)
         .build();
 
         return block;
     }
     
     public static Block convertBlockGrpctoBlock(BlockGRPC block){
-        Block b = new Block(block.getPrevHash(), block.getTimestamp(), block.getNonce(), block.getBlockHash(), block.getMerkleRoot(), convertTransactionlistGrpctoTransactionList(block.getTransactionsList()));
+        Block b = new Block(block.getPrevHash(), block.getTimestamp(), block.getNonce(), block.getBlockHash(), block.getMerkleRoot(), 
+        convertTransactionlistGrpctoTransactionList(block.getTransactionsList()), convertNodeInfoGRPCtoNodeInfo(block.getNinfo()));
         return b;
     }
 
@@ -62,7 +65,7 @@ public class AuctionUtil {
         TransactionsList tlist = convertTransactionListtoTransactionsListGRPC(block.getTransactions());
         BlockGRPC b = BlockGRPC.newBuilder().setPrevHash(block.getPrevHash())
         .setTimestamp(block.timestamp).setNonce(block.nonce).setBlockHash(block.getBlockHash())
-        .setMerkleRoot(block.merkleRoot).setTransactionsList(tlist)
+        .setMerkleRoot(block.merkleRoot).setTransactionsList(tlist).setNinfo(convertNodeInfotoNodeInfoGRPC(block.getNodeInfo()))
         .build();
         return b;
     }
