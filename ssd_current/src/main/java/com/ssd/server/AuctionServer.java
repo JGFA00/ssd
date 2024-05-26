@@ -91,6 +91,7 @@ public class AuctionServer {
         @Override 
         public void ping(NodeInfoGRPC nodeInfo, StreamObserver<PingResponse> responseObserver){
             NodeInfo convertedNode =AuctionUtil.convertNodeInfoGRPCtoNodeInfo(nodeInfo); 
+            System.out.println(convertedNode.toString());
             checkNodeInRoutinTable(convertedNode);
             //o que fazer com um ping? para já retorna só resposta ao cliente que enviou o ping
             PingResponse response = PingResponse.newBuilder().setResponse("active").build(); 
@@ -102,6 +103,8 @@ public class AuctionServer {
         //à espera de pedidos find node de outros nós
         @Override 
         public void findNode(NodeInfoGRPC nodeInfo, StreamObserver<NodeInfoGRPC> responseObserver){
+            System.out.println("Find Node received printing my routing table\n");
+            this.routingTable.print();
             NodeInfo convertedNode =AuctionUtil.convertNodeInfoGRPCtoNodeInfo(nodeInfo);
             checkNodeInRoutinTable(convertedNode);
             //Return the 3 closest nodes
@@ -125,17 +128,8 @@ public class AuctionServer {
             responseObserver.onNext(ack);
             responseObserver.onCompleted();
             Block b = AuctionUtil.convertBlockGrpctoBlock(block);
-            if(b.verifyBlock()){
-                if(verifyPrevHash(b)){
-                    blockchain.addBlock(b);
-                }
-                //conflict in blockchain
-                else{
-                    System.out.println("Conflict in blockchain, resolving\n");
-                    //Block current = blockchain.getLastBlock();
-
-                }
-            }
+            if(b.verifyBlock())
+            blockchain.addBlock(b);
             
         }
 
@@ -243,13 +237,6 @@ public class AuctionServer {
 
         public Boolean verifyCorrectUser(int auctionid ,int userid, HashMap<Integer,Transaction> activeAuctions){
             if(activeAuctions.get(auctionid).userId == userid){
-                return true;
-            }
-            return false;
-        }
-
-        public Boolean verifyPrevHash(Block b){
-            if(b.getPrevHash() == blockchain.getLastHash()){
                 return true;
             }
             return false;

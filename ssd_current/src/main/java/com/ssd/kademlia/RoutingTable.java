@@ -12,20 +12,22 @@ import com.ssd.util.AuctionUtil;
 import com.ssd.grpc.NodeInfoGRPC;
 
 public class RoutingTable {
-    private final BigInteger nodeId;
-    private final List<KBucket> kBuckets;
-    private static final int BUCKET_COUNT = 160;
+    public final BigInteger nodeId;
+    public final List<KBucket> kBuckets;
+    public static final int BUCKET_COUNT = 160;
+    public final NodeInfo nodeInfo;
 
-    public RoutingTable(BigInteger nodeId) {
+    public RoutingTable(BigInteger nodeId, NodeInfo nodeInfo) {
         this.nodeId = nodeId;
         this.kBuckets = new ArrayList<>(BUCKET_COUNT);
+        this.nodeInfo=nodeInfo;
         for (int i = 0; i < BUCKET_COUNT; i++) {
-            this.kBuckets.add(new KBucket(20));
+            this.kBuckets.add(new KBucket(20,nodeInfo));
         }
     }
 
-    public RoutingTable(String nodeIdHex) {
-        this(new BigInteger(nodeIdHex, 16));
+    public RoutingTable(String nodeIdHex,NodeInfo nodeInfo) {
+        this(new BigInteger(nodeIdHex, 16),nodeInfo);
     }
 
     public void addNode(NodeInfo node) {
@@ -75,7 +77,8 @@ public class RoutingTable {
                 }
                 NodeInfoGRPC convertedNode = AuctionUtil.convertNodeInfotoNodeInfoGRPC(currentNode);
                 AuctionClient client = new AuctionClient(convertedNode);
-                List<NodeInfoGRPC> foundNodes = client.findNode();
+                NodeInfoGRPC convertedNodeInfoGRPC = AuctionUtil.convertNodeInfotoNodeInfoGRPC(this.nodeInfo);
+                List<NodeInfoGRPC> foundNodes = client.findNode(convertedNodeInfoGRPC);
                 List<NodeInfo> convertedFoundNodes = AuctionUtil.convertNodeInfoGRPCListToNodeInfoList(foundNodes);
 
                 // Combine found nodes with nodes from the current routing table

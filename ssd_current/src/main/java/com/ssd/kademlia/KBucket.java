@@ -15,10 +15,12 @@ import com.ssd.grpc.NodeInfoGRPC;
 public class KBucket {
     public final Set<NodeInfo> nodes;
     public final int capacity;
+    public final NodeInfo nodeInfo;
 
-    public KBucket(int capacity) {
+    public KBucket(int capacity,NodeInfo nodeInfo) {
         this.nodes = new LinkedHashSet<>(capacity);
         this.capacity = capacity;
+        this.nodeInfo = nodeInfo;
     }
 
     public synchronized void addNode(NodeInfo node) {
@@ -34,7 +36,8 @@ public class KBucket {
             NodeInfo oldestNode = it.next();
             NodeInfoGRPC convertedNode = AuctionUtil.convertNodeInfotoNodeInfoGRPC(oldestNode);
             AuctionClient client = new AuctionClient(convertedNode);
-            if (!client.ping()) {
+            NodeInfoGRPC myConvertedNodeInfo = AuctionUtil.convertNodeInfotoNodeInfoGRPC(this.nodeInfo);
+            if (!client.ping(myConvertedNodeInfo)) {
                 it.remove();
                 nodes.add(node);
             }
@@ -64,7 +67,8 @@ public class KBucket {
             NodeInfo node = it.next();
             NodeInfoGRPC convertedNode = AuctionUtil.convertNodeInfotoNodeInfoGRPC(node);
             AuctionClient client = new AuctionClient(convertedNode);
-            if (!client.ping()) {
+            NodeInfoGRPC myConvertedNodeInfo = AuctionUtil.convertNodeInfotoNodeInfoGRPC(this.nodeInfo);
+            if (!client.ping(myConvertedNodeInfo)) {
                 it.remove();
             }
         }

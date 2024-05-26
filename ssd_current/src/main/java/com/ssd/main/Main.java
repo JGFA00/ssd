@@ -31,14 +31,15 @@ public class Main {
         //aqui pode estar um generatenodeid() que retorna um id de 160 bytes
         
         Blockchain blockchain = new Blockchain();
-        RoutingTable routingTable = new RoutingTable(nodeIdString);
-        LinkedList<Transaction> tlist = new LinkedList<>();
         NodeInfoGRPC nodeinfo =AuctionUtil.createNodeInfo(nodeIdString, ipAddress,port);
+        NodeInfo convertedNodeInfo=AuctionUtil.convertNodeInfoGRPCtoNodeInfo(nodeinfo);
+        RoutingTable routingTable = new RoutingTable(nodeIdString,convertedNodeInfo);
+        LinkedList<Transaction> tlist = new LinkedList<>();
         AuctionServer server = new AuctionServer(nodeinfo, blockchain, tlist, routingTable);
         server.start();
         NodeInfoGRPC test = AuctionUtil.createNodeInfo("1b2d3c4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c", "localhost",5001);
         AuctionClient client = new AuctionClient(test);
-        client.findNode();
+        client.ping(nodeinfo);
         server.blockUntilShutdown();
         
        /*  ArrayList<Transaction> tempMiningList = new ArrayList<>();
