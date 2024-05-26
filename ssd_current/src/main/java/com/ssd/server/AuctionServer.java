@@ -30,12 +30,6 @@ public class AuctionServer {
     
     private final int port;
     private final Server server;
-    /*
-    private final NodeInfo nodeinfo;
-    private Blockchain blockchain;
-    private LinkedList<Transaction> tlist;
-    private RoutingTable routingTable;
-     */
 
     public AuctionServer(NodeInfoGRPC nodeinfo, Blockchain blockchain, LinkedList<Transaction> tlist, RoutingTable routingTable) {
         this(Grpc.newServerBuilderForPort(nodeinfo.getPort(), InsecureServerCredentials.create()),nodeinfo, blockchain, tlist, routingTable);
@@ -44,13 +38,7 @@ public class AuctionServer {
     public AuctionServer(ServerBuilder<?> serverBuilder,NodeInfoGRPC nodeinfo, Blockchain blockchain, LinkedList<Transaction> tlist, RoutingTable routingTable) {
         this.port = nodeinfo.getPort();
         server = serverBuilder.addService(new AuctionService(nodeinfo, blockchain, tlist, routingTable)).build();
-        /*
-        this.nodeinfo = nodeinfo;
-        this.blockchain = blockchain;
-        this.tlist = tlist;
-        this.routingTable = routingTable;
-         */
-        
+
     }
 
     
@@ -83,8 +71,6 @@ public class AuctionServer {
         }
     }
     
-
-
 
     private static class AuctionService extends AuctionGrpc.AuctionImplBase {
         private final NodeInfoGRPC nodeinfo;
@@ -170,8 +156,6 @@ public class AuctionServer {
             responseObserver.onCompleted();
             tlist.add(trans);
             System.out.println(tlist.toString());
-
-            
 
         }
 

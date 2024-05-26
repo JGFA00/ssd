@@ -1,5 +1,6 @@
 package com.ssd.blockchain;
 import java.util.List;
+import com.ssd.kademlia.NodeInfo;
 
 public class Block {
     public String blockHash;
@@ -8,22 +9,24 @@ public class Block {
     public int nonce=0;
     public String merkleRoot;
     public List<Transaction> transactions;
+    public NodeInfo nodeinfo;
     
-    public Block(String prev_hash, List<Transaction> transactions) {
+    public Block(String prev_hash, List<Transaction> transactions, NodeInfo nodeinfo) {
         this.prevHash = prev_hash;
         this.transactions = transactions;
         this.merkleRoot = calculateMerkleRoot(transactions);
         this.blockHash = "";
+        this.nodeinfo = nodeinfo;
     }
 
     //constructor for block received after being converted, needs fixing
-    public Block(String prev_hash, long timestamp, int nonce, String blockHash, String merkleRoot, List<Transaction> transactions){
+    public Block(String prev_hash, long timestamp, int nonce, String blockHash, String merkleRoot, List<Transaction> transactions, NodeInfo nodeinfo){
         this.transactions = transactions;
         this.prevHash= prev_hash;
         this.timestamp = timestamp;
         this.blockHash = blockHash;
         this.nonce = nonce;
-        
+        this.nodeinfo = nodeinfo;
     }
 
     public String getPrevHash() {
@@ -32,6 +35,10 @@ public class Block {
 
     public String getBlockHash(){
         return blockHash;
+    }
+
+    public NodeInfo getNodeInfo() {
+        return this.nodeinfo;
     }
 
     public List<Transaction> getTransactions() {
@@ -66,7 +73,8 @@ public class Block {
 
     public String calculateHash() {
         // Include nonce in the hash calculation
-        String data = prevHash + merkleRoot + timestamp + nonce;
+        String nodeInfoString = nodeinfo.getId().toString() + nodeinfo.getIpAddress() + nodeinfo.getPort();
+        String data = prevHash + merkleRoot + timestamp + nonce + nodeInfoString;
         return Hashing.applySHA256(data);
     }
 
@@ -93,6 +101,7 @@ public class Block {
                 ", nonce=" + nonce +
                 ", merkle_root=" + merkleRoot +
                 ", hash=" + blockHash +
+                ", nodeinfo=" + nodeinfo +
                 ']';
     }
 }
