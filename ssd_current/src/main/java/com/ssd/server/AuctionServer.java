@@ -153,9 +153,10 @@ public class AuctionServer {
             String responsemessage = "";
             Random rand = new Random();
             int upperbound = 1000;
+            HashMap<Integer, Transaction> activeAuctions = blockchain.getActiveAuctions();
             switch (trans.getType()) {
                 case "bid":
-                    if(verifyValidAuctionId(trans.getAuctionId())){
+                    if(verifyValidAuctionId(trans.getAuctionId(), activeAuctions)){
                         responsemessage = "Bid accepted";
                         tlist.add(trans);
                     }
@@ -165,7 +166,7 @@ public class AuctionServer {
                     break;
                 case "start_auction":
                     int auctionid = rand.nextInt(upperbound);
-                    while(checkExistingAuctionId(auctionid) == false){
+                    while(verifyValidAuctionId(auctionid, activeAuctions)){
                         auctionid = rand.nextInt(upperbound);
                     }
                     trans.setAuctionId(auctionid);
@@ -174,9 +175,9 @@ public class AuctionServer {
                     break;
 
                 case "end_auction":
-                    if(verifyCorrectUser(trans.getUserId())){
+                    if(verifyCorrectUser(trans.getAuctionId(), trans.getUserId(), activeAuctions)){
 
-                        if(verifyValidAuctionId(trans.getAuctionId())){
+                        if(verifyValidAuctionId(trans.getAuctionId(), activeAuctions)){
                             responsemessage = "Auction will be ended soon";
                             tlist.add(trans);
                         }
@@ -209,6 +210,20 @@ public class AuctionServer {
             if(!this.routingTable.containsNode(nodeInfo)){
                 this.routingTable.addNode(nodeInfo);
             }
+        }
+
+        public Boolean verifyValidAuctionId(int auctionid, HashMap<Integer,Transaction> activeAuctions){
+            if(activeAuctions.containsKey(auctionid)){
+                return true;
+            }
+            return false;
+        }
+
+        public Boolean verifyCorrectUser(int auctionid ,int userid, HashMap<Integer,Transaction> activeAuctions){
+            if(activeAuctions.get(auctionid).userId == userid){
+                return true;
+            }
+            return false;
         }
 
 

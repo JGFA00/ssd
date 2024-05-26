@@ -1,5 +1,6 @@
 package com.ssd.blockchain;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.math.BigInteger;
 import com.ssd.kademlia.NodeInfo;
@@ -53,6 +54,26 @@ public class Blockchain {
             }
         }
         return true;
+    }
+
+    public  HashMap<Integer, Transaction> getActiveAuctions(){
+        HashMap<Integer, Transaction> map = new HashMap<>();
+        for (Block b : blockchain){
+            for (Transaction t : b.getTransactions()){
+                if(t.getType() == "start_auction"){
+                    map.put(t.getAuctionId(),t);
+                }
+                if(t.getType() == "end_auction"){
+                    map.remove(t.getAuctionId());
+                }
+            }
+        }
+        /*
+        map.forEach((key, value) -> {
+            tlist.add(value);
+        });
+         */
+        return map;
     }
 
     @Override
