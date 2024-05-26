@@ -117,4 +117,11 @@ public class RoutingTable {
     public boolean containsNode(NodeInfo node) {
         return getAllRoutes().contains(node);
     }
+
+    public void print() {
+        List<NodeInfo> nodes = getAllRoutes();
+        for (NodeInfo node : nodes) {
+            System.out.println("ID: " + node.getId().toString(16) + ", IP: " + node.getIpAddress() + ", Port: " + node.getPort());
+        }
+    }
 }

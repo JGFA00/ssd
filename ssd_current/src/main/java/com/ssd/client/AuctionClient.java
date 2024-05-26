@@ -44,6 +44,7 @@ public class AuctionClient {
         //aqui estamos a invocar o findNode do servidor, passando um id para o canal criado e a receber a resposta
         blockingStub.findNode(targetnodeinfo).forEachRemaining(Node -> {
             Nodes.add(Node);
+            System.out.println(Node.getId());
         });
         return Nodes;
     }

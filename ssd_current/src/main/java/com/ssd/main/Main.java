@@ -10,6 +10,7 @@ import com.ssd.client.AuctionClient;
 import com.ssd.grpc.NodeInfoGRPC;
 import com.ssd.grpc.TransactionApp;
 import com.ssd.grpc.NodeID;
+import com.ssd.kademlia.NodeInfo;
 import com.ssd.kademlia.RoutingTable;
 import com.ssd.server.AuctionServer;
 import com.ssd.util.AuctionUtil;
@@ -18,21 +19,29 @@ public class Main {
 
     
     public static void main(String[] args) throws IOException, InterruptedException {
+        if (args.length < 3) {
+            System.err.println("Usage: java Main <node_id> <ip_address> <port>");
+            System.exit(1);
+        }
+
+        String nodeIdString = args[0];
+        String ipAddress = args[1];
+        int port = Integer.parseInt(args[2]);
+
         //aqui pode estar um generatenodeid() que retorna um id de 160 bytes
-        NodeInfoGRPC nodeinfo = AuctionUtil.createNodeInfo("1", "172", 5000);
-        NodeID nodeid = AuctionUtil.createNodeId("1");
+        
         Blockchain blockchain = new Blockchain();
-        RoutingTable routingTable = new RoutingTable(nodeid.getId());
+        RoutingTable routingTable = new RoutingTable(nodeIdString);
         LinkedList<Transaction> tlist = new LinkedList<>();
+        NodeInfoGRPC nodeinfo =AuctionUtil.createNodeInfo(nodeIdString, ipAddress,port);
         AuctionServer server = new AuctionServer(nodeinfo, blockchain, tlist, routingTable);
         server.start();
+        NodeInfoGRPC test = AuctionUtil.createNodeInfo("1b2d3c4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c", "localhost",5001);
+        AuctionClient client = new AuctionClient(test);
+        client.findNode();
         server.blockUntilShutdown();
-        //NodeInfo bootstrap = AuctionUtil.createNodeInfo("2", "173", 9000);
-        //AuctionClient bootstrapClient = new AuctionClient(bootstrap);
-        //routingTable.nodeLookup(bootstrap);
-        //bootstrapClient.nodeLookup(nodeid.getId());
         
-        ArrayList<Transaction> tempMiningList = new ArrayList<>();
+       /*  ArrayList<Transaction> tempMiningList = new ArrayList<>();
         //mining functionality
         Thread t = new Thread(new Runnable() {
             public void run() {
@@ -63,7 +72,7 @@ public class Main {
         });
 
         t.start();
+        */
 
-
-    }
+    } 
 }
