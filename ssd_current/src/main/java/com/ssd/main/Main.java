@@ -45,7 +45,8 @@ public class Main {
         NodeInfoGRPC test = AuctionUtil.createNodeInfo("1b2d3c4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c", "localhost",5001);
         AuctionClient client = new AuctionClient(test);
         client.ping(nodeinfo);
-        server.blockUntilShutdown();
+        client.getBlockchain(nodeinfo);
+        
         
         ArrayList<Transaction> tempMiningList = new ArrayList<>();
         //mining functionality
@@ -68,12 +69,12 @@ public class Main {
                                 tlist.removeFirst();
                             }
                             blockchain.addBlock(tempBlock);
-                            BlockGRPC bgrpc= convertBlocktoBlockGRPC(tempBlock); 
+                            BlockGRPC bgrpc= AuctionUtil.convertBlocktoBlockGRPC(tempBlock); 
                             List<NodeInfo> clients = routingTable.getAllRoutes();
                             for (NodeInfo c : clients){
                                 NodeInfoGRPC cl = AuctionUtil.convertNodeInfotoNodeInfoGRPC(c);
                                 AuctionClient target = new AuctionClient(cl);
-                                target.propagateBlock(tempBlock);
+                                target.propagateBlock(bgrpc);
                             }
                         }
                     }
@@ -86,6 +87,7 @@ public class Main {
         });
 
         t.start();
+        server.blockUntilShutdown();
         
 
     } 
