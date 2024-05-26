@@ -31,6 +31,10 @@ public class Blockchain {
         return lasthash;
     }
 
+    public void removeLastBlock() {
+        blockchain.remove(blockchain.size()-1);
+    }
+
     private Block createGenesisBlock() {
         // For simplicity, the genesis block has no transactions and a previous hash of 0
         Transaction genesisTransaction = new Transaction();
