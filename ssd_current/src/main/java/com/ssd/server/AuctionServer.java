@@ -131,7 +131,7 @@ public class AuctionServer {
                 }
                 //conflict in blockchain
                 else{
-                    System.out.println("conflict in blockchain, resolving\n");
+                    System.out.println("Conflict in blockchain, resolving\n");
                     //Block current = blockchain.getLastBlock();
 
                 }
