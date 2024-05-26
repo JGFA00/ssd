@@ -124,7 +124,7 @@ public class AuctionServer {
         public void propagateBlock(BlockGRPC block, StreamObserver<Ack> responseObserver) {
             NodeInfo convertedNode =AuctionUtil.convertNodeInfoGRPCtoNodeInfo(block.getNinfo());
             checkNodeInRoutinTable(convertedNode);
-            Ack ack = Ack.newBuilder().setAcknowledge("received").build();
+            Ack ack = Ack.newBuilder().setAcknowledge("Block received").build();
             responseObserver.onNext(ack);
             responseObserver.onCompleted();
             Block b = AuctionUtil.convertBlockGrpctoBlock(block);
@@ -139,7 +139,7 @@ public class AuctionServer {
                     Block secondlast = blockchain.getSecondLastBlock();
                     if(b.getPrevHash() == secondlast.getBlockHash()){
                         if(new BigInteger(b.getBlockHash(),16).compareTo(new BigInteger(current.getBlockHash(), 16)) == -1){
-                            blockchain.blockchain.remove(current);
+                            blockchain.removeLast();
                             blockchain.addBlock(b);
                             //get transactions back to queue
                             if(current.getNodeInfo().getId() == AuctionUtil.convertNodeInfoGRPCtoNodeInfo(nodeinfo).getId()){
