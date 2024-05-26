@@ -1,18 +1,16 @@
 package com.ssd.blockchain;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.math.BigInteger;
+import com.ssd.kademlia.NodeInfo;
 
 public class Blockchain {
     public ArrayList<Block> blockchain;
 
-    // criar vazio
     public Blockchain() {
-        blockchain = new ArrayList<>();
-    }
-
-    public Blockchain(KeyPairs keypairs) {
         this.blockchain= new ArrayList<>();
-        Block genesisBlock = createGenesisBlock(keypairs);
+        Block genesisBlock = createGenesisBlock();
         blockchain.add(genesisBlock);
     }
 
@@ -20,18 +18,18 @@ public class Blockchain {
         return blockchain;
     }
 
-    public String getPrevHash(){
-        String prevhash = (blockchain.get(blockchain.size() - 1)).prevHash;
-        return prevhash;
-
+    public String getLastHash(){
+        String lasthash = (blockchain.get(blockchain.size() - 1)).blockHash;
+        return lasthash;
     }
 
-    private Block createGenesisBlock(KeyPairs keypairs) {
+    private Block createGenesisBlock() {
         // For simplicity, the genesis block has no transactions and a previous hash of 0
         Transaction genesisTransaction = new Transaction();
         List<Transaction> genesis_transactions = new ArrayList<>();
         genesis_transactions.add(genesisTransaction);
-        Block genesisBlock = new Block("0", genesis_transactions);
+        NodeInfo genesisNodeinfo = new NodeInfo(BigInteger.valueOf(0),"0", 0);
+        Block genesisBlock = new Block("0", genesis_transactions, genesisNodeinfo);
         genesisBlock.mineBlock();
         return genesisBlock;
     }
@@ -56,6 +54,23 @@ public class Blockchain {
             }
         }
         return true;
+    }
+
+    //needs verifying integer conversions and returning only the first n-2 blocks
+    public  HashMap<Integer, Transaction> getActiveAuctions(){
+        HashMap<Integer, Transaction> map = new HashMap<>();
+        for (Block b : blockchain){
+            for (Transaction t : b.getTransactions()){
+                if(t.getType() == "start_auction"){
+                    map.put(t.getAuctionId(),t);
+                }
+                if(t.getType() == "end_auction"){
+                    map.remove(t.getAuctionId());
+                }
+            }
+        }
+    
+        return map;
     }
 
     @Override

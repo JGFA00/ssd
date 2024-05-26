@@ -41,7 +41,7 @@ public class App {
         System.out.println("Auctions ativas:\n");
         //aqui estamos a invocar o findNode do servidor, passando um id para o canal criado e a receber a resposta
         blockingStub.listAuctions(id).forEachRemaining(Transaction -> {
-        System.out.println(Transaction.getAllFields());
+        System.out.println("Auction id : " + Transaction.getAuctionId() + " -> Item: " + Transaction.getItem());
         });
         System.out.println("\n" + "\n");
     }

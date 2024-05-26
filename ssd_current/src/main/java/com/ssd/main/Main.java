@@ -15,6 +15,8 @@ import com.ssd.server.AuctionServer;
 import com.ssd.util.AuctionUtil;
 
 public class Main {
+
+    
     public static void main(String[] args) throws IOException, InterruptedException {
         //aqui pode estar um generatenodeid() que retorna um id de 160 bytes
         NodeInfoGRPC nodeinfo = AuctionUtil.createNodeInfo("1", "172", 5000);
@@ -30,20 +32,37 @@ public class Main {
         //routingTable.nodeLookup(bootstrap);
         //bootstrapClient.nodeLookup(nodeid.getId());
         
-        /*
         ArrayList<Transaction> tempMiningList = new ArrayList<>();
         //mining functionality
-        while(true){
-            if(tlist.size() >= 3){
-                for(int i=0; i<3; i++ ){
-                    tempMiningList.add(tlist.getFirst());
+        Thread t = new Thread(new Runnable() {
+            public void run() {
+                while(true){
+                    if(tlist.size() >= 3){
+                        tempMiningList.clear();
+                        //size achieved, prep for mining
+                        int size = blockchain.getBlockchain().size();
+                        for(int i=0; i<3; i++ ){
+                            tempMiningList.add(tlist.getFirst());
+                        }
+                        Block tempBlock = new Block(blockchain.getLastHash(), tempMiningList, AuctionUtil.convertNodeInfoGRPCtoNodeInfo(nodeinfo));
+                        tempBlock.mineBlock();
+
+                        if (size != blockchain.getBlockchain().size()) {
+                            for(int i=0; i<3; i++ ){
+                                tlist.removeFirst();
+                            }
+                            blockchain.addBlock(tempBlock);
+                        }
+                    }
+                    try{
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {}
+
                 }
-                Block tempBlock = new Block(blockchain.getPrevHash(), tempMiningList);
-                tempBlock.mineBlock();
             }
-            
-        }
-         */
+        });
+
+        t.start();
 
 
     }
