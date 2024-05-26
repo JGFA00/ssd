@@ -125,8 +125,17 @@ public class AuctionServer {
             responseObserver.onNext(ack);
             responseObserver.onCompleted();
             Block b = AuctionUtil.convertBlockGrpctoBlock(block);
-            if(b.verifyBlock())
-            blockchain.addBlock(b);
+            if(b.verifyBlock()){
+                if(verifyPrevHash(b)){
+                    blockchain.addBlock(b);
+                }
+                //conflict in blockchain
+                else{
+                    System.out.println("Conflict in blockchain, resolving\n");
+                    //Block current = blockchain.getLastBlock();
+
+                }
+            }
             
         }
 
@@ -234,6 +243,13 @@ public class AuctionServer {
 
         public Boolean verifyCorrectUser(int auctionid ,int userid, HashMap<Integer,Transaction> activeAuctions){
             if(activeAuctions.get(auctionid).userId == userid){
+                return true;
+            }
+            return false;
+        }
+
+        public Boolean verifyPrevHash(Block b){
+            if(b.getPrevHash() == blockchain.getLastHash()){
                 return true;
             }
             return false;
